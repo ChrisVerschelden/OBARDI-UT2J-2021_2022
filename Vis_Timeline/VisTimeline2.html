@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+  <title>Timeline</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+  <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+  <link href="nouislider.css" rel="stylesheet">
+  
+  <style type="text/css">
+    #visualization {
+      width: float;
+      height: float;
+      
+    }
+    h1{
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    body{
+      
+      font-family: Open Sans;
+      background: #FAC24F;
+      color: rgb(255, 255, 255);
+      border-radius: 70%;
+  
+
+    } 
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 20%;
+      
+    }
+
+    .vis-timeline {
+      border: 2px solid rgb(255, 255, 255);
+      font-size: 12pt;
+      border-radius: 10px ;
+      box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
+      background: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    .vis-item {
+      font-family: Arial, Helvetica, sans-serif;
+
+      border-color: azure;
+      border-radius: 10px ;
+      align-items:center;
+      justify-content:center;
+      background-color: rgb(255, 255, 255);
+      font-size: 15pt;
+      color: rgb(16, 17, 90);
+      box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
+    }
+
+    .vis-item.vis-selected {
+      border-color: rgb(223, 200, 98);
+      background-color: rgb(223, 200, 98);
+    }
+
+    button{
+      font-family: Arial, Helvetica, sans-serif;
+      display: inline-block;
+        
+      border-color: rgb(16, 17, 90);
+      border-radius: 10px ;
+      
+      background-color: rgb(16, 17, 90);
+      font-size: 15pt;
+      color:azure ;
+      box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
+    }
+
+    .vis-time-axis .vis-grid.vis-minor {
+      border-width: 2px;
+      border-color: rgb(223, 200, 98);
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 15px;
+      border-radius: 5px;  
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+     }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%; 
+      background: rgb(16, 17, 90);
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #000000;
+      cursor: pointer;
+    }
+   
+  
+    
+  </style>
+</head>
+<body>
+  <h1>Frise chronologique de l'ancien régime</h1>
+ 
+      <button id="date" onclick="changerDate()">Date</button>
+      <button id="modif"onclick="editer()">Mode Edition</button>
+      
+      <br><br><br>
+
+   
+    
+
+<div id="visualization"></div>
+
+
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+</div>
+
+
+<script src="js/nouislider.js"></script>
+    <script src="js/timeline_functions.js"></script>
+    <script src="js/slider_functions.js"></script>
+</body>
+</html>
