@@ -1,0 +1,105 @@
+.indicateur{
+    margin-top: -50px;
+}
+
+#debut{
+    background-color: black;
+    height: 75px;
+    width: 5px;
+    margin-top: -25px;
+    
+}
+
+#fin{
+    background-color: black;
+    height: 75px;
+    width: 5px;
+    margin-top: -25px;
+
+}
+
+#nbGen{
+    display: none;
+}
+
+#labelDebut{
+    margin-top: -50px;
+}
+
+#labelDebut2{
+    margin-top: -50px;
+}
+
+
+
+#labelFin1{
+    margin-top: -50px;
+}
+
+#labelFin2{
+    margin-top: -50px;
+}
+
+#labelFin3{
+    margin-top: -50px;
+}
+
+#labelFin4{
+    margin-top: -50px;
+}
+
+.indicateur2{
+    margin-top: -50px;
+
+}
+
+
+
+#debut2{
+    background-color: black;
+    height: 135px;
+    width: 5px;
+    margin-top: -25px;
+    margin-right: 40px;
+
+}
+
+.card{
+    margin-left: -40px;
+}
+
+#fin2{
+    background-color: black;
+    height: 135px;
+    width: 5px;
+    margin-top: -25px;
+    margin-right: 0;
+
+}
+
+#fin3{
+    background-color: black;
+    height: 135px;
+    width: 5px;
+    margin-top: -25px;
+    margin-right: 0;
+
+}
+
+#fin4{
+    background-color: black;
+    height: 135px;
+    width: 5px;
+    margin-top: -25px;
+    margin-right: 0;
+
+}
+
+#fin5{
+    background-color: black;
+    height: 135px;
+    width: 5px;
+    margin-top: -25px;
+    margin-right: 0;
+
+}

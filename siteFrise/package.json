@@ -1,0 +1,21 @@
+{
+  "name": "site-frise",
+  "version": "1.0.0",
+  "description": "première version de la frise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ismael fezzani",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "got": "^9.6.0",
+    "jsdom": "^18.0.0",
+    "nodemon": "^2.0.13",
+    "select": "^1.1.2",
+    "select-dom": "^7.1.1"
+  }
+}
