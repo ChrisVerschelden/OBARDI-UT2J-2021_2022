@@ -144,3 +144,7 @@ button{
 .vis-item.green{
   background-color: darkcyan;
 }
+
+.vis-item.not-selected{
+  background-color: gray;
+}

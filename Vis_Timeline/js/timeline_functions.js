@@ -56,7 +56,8 @@ function getRandomInt(max) {
 }
 
 document.getElementById('visualization').onclick = function (event) {
-  var props = timeline.getEventProperties(event)
+  var props = timeline.getEventProperties(event);
+  
 }
 
 // <div id="slider"></div>
@@ -142,22 +143,30 @@ slider.noUiSlider.on('change',function(){
   timeline.setItems(items);
   timeline.redraw();
   timeline.fit();
-  changer_les_couleurs();
 
 
 $(document).ready(function(){
     $('.vis-item').on('click',function() {
       var e=$(this);
       // e.off('hover');
-      var x = e.attr('data-id')
+      var id = parseInt( e.attr('data-id'), 10 )
       // e.off('click')
-      var item = items.get(parseInt(x, 10))
+      var item = items.get(id);
       // var contents = item.content + "\r" + item.start
 
       // e.popover({title: x, content: contents, placement: "top"}).popover('show');
       document.getElementById('item_id').innerHTML = item.id;
       document.getElementById('item_content').innerHTML = item.content;
       document.getElementById('item_date').innerHTML = item.start.toString() + " / " + item.end.toString();
+
+      items.forEach((item) => {
+        if(item.id != id){
+          items.update({id: item["id"], group: item["group"], content: item["content"], className:'not-selected'});
+        } else {
+          var item_selected = items.get(id);
+          items.update({id: item_selected['id'], group: item["group"], content: item["content"], className:'base'});
+        }
+      })
     });
 });
 
