@@ -1,26 +1,15 @@
 var groups = new vis.DataSet([
   {id: 0, content: 'Version_1', value: 1},
+  {id: 1, content: 'évènement', value: 2},
 ]);
 
-
-
-// create a dataset with items
-// note that months are zero-based in the JavaScript Date object, so month 3 is April
-
 var items = new vis.DataSet();
-
-
 
 // create visualization
 var container = document.getElementById('visualization');
 var options = {
-// option groupOrder can be a property name or a sort function
-// the sort function must compare two groups and return a value
-//     > 0 when a > b
-//     < 0 when a < b
-//       0 when a == b
 groupOrder: function (a, b) {
-    return a.value - b.value;
+    return b.value - a.value;
 },
 editable: true,
 stack: false,
@@ -46,36 +35,6 @@ timeline.on("doubleClick", function (properties) {
         timeline.setCustomTimeMarker("Modifier votre texte", id, true);
     }
 })
-
-
-function cacher1() {
-  timeline.setGroups(groups2_3);
-}
-
-function cacher2() {
-  timeline.setGroups(groups1_3);
-}
-
-function cacher3() {
-  timeline.setGroups(groups1_2);
-}
-
-function montrerTout() {
-  timeline.setGroups(groups)
-}
-
-function changer_les_couleurs(id_item) {
-  // if(getRandomInt(2) == 0){
-  //   items.forEach(item => {
-  //     items.update({id: item["id"], group: item["group"], content: item["content"], className:'red'});
-  //   });
-  // }else{
-    items.forEach(item => {
-      items.update({id: item["id"], group: item["group"], content: item["content"], className:'green'});
-    });
-  // }
-  timeline.redraw();
-}
 
 function reset_couleurs() {
   items.forEach(item => {
@@ -110,11 +69,9 @@ var anneeMin = 1660;
 var anneeMax = 1800;
 
 var tabVal = new Array();
-var tabVal2 = new Array();
 
 for(var val = anneeMin; val<=anneeMax; val = val + 10){
     tabVal.push(val);
-    tabVal2.push(val);
 }
 
 
@@ -152,73 +109,8 @@ slider.noUiSlider.on('change',function(){
     options['max'] = new Date(max, 1, 1);
     timeline.setOptions(options);
     timeline.fit();
-    tabVal2 = new Array;
-    for(var val = min; val<=max; val = val + 10){
-        tabVal2.push(val);
-    }
-    slider2.noUiSlider.updateOptions({
-        start: [min, max],
-        range: {
-            'min': min,
-            'max': max
-        },
-        pips: {
-            mode:'values',
-            values: tabVal2,
-            density: 2,
-        }
-    });
-    updateColors(min, max);
 });
 
-
-//slider highLight
-var slider2 = document.getElementById("slider2");
-
-noUiSlider.create(slider2, {
-    start: [anneeMin, anneeMax],
-    connect: true,
-    tooltips: true,
-    step: 1,
-    range: {
-        'min': anneeMin,
-        'max': anneeMax
-    },
-    format: {
-        to: function ( value ) {
-            return value;
-        },
-        from: function ( value ) {
-            return value.replace();
-        }
-    },
-    pips: {
-        mode:'values',
-        values: tabVal2,
-        density: 2,
-    }
-});
-
-slider2.noUiSlider.on('change', function(){
-    updateColors(slider2.noUiSlider.get()[0], slider2.noUiSlider.get()[1]);
-});
-
-
-
-function updateColors(dateMin, dateMax){
-    items.forEach(item => {
-        var dateStart = new Date(item.start);
-        //console.log(dateStart);
-        var dateEnd = new Date(item.end);
-        if( dateStart.getFullYear() >= dateMin && dateEnd.getFullYear() <= dateMax){
-            items.update({id: item["id"], group: item["group"], content: item["content"], className:'green'});
-        } else {
-            items.update({id: item["id"], group: item["group"], content: item["content"], className:'base'});
-        }
-    });
-}
-
-window.addEventListener("load", updateColors(slider2.noUiSlider.get()[0], slider2.noUiSlider.get()[1]));
 
 
 (async function() {
@@ -253,7 +145,7 @@ window.addEventListener("load", updateColors(slider2.noUiSlider.get()[0], slider
   changer_les_couleurs();
 
 
-  $(document).ready(function(){
+$(document).ready(function(){
     $('.vis-item').on('click',function() {
       var e=$(this);
       // e.off('hover');
