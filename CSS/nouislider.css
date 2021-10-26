@@ -186,7 +186,7 @@
 }
 .noUi-pips {
   position: absolute;
-  color: #999;
+  color: black;
 }
 /* Values;
  *
@@ -195,6 +195,7 @@
   position: absolute;
   white-space: nowrap;
   text-align: center;
+  margin-top: 10px;
 }
 .noUi-value-sub {
   color: #ccc;
@@ -205,13 +206,13 @@
  */
 .noUi-marker {
   position: absolute;
-  background: #CCC;
+  background: darkslategrey;
 }
 .noUi-marker-sub {
-  background: #AAA;
+  background: black;
 }
 .noUi-marker-large {
-  background: #AAA;
+  background: black;
 }
 /* Horizontal layout;
  *
