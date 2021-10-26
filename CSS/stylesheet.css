@@ -51,7 +51,7 @@ body{
   margin: 20px 20px 20px 20px;
   padding: 20px 20px 20px 20px;
   border-radius: 30px;
-  border: 2px solid black
+  border: 2px solid black;
 }
 
 .timeline {
@@ -85,11 +85,17 @@ body{
   font-size: 15pt;
   color: rgb(16, 17, 90);
   box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
+
+  pointer-events: auto; 
 }
 
 .vis-item.vis-selected {
   border-color: rgb(223, 200, 98);
   background-color: rgb(223, 200, 98);
+}
+
+.vis-item.not-selected{
+  background-color: lightgray;
 }
 
 button{
