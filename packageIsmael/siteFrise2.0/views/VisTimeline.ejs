@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Timeline Vis</title>
+    
+
+        <!-- CDN and external scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="d3.v2.min.js"></script>
+
+        <!-- CDN css -->
+        <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"     rel="stylesheet">
+
+        <!-- Personnal css -->
+        <link href="nouislider.css" rel="stylesheet">
+        <link href="slider.css"     rel="stylesheet">
+        <link href="stylesheet.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="timeline-widget">
+
+            <p style="color: black ;"> Démonstration de l'implémentation de la librairie <a href="https://visjs.github.io/vis-timeline/docs/timeline/" target="_blank">vis-timeline-graph2d.js</a> </p>
+            <!---génération des couleurs-->
+            <%var colorListButton=["chartreuse","deepSkyBlue","yellow","red","cyan","orange","purple","orangeRed",""]%>
+            <%var resColors=[]%>
+            <% for(var i=0;i<=Object.values(object.nbVersions).length-1;i++) { %>
+                <%var resRandom=colorListButton[Math.floor(Math.random()*(colorListButton.length-1))]%>    
+          
+                <% if(resColors.includes(resRandom)!==true) {%>
+                    <% resColors.push(resRandom) %>   
+                  
+                <% }else{ %>
+                    <%var randomRes2=Math.floor(Math.random()*(colorListButton.length-1)); %>
+                    <%while (resColors.includes(colorListButton[randomRes2])===true){ %>
+                        <%randomRes2=Math.floor(Math.random()*(colorListButton.length-1)) %>
+                    <%}%>
+                    <% resColors.push(colorListButton[randomRes2]) %>  
+                <%}%>                                              
+            <% } %>   
+            <button onclick="reset_couleurs()"> reset couleurs </button>
+            <button onclick="reset_dates()">    reset dates    </button>
+
+      
+
+            <div id="visualization">
+            </div>
+            <div id='slider'>       </div>
+
+        </div>
+        <!---génération des cards bootstrap-->
+        <nav class="navbar-expand-sm">
+            <div class="navbar">
+                <ul class="navbar-nav " id="cardList">
+                    <%console.log(resColors)%>
+                    <% for(var cpt=0;cpt<=resColors.length-1;cpt++) { %>
+                        <li class="nav-item">
+                            <div class="card" id="card">                          
+                                <div class="card-body mx-auto" style="background-color:<%=resColors[cpt]%>;" id="cardGestion<%=cpt+1%>">
+                                    <h1 class="card-title"><%=Object.values(object.nbVersions)[cpt]%></h1>
+                                    <p class="card-text">
+                                        <%=Object.values(object.descriptions)[cpt]%>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>                    
+                    <%}%>
+                </ul> 
+            </div>
+        </nav>
+
+    </body>
+    <footer>
+        <!-- Personnal scripts -->
+        <script src="nouislider.js"></script>
+        
+        <script src="slider_functions.js"></script>
+        <script>        
+            var versions=[]
+            var dates=[]
+            //ajout des versions enregistrées
+            <%for (var cptVers=0;cptVers<=Object.values(object.nbVersions).length-1;cptVers++){%>
+                versions.push("<%=Object.values(object.nbVersions)[cptVers]%>")
+            <%}%>
+            //ajout des dates
+            <%for (var cptDates=0;cptDates<=Object.values(object.dates).length-1;cptDates++){%>
+                dates.push(<%=Object.values(object.dates)[cptDates]%>)
+            <%}%>
+            
+
+            var colorListButton=["chartreuse","deepSkyBlue","yellow","red","cyan","orange","orangeRed","purple"]
+            var colors=[]
+            
+            //ajout des couleurs rendues précédemment dans le tableau resColors généré par ejs
+            <%for(var cptResColors=0;cptResColors<=resColors.length-1;cptResColors++){%>
+                colors.push("<%=resColors[cptResColors]%>");
+            <%}%>
+        
+            
+            // create a dataset with items
+            // note that months are zero-based in the JavaScript Date object, so month 3 is April
+            var items = new vis.DataSet([
+    
+            ]);
+
+            for (var cptItems=1;cptItems<=versions.length;cptItems++){
+                
+                items.add({id: cptItems-1, group: 1, content: versions[cptItems-1], start: new Date(dates[cptItems-1], 3, 17), end: new Date(dates[cptItems], 3, 21), className:"green"})
+            }
+        
+            $(document).ready(()=>{
+                var tabId=items.getIds();
+                tabId.forEach((item) => {
+                
+                    items.update({id: item, className:"selected-"+colors[item]}); 
+                })
+                timeline.redraw()
+                timeline.fit()
+            })
+
+        
+        
+            for (var cptCard=1;cptCard<=versions.length;cptCard++){
+                document.getElementById("cardGestion"+cptCard).hidden=true;
+            }
+
+
+            $(document).ready(function(){
+                $('.vis-item').on('click',function() {
+                    var tabId=items.getIds()
+                    var id = timeline.getSelection();
+                    tabId.forEach((item) => {
+                        if(item != id){
+                            items.update({id:item,className:"not-selected"});
+                            document.getElementById("cardGestion"+(item+1)).hidden=true;
+                        } else {
+                        
+                            items.update({id:item,className:"selected-"+colors[item]});
+                            document.getElementById("cardGestion"+(item+1)).hidden=false;
+                        }
+                    });
+                    
+                });
+                timeline.redraw()
+                timeline.fit()
+            });
+
+        
+
+
+            // create visualization
+            var container = document.getElementById('visualization');
+            var options = {
+            // option groupOrder can be a property name or a sort function
+            // the sort function must compare two groups and return a value
+            //     > 0 when a > b
+            //     < 0 when a < b
+            //       0 when a == b
+                groupOrder: function (a, b) {
+                    return a.value - b.value;    
+                },
+                editable: false,
+                stack: false,
+                min: new Date(1660, 1, 1),
+                max: new Date(1800, 1, 1),
+                dataAttributes: ['id']
+            };
+
+            var timeline = new vis.Timeline(container);
+            timeline.setOptions(options);
+            timeline.setItems(items);
+
+
+            timeline.on("doubleClick", function (properties) {
+                var eventProps = timeline.getEventProperties(properties.event);
+
+                if (eventProps.what === "custom-time") {
+                    timeline.removeCustomTime(eventProps.customTime);
+                } else {
+                    var id = new Date().getTime();
+                    timeline.addCustomTime(eventProps.time, id);
+                    timeline.setCustomTimeMarker("Modifier votre texte", id, true);
+                }
+            })
+            
+
+
+ 
+ 
+
+            function reset_couleurs() {
+                var tabId=items.getIds();
+                tabId.forEach((item) => {
+                
+                    items.update({id: item, className:"selected-"+colors[item]}); 
+                    console.log("selected-"+colors[item])               
+                })
+            }
+
+            function reset_dates(){
+                slider.noUiSlider.updateOptions({ start: [anneeMin, anneeMax]})
+                options['min'] = new Date(anneeMin, 1, 1)
+                options['max'] = new Date(anneeMax, 1, 1)
+                timeline.setOptions(options)
+                timeline.fit()
+            }
+
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * max);
+            }
+
+            document.getElementById('visualization').onclick = function (event) {
+                var props = timeline.getEventProperties(event)
+            }
+        </script>
+    </footer>
+</html>
