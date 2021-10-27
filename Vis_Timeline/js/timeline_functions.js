@@ -187,9 +187,7 @@ noUiSlider.create(slider2, {
 });
 
 slider2.noUiSlider.on('change', function(){
-  items.update({id: 100, content: "", start: slider2.noUiSlider.get()[0] + "-01-01",  end: slider2.noUiSlider.get()[1] + "-01-01", type: "background", style: "background-color: orange"});
-  console.log(items.get(100))
-  console.log(items.get(1))
+  items.update({id: "bg", content: "", start: slider2.noUiSlider.get()[0] + "-01-01",  end: slider2.noUiSlider.get()[1] + "-01-01", type: "background", style: "background-color: orange"});
 });
 
 
