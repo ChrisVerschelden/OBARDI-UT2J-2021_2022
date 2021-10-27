@@ -150,6 +150,6 @@ button{
   background-color: orange;
 }
 
-vis-item.vis-item.selected-purple{
-  background-color: purple;
+.vis-item.vis-item.selected-purple{
+  background-color:darkviolet;
 }
