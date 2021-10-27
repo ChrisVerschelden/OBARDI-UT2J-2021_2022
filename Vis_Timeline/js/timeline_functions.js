@@ -22,7 +22,7 @@ var options = {
 groupOrder: function (a, b) {
     return a.value - b.value;
 },
-editable: true,
+editable: false,
 stack: false,
 min: new Date(1660, 1, 1),
 max: new Date(1800, 1, 1),
@@ -34,19 +34,6 @@ timeline.setOptions(options);
 timeline.setGroups(groups);
 timeline.setItems(items);
 timeline.fit()
-
-timeline.on("doubleClick", function (properties) {
-    var eventProps = timeline.getEventProperties(properties.event);
-
-    if (eventProps.what === "custom-time") {
-        timeline.removeCustomTime(eventProps.customTime);
-    } else {
-        var id = new Date().getTime();
-        timeline.addCustomTime(eventProps.time, id);
-        timeline.setCustomTimeMarker("Modifier votre texte", id, true);
-    }
-})
-
 
 function cacher1() {
   timeline.setGroups(groups2_3);
@@ -200,7 +187,9 @@ noUiSlider.create(slider2, {
 });
 
 slider2.noUiSlider.on('change', function(){
-    updateColors(slider2.noUiSlider.get()[0], slider2.noUiSlider.get()[1]);
+  items.update({id: 100, content: "", start: slider2.noUiSlider.get()[0] + "-01-01",  end: slider2.noUiSlider.get()[1] + "-01-01", type: "background", style: "background-color: orange"});
+  console.log(items.get(100))
+  console.log(items.get(1))
 });
 
 

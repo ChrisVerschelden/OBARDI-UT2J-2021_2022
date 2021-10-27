@@ -98,7 +98,8 @@ noUiSlider.create(slider2, {
 });
 
 slider2.noUiSlider.on('change', function(){
-    updateColors(slider2.noUiSlider.get()[0], slider2.noUiSlider.get()[1]);
+    console.log("test")
+    items.update({id: 100, content: "Periode mise en valeur", start: new Date(slider2.noUiSlider.get()[0]),  end: new Date(slider2.noUiSlider.get()[1]), type: "background"});
 });
 
 
