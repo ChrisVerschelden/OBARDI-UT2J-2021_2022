@@ -1,0 +1,155 @@
+#visualization {
+
+  width: float;
+  height: float;
+
+}
+h1{
+
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+
+}
+
+#nbGen{
+  display: none;
+}
+
+body{
+  
+  font-family: Open Sans;
+  background: #FAC24F;
+  color: black;
+  border-radius: 70%;
+
+} 
+
+.timeline-widget{
+  margin: 20px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 30px;
+  border: 2px solid black
+}
+
+.timeline {
+  
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 20%;
+  
+}
+
+.vis-timeline {
+  margin : 0px 0px 40px 0px;
+  border: 2px solid rgb(255, 255, 255);
+  font-size: 12pt;
+  border-radius: 10px ;
+  box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.vis-item {
+  font-family: Arial, Helvetica, sans-serif;
+
+  border-color: azure;
+  border-radius: 10px ;
+  align-items:center;
+  justify-content:center;
+  background-color: rgb(255, 255, 255);
+  font-size: 15pt;
+  color: rgb(16, 17, 90);
+  box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
+}
+
+.vis-item.vis-selected {
+  border-color: rgb(223, 200, 98);
+  background-color: rgb(223, 200, 98);
+}
+
+button{
+  margin : 10px 10px 10px 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+    
+  border-color: rgb(16, 17, 90);
+  border-radius: 10px ;
+  
+  background-color: rgb(16, 17, 90);
+  font-size: 15pt;
+  color:azure ;
+  box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
+}
+
+.vis-time-axis .vis-grid.vis-minor {
+  border-width: 2px;
+  border-color: rgb(223, 200, 98);
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+ }
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: rgb(16, 17, 90);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #000000;
+  cursor: pointer;
+}
+
+.vis-item.not-selected{
+  background-color: grey;
+}
+
+.vis-item.selected-red{
+  background-color: red;
+}
+
+.vis-item.selected-chartreuse{
+  background-color: chartreuse;
+}
+
+.vis-item.selected-cyan{
+  background-color: cyan;
+}
+
+.vis-item.selected-deepSkyBlue{
+  background-color: deepskyblue;
+}
+
+.vis-item.selected-yellow{
+  background-color: yellow;
+}
+
+.vis-item.selected-orangeRed{
+  background-color: orangeRed;
+}
+
+.vis-item.vis-item.selected-orange{
+  background-color: orange;
+}
+
+vis-item.vis-item.selected-purple{
+  background-color: purple;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Timeline Vis</title>
+    
+
+    <!-- CDN and external scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <script src="js/d3.v2.min.js"></script>
+
+    <!-- CDN css -->
+    <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"     rel="stylesheet">
+
+    <!-- Personnal css -->
+    <link href="../CSS/nouislider.css" rel="stylesheet">
+    <link href="../CSS/slider.css"     rel="stylesheet">
+    <link href="../CSS/stylesheet.css" rel="stylesheet">
+
+  </head>
+  <body>
+    
+
+    <div class="timeline-widget">
+
+      <p style="color: black ;"> Démonstration de l'implémentation de la librairie <a href="https://visjs.github.io/vis-timeline/docs/timeline/" target="_blank">vis-timeline-graph2d.js</a> </p>
+
+      <button onclick="cacher1()">        cacher V1      </button>
+      <button onclick="cacher2()">        cacher V2      </button>
+      <button onclick="cacher3()">        cacher V3      </button>
+      <button onclick="montrerTout()">    montrer tout   </button>
+      <button onclick="reset_couleurs()"> reset couleurs </button>
+      <button onclick="reset_dates()">    reset dates    </button>
+
+      <div id="visualization">
+        <script>
+          
+        </script>
+        
+      </div>
+      <div id='slider'>       </div>
+
+    </div>
+
+  </body>
+  <footer>
+    <!-- Personnal scripts -->
+    <script src="js/nouislider.js"></script>
+    <script src="js/timeline_functions.js"></script>
+    <script src="js/slider_functions.js"></script>
+    <script src=""></script>
+  </footer>
+</html>
