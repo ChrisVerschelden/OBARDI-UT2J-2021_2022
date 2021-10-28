@@ -105,8 +105,11 @@ body{
 }
 
 .vis-item.vis-selected {
-  border-color: rgb(223, 200, 98);
+  border-color:  rgb(0, 0, 0);
   background-color: rgb(223, 200, 98);
+  color: #000000;
+  
+  
 }
 
 .vis-item.not-selected{
