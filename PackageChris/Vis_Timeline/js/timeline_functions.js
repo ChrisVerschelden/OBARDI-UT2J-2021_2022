@@ -103,7 +103,7 @@ noUiSlider.create(slider, {
     }
 });
 
-slider.noUiSlider.on('change',function(){
+slider.noUiSlider.on('slide',function(){
     var min = slider.noUiSlider.get()[0];
     var max = slider.noUiSlider.get()[1];
     options['min'] = new Date(min, 1, 1);
@@ -119,9 +119,9 @@ slider.noUiSlider.on('change',function(){
     return new Promise(resolve => {
       setTimeout(() => {
         var json = [
-          {id: 6, group: 0, content: 'Toulouse v1', start: '1661-01-01', end:'1686-01-01', className:"base"},
-          {id: 7, group: 0, content: 'Toulouse v2', start: '1686-01-01', end:'1740-01-01', className:"base"},
-          {id: 8, group: 0, content: 'Toulouse v3', start: '1740-01-01', end:'1798-01-01', className:"base"}
+          {id: 6, group: 0, content: 'Toulouse v1', start: '1661-01-01', end:'1686-01-01', className:"not-selected"},
+          {id: 7, group: 0, content: 'Toulouse v2', start: '1686-01-01', end:'1740-01-01', className:"not-selected"},
+          {id: 8, group: 0, content: 'Toulouse v3', start: '1740-01-01', end:'1798-01-01', className:"not-selected"}
         ]
         resolve(json);
       }, 1000);
@@ -137,7 +137,7 @@ slider.noUiSlider.on('change',function(){
   await f1();
 
   for(var i = 0 ; i < json.length ; i++){
-    items.add({id: i, group: 0, content: json[i]['content'], start: new Date(json[i]['start']), end: new Date(json[i]['end']), className:"base"})
+    items.add({id: i, group: 0, content: json[i]['content'], start: new Date(json[i]['start']), end: new Date(json[i]['end']), className:"not-selected"})
   }
 
   timeline.setItems(items);
@@ -164,7 +164,7 @@ $(document).ready(function(){
           items.update({id: item["id"], group: item["group"], content: item["content"], className:'not-selected'});
         } else {
           var item_selected = items.get(id);
-          items.update({id: item_selected['id'], group: item["group"], content: item["content"], className:'base'});
+          items.update({id: item_selected['id'], group: item["group"], content: item["content"], className:'green'});
         }
       })
     });

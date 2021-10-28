@@ -5,45 +5,30 @@
 
 }
 
-#positioncard{
-  display : flex;
-  justify-content: center;
-}
-
 #card{
   width: 30%;
   height: 30%;
   margin-left: 2%;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12pt;
-  border-radius: 10px ;
-  box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
-  background: rgb(255, 255, 255);
+  border: 2px solid black;
+  border-radius: 5px;
 }
 #item_id{
-  background: rgb(145, 137, 137);
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid black;
   border-radius: 5px;
-  margin:  2% 2% 2% 2%;
-  padding:  2% 2% 2% 2%;
-  color: rgb(255, 255, 255);
+  margin: 2% 2% 2% 2%;
+  color: black;
 }
 #item_content{
-  
-  background: rgb(145, 137, 137);
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 5px; 
-  padding:  2% 2% 2% 2%;
-  margin:  2% 2% 2% 2%;
-  color: rgb(255, 255, 255);
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 2% 2% 2% 2%;
+  color: black;
 }
 #item_date{
-  background: rgb(145, 137, 137);
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid black;
   border-radius: 5px;
-  margin:  2% 2% 2% 2%;
-  padding:  2% 2% 2% 2%;
-  color: rgb(255, 255, 255);
+  margin: 2% 2% 2% 2%;
+  color: black;
 }
 
 h1{
@@ -56,7 +41,7 @@ h1{
 body{
   
   font-family: Open Sans;
-  background: #ffffff;
+  background: #FAC24F;
   color: rgb(255, 255, 255);
   border-radius: 70%;
 
@@ -66,7 +51,7 @@ body{
   margin: 20px 20px 20px 20px;
   padding: 20px 20px 20px 20px;
   border-radius: 30px;
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid black
 }
 
 .timeline {
@@ -96,21 +81,15 @@ body{
   border-radius: 10px ;
   align-items:center;
   justify-content:center;
-  background-color: rgb(145, 137, 137);
+  background-color: rgb(255, 255, 255);
   font-size: 15pt;
-  color: rgb(255, 255, 255);
+  color: rgb(16, 17, 90);
   box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
-
-  pointer-events: auto; 
 }
 
 .vis-item.vis-selected {
-  border-color: black;
-  background-color: darkcyan;
-}
-
-.vis-item.not-selected{
-  background-color: gray;
+  border-color: rgb(223, 200, 98);
+  background-color: rgb(223, 200, 98);
 }
 
 button{
@@ -118,10 +97,10 @@ button{
   font-family: Arial, Helvetica, sans-serif;
   display: inline-block;
     
-  border-color: rgb(255, 255, 255);
+  border-color: rgb(16, 17, 90);
   border-radius: 10px ;
   
-  background-color: darkcyan;
+  background-color: rgb(16, 17, 90);
   font-size: 15pt;
   color:azure ;
   box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
@@ -166,3 +145,6 @@ button{
   background-color: darkcyan;
 }
 
+.vis-item.not-selected{
+  background-color: gray;
+}
