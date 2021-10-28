@@ -157,7 +157,6 @@ slider.noUiSlider.on('change',function(){
         tabVal2.push(val);
     }
     slider2.noUiSlider.updateOptions({
-        start: [min, max],
         range: {
             'min': min,
             'max': max
