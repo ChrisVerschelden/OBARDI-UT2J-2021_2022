@@ -132,19 +132,24 @@ noUiSlider.create(slider, {
     }
 });
 
+slider.noUiSlider.on('slide',function(){
+  var min = slider.noUiSlider.get()[0];
+  var max = slider.noUiSlider.get()[1];
+  options['min'] = new Date(min, 1, 1);
+  options['max'] = new Date(max, 1, 1);
+  timeline.setOptions(options);
+  timeline.fit();
+})
+
+
 slider.noUiSlider.on('change',function(){
-    var min = slider.noUiSlider.get()[0];
-    var max = slider.noUiSlider.get()[1];
-    options['min'] = new Date(min, 1, 1);
-    options['max'] = new Date(max, 1, 1);
-    timeline.setOptions(options);
-    timeline.fit();
+  var min = slider.noUiSlider.get()[0];
+  var max = slider.noUiSlider.get()[1];
     tabVal2 = new Array;
     for(var val = min; val<=max; val = val + 10){
         tabVal2.push(val);
     }
     slider2.noUiSlider.updateOptions({
-        start: [min, max],
         range: {
             'min': min,
             'max': max
@@ -156,6 +161,7 @@ slider.noUiSlider.on('change',function(){
         }
     });
     updateColors(min, max);
+    timeline.redraw();
 });
 
 
