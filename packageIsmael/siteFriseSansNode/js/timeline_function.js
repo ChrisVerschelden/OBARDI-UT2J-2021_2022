@@ -45,20 +45,20 @@ const data={
 }
 
 //liste des couleurs
-var colorListButton=["chartreuse","deepSkyBlue","yellow","red","cyan","orange","purple","orangeRed",""]
+var colorListButton=["chartreuse","deepSkyBlue","yellow","red","cyan","orange","purple","orangeRed"]
 
 //liste des couleurs générées aléatoirement en fonction du nombre de données
 var resColors=[]
 for(var i=0;i<=Object.values(data.nbVersions).length-1;i++) { 
-    var resRandom=colorListButton[Math.floor(Math.random()*(colorListButton.length-1))] 
+    var resRandom=colorListButton[Math.floor(Math.random()*(colorListButton.length))] 
           
     if(resColors.includes(resRandom)!==true) {
         resColors.push(resRandom)   
                   
     }else{ 
-        var randomRes2=Math.floor(Math.random()*(colorListButton.length-1)); 
+        var randomRes2=Math.floor(Math.random()*(colorListButton.length)); 
         while (resColors.includes(colorListButton[randomRes2])===true){ 
-            randomRes2=Math.floor(Math.random()*(colorListButton.length-1)) 
+            randomRes2=Math.floor(Math.random()*(colorListButton.length)) 
         }
         resColors.push(colorListButton[randomRes2])  
     }                                              
