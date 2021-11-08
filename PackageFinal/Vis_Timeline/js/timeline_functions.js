@@ -3,7 +3,8 @@ const anneeMax = 1800;
 
 //group list
 var groups = new vis.DataSet([
-    { id: 0, content: 'Version_1', value: 1 },
+    { id: 0, content: 'Evenements', value: 1 },
+    { id: 1, content: '[|||||||||||]', value: 2 },
 ]);
 
 //item list
@@ -12,7 +13,7 @@ var items = new vis.DataSet();
 var container = document.getElementById('visualization');
 var options = {
     groupOrder: function(a, b) {
-        return a.value - b.value;
+        return b.value - a.value;
     },
     editable: false,
     stack: false,
@@ -65,14 +66,6 @@ function reset_dates() {
     timeline.setOptions(options);
     timeline.fit();
 }
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
-
-// document.getElementById('visualization').onclick = function(event) {
-//     var props = timeline.getEventProperties(event)
-// }
 
 var slider = document.getElementById('slider');
 var sliderval = document.getElementById('slidervalue');
