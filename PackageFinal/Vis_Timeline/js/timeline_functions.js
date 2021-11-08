@@ -173,7 +173,7 @@ slider2.noUiSlider.on('slide', function() {
 (async function() {
     const urlParams = new URLSearchParams(window.location.search);
     const id_frise = parseInt(urlParams.get('id_frise'));
-    await fetch("https://github.com/ChrisVerschelden/OBARDI-UT2J-2021_2022/blob/RefactorPropre/data_example.json")
+    await fetch("https://jsonkeeper.com/b/WQZB")
         .then(res => res.json())
         .then((out) => {
             var json = out[id_frise];
