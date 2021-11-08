@@ -173,7 +173,7 @@ slider2.noUiSlider.on('slide', function() {
 (async function() {
     const urlParams = new URLSearchParams(window.location.search);
     const id_frise = parseInt(urlParams.get('id_frise'));
-    await fetch("https://jsonkeeper.com/b/WQZB")
+    await fetch("https://chrisverschelden.github.io/jsonProvider/data.json") //http://myjson.dit.upm.es/api/bins/8box
         .then(res => res.json())
         .then((out) => {
             var json = out[id_frise];
@@ -190,6 +190,7 @@ slider2.noUiSlider.on('slide', function() {
         document.getElementById('item_id').innerHTML = item_selected.id;
         document.getElementById('item_content').innerHTML = item_selected.content;
         document.getElementById('item_date').innerHTML = item_selected.start.getFullYear() + " / " + item_selected.end.getFullYear();
+        timeline.fit(parseInt(urlParams.get('id')));
     }
 
     timeline.setItems(items);
