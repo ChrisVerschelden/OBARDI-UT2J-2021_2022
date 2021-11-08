@@ -210,7 +210,8 @@ slider2.noUiSlider.on('slide', function() {
                     items.update({ id: item_selected['id'], group: item["group"], content: item["content"], className: 'green' });
                 }
             })
-            window.open("file:///C:/Users/chris/Documents/COURS/OBARDI-UT2J-2021_2022/PackageFinal/Vis_Timeline/VisTimeline.html" + '?id=' + id + "&id_frise=" + id_frise, '_blank').focus();
+            var url_propre = window.location.search.split('?')[0];
+            window.open(url_propre + '?id=' + id + "&id_frise=" + id_frise, '_blank').focus();
         });
     });
 
