@@ -1,6 +1,7 @@
 
 //objet javascript contenant les données
 
+
 const data={
     ville:"toulouse",
 
@@ -13,8 +14,6 @@ const data={
         titre6:"toulouse V6",
         titre7:"toulouse V7",
         titre8:"toulouse V8"
-        
-
     },
 
     descriptions:{
@@ -26,8 +25,6 @@ const data={
         texte6:"sixième version de toulouse",
         texte7:"septième version de toulouse",
         titre8:"huitième version de toulouse"
-        
-
 
     },
 
