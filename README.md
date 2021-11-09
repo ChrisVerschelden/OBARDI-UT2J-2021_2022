@@ -2,4 +2,6 @@
 
 ## création d'un snippet JavaScript pour le projet ObARDI
 
-du texte, bonjour les copains
+Première version des démonstration
+
+[Voir les frises] : https://chrisverschelden.github.io/OBARDI-UT2J-2021_2022/

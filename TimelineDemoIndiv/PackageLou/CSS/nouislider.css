@@ -82,13 +82,14 @@
 /* Slider size and handle placement;
  */
 .noUi-horizontal {
-  height: 18px;
+  height: 12px;
 }
 .noUi-horizontal .noUi-handle {
-  width: 34px;
-  height: 28px;
-  right: -17px;
-  top: -6px;
+  height: 18px;
+    width: 18px;
+    top: -5px;
+    right: -9px; /* half the width */
+    border-radius: 9px;
 }
 .noUi-vertical {
   width: 18px;
@@ -116,7 +117,8 @@
   border-radius: 3px;
 }
 .noUi-connect {
-  background: #3FB8AF;
+  
+  background:#FAC24F ;
 }
 /* Handles and cursors;
  */
@@ -183,10 +185,12 @@
 .noUi-pips * {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .noUi-pips {
+  
   position: absolute;
-  color: #999;
+  color: rgb(0, 0, 0);
 }
 /* Values;
  *
@@ -195,6 +199,7 @@
   position: absolute;
   white-space: nowrap;
   text-align: center;
+  margin-top: 10px;
 }
 .noUi-value-sub {
   color: #ccc;
@@ -205,13 +210,13 @@
  */
 .noUi-marker {
   position: absolute;
-  background: #CCC;
+  background: rgb(145, 137, 137);
 }
 .noUi-marker-sub {
-  background: #AAA;
+  background: black;
 }
 .noUi-marker-large {
-  background: #AAA;
+  background: black;
 }
 /* Horizontal layout;
  *
@@ -272,6 +277,8 @@
   width: 15px;
 }
 .noUi-tooltip {
+  font-family: Arial, Helvetica, sans-serif;
+
   display: block;
   position: absolute;
   border: 1px solid #D9D9D9;
