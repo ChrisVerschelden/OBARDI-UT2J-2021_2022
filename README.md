@@ -30,7 +30,7 @@ Première version des démonstrations
 ///////////////////////////////////////////////////////////
 
 ## Documentation utilisateur générale
-[voir la documentation technique correspondante]((#Documentation-technique-générale))
+[voir la documentation technique correspondante](https://docs.google.com/document/d/1313UfUvu5JMydGfskpcGC2aoPb3ukhzSo4ToIS74r6w/edit?usp=sharing)
 
 - Se déplacer sur la frise
 
