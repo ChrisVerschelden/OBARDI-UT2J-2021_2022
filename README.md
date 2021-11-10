@@ -12,11 +12,11 @@ Le groupe est composé de 6 magnifiques personnes.
 Notre client Lucas Bourel fait partie du projet Obardi et souhaite que nous créions une frise web afin d’aider les historiens à analyser l’évolution des unités territoriales pendant l’Ancien Régime.
 
 
-## création d'un snippet JavaScript pour le projet ObARDI
+## Création d'un snippet JavaScript pour le projet ObARDI
 
-Première version des démonstration
+Première version des démonstrations
 
-[Pour accèder à la démonstration cliquez ce lien](https://chrisverschelden.github.io/OBARDI-UT2J-2021_2022/)
+[Pour accéder à la démonstration cliquez sur ce lien](https://chrisverschelden.github.io/OBARDI-UT2J-2021_2022/)
 
 ## Documentation technique générale
 [voir la documentation utilisateur correspondante]((#Documentation-utilisateur-générale))
