@@ -311,7 +311,6 @@ Pour sélectionner une version, il suffit de cliquer sur une période qui nous r
         <td> <td>
         <td> Facilement modifiable <td>
     </tr>
-
 </table>
 
 <br>
