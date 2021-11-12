@@ -1,13 +1,26 @@
 # OBARDI-UT2J-2021_2022
 
+Liens vers ces informations sous forme de documents individuels:
+
+[Documentation technique](https://docs.google.com/document/d/17fuz92WkovtW9EhOZAYqz8fv3NqDdExkeeilsL_BOrg/edit?usp=sharing)
+
+[Manuel utilisateur](https://docs.google.com/document/d/1313UfUvu5JMydGfskpcGC2aoPb3ukhzSo4ToIS74r6w/edit?usp=sharing)
+
+[Etat de l'art](https://docs.google.com/spreadsheets/d/1Qmp_tiZh09-4FGok3-u5c-aASvjVbPiT-ug5-PIHYd0/edit?usp=sharing)
+
+<br>
+
 ## Contexte
 Le projet Obardi est un projet de recherche interdisciplinaire qui a pour objectif d’aider les historiens à analyser l’évolution des unités territoriales pendant l'Ancien régime. Un site Web a été réalisé pour mettre en évidence les informations recueillies sur ces unités territoriales. Le but de projet tutoré est de mettre en place dans une application Web une frise permettant de visualiser et d’analyser les différentes périodes sur lesquelles une unité territoriale à évoluer.
+
 ## Qui sommes-nous ? 
 Nous sommes six étudiants en Informatique à l’université Jean Jaurès. Dans le cadre de notre formation, nous sommes amenés à donner 8 semaines de notre temps à la création d’un projet tuteuré qui porte sur la création d’une frise web. 
 Le groupe est composé de 6 magnifiques personnes.
-## Le client
+
+## Notre client
 Notre client Lucas Bourel fait partie du projet Obardi et souhaite que nous créions une frise web afin d’aider les historiens à analyser l’évolution des unités territoriales pendant l’Ancien Régime.
 
+<br>
 
 # La frise chronologique
 
@@ -49,8 +62,36 @@ Pour sélectionner une version, il suffit de cliquer sur une période qui nous r
 
 ## Documentation technique
 
+### Librairies utilisées
+(voir "Etat de l'art" dans la section "Choix techniques et design")
+* Vis.js  
+    Vis.js est la librairie principale pour faire fonctionner la frise chronologique. La documentation se trouve [ici](https://visjs.github.io/vis-timeline/docs/timeline/).
+    Nous avons choisi de l'importer via son CDN (Content Delivery Network). C’est une bibliothèque de visualisation dynamique basée sur un navigateur. La bibliothèque est conçue pour être facile à utiliser, pour gérer de grandes quantités de données dynamiques et pour permettre la manipulation et l'interaction avec les données. La bibliothèque se compose des composants DataSet, Timeline, Network, Graph2d et Graph3d.
 
-### Spécificité technique frise 2
+    (voir son importation dans le fichier VisTimeline.html) 
+
+    ```html
+    <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet"> 
+    ```
+
+* NoUiSlider
+
+    NoUiSlider est la librairie qui permet de faire les sliders de la frise chronologique. Elle est actuellement téléchargé dans les dossier du projet, l'utilisation d'un CDN est encore à débattre. Cette librairie prend en charge le Multi-Touch sur les appareils IOS, Android et Windows et ne nécessite aucune dépendance externe. Il n’y a pas de reflow, le slider est donc rapide même sur les appareils les plus anciens. Le slider est également responsive et s’adapte sur tous types de supports.
+
+    (voir son importation dans le fichier VisTimeline.html) 
+
+    ```html
+    <link href="../CSS/nouislider.css" rel="stylesheet">
+    <link href="../CSS/slider.css" rel="stylesheet">
+    <link href="../CSS/stylesheet.css" rel="stylesheet">
+    ```
+
+### Importation des données
+
+L’importation des données se fait via un jeu de données JSON . Ce jeu de données représente à l’heure actuelle le seul moyen d’accéder à des données concernant des unités territoriales en absence de moyen d’interagir avec l’API d’Obardi. Les données JSON sont actuellement stocké sur un GITHUB Pages afin de simuler une API/CDN.
+
+[GITHUB Pages](https://chrisverschelden.github.io/jsonProvider/data.json) 
 
 
 # Tests sur navigateur
@@ -197,7 +238,7 @@ Pour sélectionner une version, il suffit de cliquer sur une période qui nous r
 
 # Choix techniques et design
 
-## choix des librairies
+## Etat de l'art
 
 <br>
 <table style="text-align: center;">
