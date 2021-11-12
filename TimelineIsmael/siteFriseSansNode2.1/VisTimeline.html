@@ -4,10 +4,7 @@
         <title>Timeline Vis</title>
     
 
-        <!-- CDN and external scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="js/d3.v2.min.js"></script>
 
@@ -25,8 +22,7 @@
 
             <p style="color: black ;"> Démonstration de l'implémentation de la librairie <a href="https://visjs.github.io/vis-timeline/docs/timeline/" target="_blank">vis-timeline-graph2d.js</a> </p>
             <!---génération des couleurs-->
-            <button onclick="reset_colors()"> reset couleurs </button>
-            <button onclick="reset_dates()">    reset dates    </button>
+            <button id="bouttonDates">    reset dates    </button>
 
       
 
@@ -47,6 +43,10 @@
     </body>
     <footer>
         <!-- Personnal scripts -->
+        <!-- CDN and external scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
         <script type="text/javascript" src="data_example.json"></script>
         <script src="js/nouislider.js"></script>
         <script src="js/slider_functions.js"></script>
