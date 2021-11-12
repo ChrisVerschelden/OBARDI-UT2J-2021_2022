@@ -1,13 +1,12 @@
 
 //url où est généré le Json (myJSON)
-let url = 'http://myjson.dit.upm.es/api/bins/8box';
+let url = 'https://chrisverschelden.github.io/jsonProvider/data.json';
 
 //requete permettant de récupérer le JSON 
 var req=new XMLHttpRequest();
 req.open('GET',url)
 req.onload=function(){
     var res=JSON.parse(req.responseText);
-    console.log(res[70])
     frise(res[70])
 }
 req.send()
@@ -20,7 +19,7 @@ function frise(res){
     var dates=[]
     var nom=res.name;
 
-    console.log(nom)
+
 
     //ajout dans les tableaux dates et versions des dates et des versions contenues dans le JSON
     for (var cptElt=0;cptElt<=res.intervals.length-1;cptElt++){
