@@ -20,7 +20,7 @@ Liens vers ces informations sous forme de documents individuels:
         2. [Importation des données](#importation-des-données)
 3. [Tests sur navigateur](#tests-sur-navigateur)
 4. [Choix techniques et design](#choix-techniques-et-design)
-    1. [Etat de l'art](#etat-de-l'art)
+    1. [Etat de l'art](#etat-de-l-'-art)
 
 
 # OBARDI-UT2J-2021_2022
