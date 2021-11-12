@@ -199,7 +199,120 @@ Pour sélectionner une version, il suffit de cliquer sur une période qui nous r
 
 ## choix des librairies
 
+<br>
+<table style="text-align: center;">
+    <tr>
+        <th> Nom </th> 
+        <td> <a href="https://timeline.knightlab.com/"> Knightlab </a> <td>
+        <td> <a href="https://ilkeryilmaz.github.io/timelinejs/"> Timeline.js </a> <td>
+        <td> <a href="https://avo.alaska.edu/includes/js/timeglider/kitchen_sink.html"> Timeglider </a> <td>
+        <td> <a href="https://vuejsexamples.com/a-simple-timeline-component-for-vue/"> Vue-Timeline-Component </a> <td>
+        <td> <a href="http://propublica.github.io/timeline-setter/"> Timeline setter </a> <td>
+        <td> <a href="http://www.simile-widgets.org/timeline/"> Simile widget timeline </a> <td>
+        <td> <a href="https://visjs.github.io/vis-timeline/examples/timeline/"> Vis.js </a> <td>
+    </tr>
+    <tr>
+        <th> Documentation </th>
+        <td> Basique <td>
+        <td> <a href="https://ilkeryilmaz.github.io/timelinejs/"> Basique </a> <td>
+        <td> Inaccessible <td>
+        <td> Très basiques (10 lignes) <td>
+        <td> <a href="https://http://propublica.github.io/timeline-setter/documentation/index.html"> Basique </a> <td>
+        <td> Basique <td>
+        <td> <a href="https://visjs.github.io/vis-timeline/docs/timeline/"> Très Détaillée </a> <td>
+    </tr>
+    <tr>
+        <th> Licence </th>
+        <td> Licence MLP <td>
+        <td> Open Source <td>
+        <td> Source fermées <td>
+        <td> Open Source <td>
+        <td> Open Source <td>
+        <td> Licence BSD<td>
+        <td> Licence MIT <td>
+    </tr>
+    <tr>
+        <th> Chargement 10/15/100 <br> éléments </th>
+        <td> 3s / 3s / 10s   <td>
+        <td> <1s / <1s / <1s <td>
+        <td> <1s / <1s / <1s <td>
+        <td> <1s / <1s / <1s <td>
+        <td> <1s / <1s / <1s <td>
+        <td> <1s / <1s / <1s <td>
+        <td> <1s / <1s / <1s <td>
+    </tr>
+    <tr>
+        <th> Librairies annexes </th>
+        <td> Inconnu <td>
+        <td> JQuery <td>
+        <td> JQuery <td>
+        <td> aucune <td>
+        <td> TableFu / Underscore / JQuery <td>
+        <td> aucune <td>
+        <td> aucune <td>
+    </tr>
+    <tr>
+        <th> CRUD des éléments </th> 
+        <td> Simple mais pas instantané <td>
+        <td> Difficile aucune documentation <td>
+        <td> Simple mais pas instantané <td>
+        <td> Simple mais pas instantané <td>
+        <td> Simple mais pas instantané <td>
+        <td> Simple mais pas instantané <td>
+        <td> Simple mais est instantané <td>
+    </tr>
+    <tr>
+        <th> Implémentation </th>
+        <td> Simple <td>
+        <td> Simple(node js) <td>
+        <td> Simple <td>
+        <td> Simple <td>
+        <td> Difficile <td>
+        <td> Simple <td>
+        <td> Simple <td>
+    </tr>
+    <tr>
+        <th> Implémentation des <br> besoins client</th>
+        <td> Impossible ( code non accessible ) <td>
+        <td> Difficile(difficultés d'ajout et d'édition)<td>
+        <td> Impossible ( code non accessible ) <td>
+        <td> Facile <td>
+        <td> Difficile(difficultés d'ajout et d'édition) <td>
+        <td> Difficile <td>
+        <td> Facile <td>
+    </tr> 
+    <tr>
+        <th> Format des <br> données</th>
+        <td> Google Spreadsheet <td>
+        <td> Json <td>
+        <td> Json <td>
+        <td> Json <td>
+        <td> CSV  <td>
+        <td> Json <td>
+        <td> Json <td>
+    </tr>
+    <tr>
+        <th> Elément cliquables </th>
+        <td> Oui <td>
+        <td> Oui <td>
+        <td> Oui <td>
+        <td> Non <td>
+        <td> Oui <td>
+        <td> Oui <td>
+        <td> Oui <td>
+    </tr>
+    <tr>
+        <th> Commentaires </th>
+        <td> <td>
+        <td> Documentation peu complètes et difficultées de modification <td>
+        <td> Style déjà présent et difficilement modifiable <td>
+        <td> Pas assez complet et peu modifiable <td>
+        <td> Documentation sur l'installation pas assez précise <td>
+        <td> <td>
+        <td> Facilement modifiable <td>
+    </tr>
 
+</table>
 
 <br>
 <br>
