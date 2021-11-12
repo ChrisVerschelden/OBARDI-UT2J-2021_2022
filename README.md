@@ -1,36 +1,19 @@
 # OBARDI-UT2J-2021_2022
 
-## Introduction
-Au cours de cette présentation nous allons vous présenter le cahier des charges ainsi que les solutions qui furent réalisées afin de répondre à l’exigence de ce dernier.
-
-## Partie I : Contexte
+## Contexte
 Le projet Obardi est un projet de recherche interdisciplinaire qui a pour objectif d’aider les historiens à analyser l’évolution des unités territoriales pendant l'Ancien régime. Un site Web a été réalisé pour mettre en évidence les informations recueillies sur ces unités territoriales. Le but de projet tutoré est de mettre en place dans une application Web une frise permettant de visualiser et d’analyser les différentes périodes sur lesquelles une unité territoriale à évoluer.
-# Qui sommes-nous ? 
+## Qui sommes-nous ? 
 Nous sommes six étudiants en Informatique à l’université Jean Jaurès. Dans le cadre de notre formation, nous sommes amenés à donner 8 semaines de notre temps à la création d’un projet tuteuré qui porte sur la création d’une frise web. 
 Le groupe est composé de 6 magnifiques personnes.
 ## Le client
 Notre client Lucas Bourel fait partie du projet Obardi et souhaite que nous créions une frise web afin d’aider les historiens à analyser l’évolution des unités territoriales pendant l’Ancien Régime.
 
 
-## Création d'un snippet JavaScript pour le projet ObARDI
+# La frise chronologique
 
-Première version des démonstrations
+[site de démonstration](https://chrisverschelden.github.io/OBARDI-UT2J-2021_2022/)
 
-[Pour accéder à la démonstration cliquez sur ce lien](https://chrisverschelden.github.io/OBARDI-UT2J-2021_2022/)
-
-## Documentation technique générale
-[voir la documentation utilisateur correspondante]((#Documentation-utilisateur-générale))
-
-## Documentation technique frise 1
-[voir la documentation utilisateur correspondante]((#Documentation-utilisateur-frise-1))
-
-## Documentation technique frise 2
-[voir la documentation utilisateur correspondante]((#Documentation-utilisateur-frise-1))
-
-///////////////////////////////////////////////////////////
-
-## Documentation utilisateur générale
-[voir la documentation technique correspondante](https://docs.google.com/document/d/1313UfUvu5JMydGfskpcGC2aoPb3ukhzSo4ToIS74r6w/edit?usp=sharing)
+## Documentation utilisateur
 
 - Se déplacer sur la frise
 
@@ -64,8 +47,165 @@ Pour sélectionner une version, il suffit de cliquer sur une période qui nous r
 
 ![sélectionner une période](https://media.giphy.com/media/duJYe6eweCLUK2280R/giphy.gif)
 
-## Documentation utilisateur frise 1
-[voir la documentation technique correspondante]((#Documentation-technique-frise-1))
+## Documentation technique
 
-## Documentation utilisateur frise 2
-[voir la documentation technique correspondante]((#Documentation-technique-frise-2))
+
+### Spécificité technique frise 2
+
+
+# Tests sur navigateur
+
+<table style="text-align: center;">
+    <tr>
+        <th> </th> <th> Opera </th> <th> Chrome </th> <th> Firefox </th> <th> Brave </th> <th> Edge </th> <th> Safari </th> <th> Chrome <br> android</th>
+    </tr>
+    <tr>
+        <td> 
+            redimensionnement de <br>
+            la frise via le slider 1 
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+    <tr>
+        <td> 
+            les nouvelles bornes de la <br>
+            frise correspondent à celles <br>
+            définies sur le slider 1 <br> 
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+    <tr>
+        <td> 
+            changement de la <br>
+            graduation du slider 2 <br>
+            en fonction du slider 1 <br>
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+    <tr>
+        <td> 
+            les nouvelles bornes <br>
+            du slider 2 <br>
+            correspondent à celles <br>
+            définies sur le slider 1 <br>
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+    <tr>
+        <td> 
+            le slider 2 créé un item <br>
+            orange en backgroun <br>
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+    <tr>
+        <td> 
+            les nouvelles bornes <br>
+            de l'item orange <br>
+            correspondent à celles <br>
+            définies sur le slider 2  <br>
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+    <tr>
+        <td> 
+            Le bouton reset remet <br>
+            tout dans l'état d'origine <br>
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+    <tr>
+        <td> 
+            les données sont <br>
+            correctement importées <br>
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+        <td> 
+            ouvrir dans une nouvelle <br>
+            page lors d'un clic <br>
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+        <td> 
+            changer la couleur d'une  <br>
+            période sélectionnée <br>
+        </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+        <td> ✔️ </td>
+    </tr>
+</table>
+
+# Choix techniques et design
+
+## choix des librairies
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+BALDE Ismaila-COSTES Lou-Anne - FEZZANI Ismael- JEANJEAN Cédric -TRINH Williams -VERSCHELDEN Chris
