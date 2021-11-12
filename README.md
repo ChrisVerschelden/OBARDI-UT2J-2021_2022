@@ -1,5 +1,3 @@
-# OBARDI-UT2J-2021_2022
-
 Liens vers ces informations sous forme de documents individuels:
 
 [Documentation technique](https://docs.google.com/document/d/17fuz92WkovtW9EhOZAYqz8fv3NqDdExkeeilsL_BOrg/edit?usp=sharing)
@@ -7,6 +5,25 @@ Liens vers ces informations sous forme de documents individuels:
 [Manuel utilisateur](https://docs.google.com/document/d/1313UfUvu5JMydGfskpcGC2aoPb3ukhzSo4ToIS74r6w/edit?usp=sharing)
 
 [Etat de l'art](https://docs.google.com/spreadsheets/d/1Qmp_tiZh09-4FGok3-u5c-aASvjVbPiT-ug5-PIHYd0/edit?usp=sharing)
+
+
+# Table des matières
+
+1. [OBARDI-UT2J-2021_2022](#obardi-ut2j-2021_2022)
+    1. [Contexte](#contexte)
+    2. [Qui sommes-nous ?](#qui-sommes-nous-?)
+    3. [Notre client](#notre-client)
+2. [La frise chronologique](#la-frise-chronologique)
+    1. [Documentation utilisateur](#documentation-utilisateur)
+    2. [Documentation Technique](#documentation-technique)
+        1. [Librairies utilisées](#librairies-utilisées)
+        2. [Importation des données](#importation-des-données)
+3. [Tests sur navigateur](#tests-sur-navigateur)
+4. [Choix techniques et design](#choix-techniques-et-design)
+    1. [Etat de l'art](#etat-de-l'art)
+
+
+# OBARDI-UT2J-2021_2022
 
 <br>
 
