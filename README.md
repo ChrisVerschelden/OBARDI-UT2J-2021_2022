@@ -21,7 +21,7 @@ Liens vers ces informations sous forme de documents individuels:
 3. [Tests sur navigateur](#tests-sur-navigateur)
 4. [Choix techniques et design](#choix-techniques-et-design)
     1. [Etat de l'art](#etat-de-l-art)
-5. [Représentation des unités territoriales et leur niveau hiérarchqique]
+5. [Représentation des unités territoriales et leur niveau hiérarchqique](# Représentation des unités territoriales et leur niveau hiérarchqique)
     1. [Documentation utilisateur]
     2. [Documentation technique]
         1. [Librairies utilisées]
