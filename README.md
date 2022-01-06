@@ -2,4 +2,6 @@
 
 ## création d'un snippet JavaScript pour le projet ObARDI
 
-du texte, bonjour les copains
+
+
+
