@@ -21,6 +21,11 @@ Liens vers ces informations sous forme de documents individuels:
 3. [Tests sur navigateur](#tests-sur-navigateur)
 4. [Choix techniques et design](#choix-techniques-et-design)
     1. [Etat de l'art](#etat-de-l-art)
+5. [Représentation des unités territoriales et leur niveau hiérarchqique]
+    1. [Documentation utilisateur]
+    2. [Documentation technique]
+        1. [Librairies utilisées]
+        2. [Importation des données]
 
 
 # OBARDI-UT2J-2021_2022
@@ -374,7 +379,9 @@ L’importation des données se fait via un jeu de données JSON . Ce jeu de don
 <br>
 <br>
 <br>
+# Représentation des unités territoriales et leur niveau hiérarchqique
 <br>
+[site de démonstration]
 <br>
 
 BALDE Ismaila-COSTES Lou-Anne - FEZZANI Ismael- JEANJEAN Cédric -TRINH Williams -VERSCHELDEN Chris
