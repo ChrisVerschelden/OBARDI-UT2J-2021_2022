@@ -1,0 +1,57 @@
+{
+    "nodes":[
+        {"id":"m-1", "age":20, "name":"Europe", "loaded":true},
+        {"id":"m-2", "age":15, "name":"Fred", "loaded":true},
+        {"id":"m-3", "age":16, "name":"Tom", "loaded":true},
+        {"id":"m-4", "age":35, "name":"Robert", "loaded":true},
+        {"id":"m-5", "age":38, "name":"Mark", "loaded":true},
+        {"id":"m-6", "age":42, "name":"Jason", "loaded":true},
+        {"id":"m-7", "age":37, "name":"Bill", "loaded":true},
+        {"id":"m-8", "age":60, "name":"Andre", "loaded":true},
+        {"id":"m-9", "age":63, "name":"Daniel", "loaded":true},
+        {"id":"m-10", "age":17, "name":"Thomas", "loaded":true},
+        {"id":"m-11", "age":21, "name":"Sergejs", "loaded":true},
+        {"id":"m-12", "age":26, "name":"Bryon", "loaded":true},
+        {"id":"m-13", "age":29, "name":"Toby", "loaded":true},
+
+        {"id":"f-1", "age":28, "name":"france", "loaded":true},
+        {"id":"f-2", "age":21, "name":"allemagne", "loaded":true},
+
+        {"id":"r1","age":50,"name":"occitanie","loaded":true},
+        {"id":"r2","age":50,"name":"bretagne","loaded":true},
+
+        {"id":"d1","age":50,"name":"haute-garonne","loaded":true},
+        {"id":"d2","age":50,"name":"aude","loaded":true},
+
+        {"id":"v1","age":50,"name":"revel","loaded":true},
+        {"id":"v2","age":50,"name":"toulouse","loaded":true},
+
+        {"id":"p1","age":50,"name":"abbaye Sompidou","loaded":true},
+        {"id":"p2","age":50,"name":"abbaye Poupidou","loaded":true}
+
+
+
+
+
+        
+        
+   ],
+
+    "links":[
+        {"id":"1", "from":"m-1", "to":"f-1", "type":"friend"},
+        {"id":"2", "from":"m-1", "to":"f-2", "type":"friend"},
+
+        {"id":"3", "from":"f-1", "to":"r1", "type":"region"},
+        {"id":"4", "from":"f-1", "to":"r2", "type":"region"},
+
+        {"id":"5", "from":"r1", "to":"d2", "type":"region"},
+        {"id":"6", "from":"r1", "to":"d1", "type":"region"},
+
+        {"id":"7", "from":"d1", "to":"v2", "type":"ville"},
+        {"id":"8", "from":"d1", "to":"v1", "type":"ville"},
+
+        {"id":"9", "from":"v2", "to":"p1", "type":"ville"},
+        {"id":"10", "from":"v2", "to":"p2", "type":"ville"}
+        
+    ]
+}
