@@ -10,31 +10,69 @@ function loadDoc() {
 	xhttp.send();
 }
 
-
 function hide(element){
 	var id_node_origine = parseInt(element.id,10);
 
-	network.getConnectedEdges(id_node_origine, "to").forEach( e => {
-		var node = nodes.get(e);
-		var id_node_child = parseInt(node.id, 10);
-		if (network.getConnectedEdges(e, "from").length === 1){
-			nodes.update({id: id_node_child, hidden: true})
+	edges.forEach( e => {
+		var id = parseInt(e.id,10);
+		var id_from = parseInt(e.from,10);
+		var id_to = parseInt(e.to,10);
+		var parent_node = nodes.get(id_from);
+		var child_node = nodes.get(id_to);
+		if(!parent_node.expanded && id_from === id_node_origine){
+			var id_child_node = parseInt(child_node.id,10);
+			var connectedEdges = network.getConnectedEdges(id_child_node, "from");
+			console.log(connectedEdges)
+			if(connectedEdges.length === 1){
+				nodes.update({id: id_child_node, hidden: true});
+			} else {
+				var cpt_visible = 0;
+				var cpt_parent = 0;
+				connectedEdges.forEach( e => {
+					var edge = edges.get(e);
+					var edge_id = parseInt(edge.from,10);
+					var parent = nodes.get(edge_id);
+					if(parent.expanded){
+						cpt_visible++;
+					}
+					if(parent.id === parent_node.id){
+						cpt_parent++
+					}
+				})
+				if (cpt_visible===1 || cpt_parent === 1){
+					nodes.update({id: id_child_node, hidden: true});
+				}
+			}
+
+			network.getConnectedEdges(id_child_node, "from")
+
+
+
+			
+			
 		}
 	})
 }	
 
 function reveal(element){
 	var id_node_origine = parseInt(element.id,10);
-	edges.forEach(e => {
-		var id_edge = parseInt(e.id,10);
+
+	network.getConnectedNodes(element.id, "to").forEach( e => {
+		var id = parseInt(e,10);
+		nodes.update({id:id, hidden: false});
+	})
+
+	edges.forEach( e => {
+		var id = parseInt(e.id,10);
 		var id_from = parseInt(e.from,10);
 		var id_to = parseInt(e.to,10);
-
-		if(id_from === id_node_origine && Number.isInteger(id_to)){
-			nodes.update({id: id_to, hidden:false});
-			edges.update({id: id_edge, hidden:false});
+		var from_visibility = nodes.get(id_from).hidden;
+		var to_visibility = nodes.get(id_to).hidden;
+		if(!from_visibility && !to_visibility){
+			edges.update({id: id, hidden: false});
 		}
 	})
+
 }
 	
 	
@@ -42,46 +80,32 @@ function reveal(element){
 var color = "gray";
 var len = undefined;
 
-var nodes_permanent = new vis.DataSet([
-
-]);
-var edges_permanent = [
-
-];
-
 var nodes = new vis.DataSet([
 	{id: 1, label: "Tour", title: "TourLab",value: 30,group: 1,level: 1, levelLabel: "généralité", hidden: false, expanded: false},
-	{id: 2, label: "Consul", title: "ConsulLab",value: 30,group: 1,level: 1, levelLabel: "généralité", hidden: false, expanded: false},
 	{id: 3, label: "Orléans", title: "OrléansLab",value: 30,group: 1,level: 1, levelLabel: "généralité", hidden: false, expanded: false},
 	{id: 4, label: "Ambroise", title: "AmbroiseLab",value: 20,group: 2,level: 2, levelLabel: "elections", hidden: true, expanded: false},
 	{id: 5, label: "Chinon", title: "ChinonLab",value: 20,group: 2,level: 2, levelLabel: "elections", hidden: true, expanded: false},
 	{id: 6, label: "Loches", title: "LochesLab",value: 20,group: 2,level: 2, levelLabel: "elections", hidden: true, expanded: false},
-	{id: 7, label: "subdélégué", title: "subdéléguéLab",value: 20,group: 2,level: 2, levelLabel: "elections", hidden: true, expanded: false},
 	{id: 8, label: "A", title: "ALab",value: 10,group: 3,level: 3, levelLabel: "communes", hidden: true, expanded: false},
 	{id: 9, label: "B", title: "BLab",value: 10,group: 3,level: 3, levelLabel: "communes", hidden: true, expanded: false},
 	{id: 10, label: "C", title: "CLab",value: 10,group: 3,level: 3, levelLabel: "communes", hidden: true, expanded: false},
 	{id: 11, label: "D", title: "DLab",value: 10,group: 3,level: 3, levelLabel: "communes", hidden: true, expanded: false},
 ]);
 var edges = new vis.DataSet([
-	{id: 1,label: "subFeature", from: 1 , to: 4 , arrows:"to", hidden: false},
-	{id: 2,label: "subFeature", from: 1 , to: 5 , arrows:"to", hidden: false},
-	{id: 3,label: "subFeature", from: 1 , to: 6 , arrows:"to", hidden: false},
-	{id: 4,label: "attachedTo", from: 2 , to: 3 , arrows:"to", hidden: false},
-	{id: 5,label: "isClaiming", from: 2 , to: 5 , arrows:"to", hidden: false},
-	{id: 6,label: "isClaiming", from: 2 , to: 6 , arrows:"to", hidden: false},
+	{id: 1,label: "subFeature", from: 1 , to: 4 , arrows:"to", hidden: true},
+	{id: 2,label: "subFeature", from: 1 , to: 5 , arrows:"to", hidden: true},
+	{id: 3,label: "subFeature", from: 1 , to: 6 , arrows:"to", hidden: true},
 	{id: 7,label: "subFeature", from: 4 , to: 8 , arrows:"to", hidden: true},
 	{id: 8,label: "subFeature", from: 4 , to: 9 , arrows:"to", hidden: true},
 	{id: 9,label: "subFeature", from: 5 , to: 10 , arrows:"to", hidden: true},
 	{id: 10,label: "subFeature", from: 6 , to: 11 , arrows:"to", hidden: true},
-	{id: 11,label: "attachedTo", from: 7 , to: 6 , arrows:"to", hidden: true},
-	{id: 12,label: "isDeclaredUnder", from: 7 , to: 3 , arrows:"to", hidden: true},
-	{id: 13,label: "test", from: 11 , to: 1 , arrows:"to", hidden: true},
 	{id: 14,label: "test", from: 5 , to: 9 , arrows:"to", hidden: true},
 ]);
 
 
 // create a network
 var container = document.getElementById("mynetwork");
+
 var data = {
 	nodes: nodes,
 	edges: edges,
@@ -100,7 +124,7 @@ var options = {
 	edges: {
 		width: 2,
 	},
-	physics: false,
+	physics: true,
 	layout: {
 		hierarchical: {
 			levelSeparation: 250,
@@ -131,15 +155,18 @@ network.on("click", function(params) {
 	var clicked_node = nodes.get(params.nodes[0]);
 	clicked_node_id = parseInt(clicked_node['id']);
 
-	
-	if(!clicked_node.expanded){
-		reveal(clicked_node);
-		nodes.update({id: clicked_node_id, expanded: true});
-	}else{
-		hide(clicked_node);
-		nodes.update({id: clicked_node_id, expanded: false});
+	if(clicked_node.id != null){
+		if(!clicked_node.expanded){
+			nodes.update({id: clicked_node_id, expanded: true});
+			reveal(clicked_node);
+		}else{
+			nodes.update({id: clicked_node_id, expanded: false});
+			hide(clicked_node);
+		}
 	}
+	
 	updateReferencePoint();
+	updateLegend();
 });
 
 function getPosDom(e) {
@@ -150,25 +177,42 @@ function getPosDom(e) {
 	});
 }
 
+function updateLegend(){
+	var elements = document.getElementsByClassName('legende');
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+
+	referencePoints.forEach( e => {
+		var pos = getPosDom(e);
+		if(!e.hidden){
+			var obj = composeLegendElement(pos, e)
+			document.body.appendChild(obj);
+		}	
+	})
+}
+
 var setLevels = new Set();
 var referencePoints = new Set();
 function updateReferencePoint(){
 	setLevels = new Set();
 	referencePoints = new Set();
 	nodes.forEach( e => {
-		if(!setLevels.has(e.level)){
+		if(!setLevels.has(e.level) && !e.hidden){
 			setLevels.add(e.level);
 			referencePoints.add({id: e.id, level: e.level, label: e.levelLabel, nom: e.title, hidden: e.hidden})
 		}
 	});
 }
 updateReferencePoint();
+updateLegend();
 
 function composeLegendElement(pos, e){
 	var obj = document.createElement('div');
 	obj.id = ""+e.id;
 	obj.innerText = e.label;
-	obj.style.cssText = 'position:absolute;top:'+ pos.y + 'px;margin-left:1200px;width:100px;height:50px;-moz-border-radius:10px;border:1px  solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
+	obj.style.cssText = 'position:absolute;z-index: 100;top:'+ pos.y + 'px;margin-left:10px;width:100px;height:50px;-moz-border-radius:10px;border:1px  solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
+	obj.classList.add('legende');
 	return obj;
 }
 
@@ -186,20 +230,7 @@ function mouseup(event) {
 }
 
 function whilemousedown() {
-    console.log("========================");
-	referencePoints.forEach( e => {
-		var pos = getPosDom(e);
-		if(document.getElementById(e.id) != null){
-			document.getElementById(e.id).remove();
-		}
-		
-		if(!e.hidden){
-			console.log(pos.x + " " + pos.y)
-			var obj = composeLegendElement(pos, e)
-			document.body.appendChild(obj);
-		}	
-	})
-	
+	updateLegend();
 }
 
 //Assign events
