@@ -85,7 +85,7 @@ var nodes = new vis.DataSet([
 	{id: 3, label: "Orléans", title: "OrléansLab",value: 30,group: 1,level: 1, levelLabel: "généralité", hidden: false, expanded: false},
 	{id: 4, label: "Ambroise", title: "AmbroiseLab",value: 20,group: 2,level: 2, levelLabel: "elections", hidden: true, expanded: false},
 	{id: 5, label: "Chinon", title: "ChinonLab",value: 20,group: 2,level: 2, levelLabel: "elections", hidden: true, expanded: false},
-	{id: 6, label: "Loches", title: "LochesLab",value: 20,group: 2,level: 2, levelLabel: "elections", hidden: true, expanded: false},
+	{id: 6, label: "Loches", title: "LochesLab",value: 20,group: 6,level: 2, levelLabel: "elections", hidden: true, expanded: false},
 	{id: 8, label: "A", title: "ALab",value: 10,group: 3,level: 3, levelLabel: "communes", hidden: true, expanded: false},
 	{id: 9, label: "B", title: "BLab",value: 10,group: 3,level: 3, levelLabel: "communes", hidden: true, expanded: false},
 	{id: 10, label: "C", title: "CLab",value: 10,group: 3,level: 3, levelLabel: "communes", hidden: true, expanded: false},
@@ -232,6 +232,11 @@ function mouseup(event) {
 function whilemousedown() {
 	updateLegend();
 }
+
+window.addEventListener("scroll", function(e) {
+	updateLegend();
+	console.log('test')
+});
 
 //Assign events
 document.addEventListener("mousedown", mousedown);
