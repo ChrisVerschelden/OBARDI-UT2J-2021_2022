@@ -237,6 +237,7 @@ let groupe = new  Map();
 
 function load(data, group, level, recursif, idnem)
 {
+	console.log(data);
 	let grouptemp = group;
 	let leveltemp = levelperms;
 	
