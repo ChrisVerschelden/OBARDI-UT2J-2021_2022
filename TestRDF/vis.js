@@ -140,6 +140,29 @@ function reset(){
 	
 }
 
+function hide_remove(element){
+    var id_node_origine = parseInt(element.id,10);
+    var connectedEdges = network.getConnectedEdges(id_node_origine, "from");
+
+    connectedEdges.forEach( e => {
+        var edge = edges.get(e)
+        var id_node_child = parseInt(edge.to,10);
+
+		var nomnode = nodes.get(id_node_child);
+		var name = nomnode.label;
+		for(let i = 0; i<nom.length; i++)
+		{
+			if(nom[i] == name)
+			{
+				delete nom[i];
+			}
+		}
+		
+        nodes.remove(id_node_child);
+        edges.remove(e);
+    });
+} 
+
 network.on("click", function(params) {
 	var clicked_node = nodes.get(params.nodes[0]);
 	clicked_node_id = parseInt(clicked_node['id']);
@@ -147,10 +170,10 @@ network.on("click", function(params) {
 	if(clicked_node.id != null){
 		if(!clicked_node.expanded){
 			nodes.update({id: clicked_node_id, expanded: true});
-			reveal(clicked_node);
+			retrieveNom(clicked_node['label'], 0, 2, 0);
 		}else{
 			nodes.update({id: clicked_node_id, expanded: false});
-			hide(clicked_node);
+			hide_remove(clicked_node);
 		}
 	}
 	
@@ -254,12 +277,14 @@ function load(data, group, level, recursif, idnem)
 		}
 		
 		let trouve = false;
+		//Regarde si le nom de la node est déjà présent, si c'est le cas il ajoute ses enfants
 		for(let j = 0; j<nom.length; j++)
 		{
 			if(nom[j] == data[i].nom.value)
 			{
-				if(recursif)
+				if(recursif && level != 1)
 				{
+					//Recupere le groupe de la node mère
 					let groupnem = grouptemp;
 					for (const key of myMap.keys()) {
 					  if(key.value == data[i].nom.value)
@@ -268,6 +293,7 @@ function load(data, group, level, recursif, idnem)
 					  }
 					}
 					
+					//Recupere l'id de la node mère
 					let idnem = id;
 					for (const key of myMapid.keys()) {
 					  if(key.value == data[i].nom.value)
@@ -276,12 +302,14 @@ function load(data, group, level, recursif, idnem)
 					  }
 					}
 
+					//Recupere la node enfants
 					retrieveNom(data[i].nomdeceluiquiestdessous.value, groupnem, (leveltemp + 1), idnem);
 				}
 				trouve = true;
 			}
 		}
 		
+		//Cas du nom de la nodes inexistant 
 		if(!trouve)
 		{
 			//Attribution d'une couleur pour un groupe
@@ -357,9 +385,6 @@ function retrieveData() {
 }*/
 
 function retrieveDataSup() {
-  //var query = "PREFIX pub: <http://ontology.ontotext.com/taxonomy/> PREFIX pub-old: <http://ontology.ontotext.com/publishing#> select distinct ?x ?Person  where { ?x a pub:Person . ?x pub:preferredLabel ?Person . ?doc pub-old:containsMention / pub-old:hasInstance ?x . } ";
-  //var query = "select * where { ?s ?p ?o . } limit 100 ";
-  //var query = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/> SELECT ?name WHERE { ?person foaf:name ?name . }";
   var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?nom WHERE { ?x a :Area . ?x rdfs:label ?nom . MINUS { ?x a :Area . ?x :hasUpperUnit ?z . } }";
   var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
 
@@ -373,6 +398,7 @@ function retrieveDataSup() {
 	  {
 		  retrieveNom(data.results.bindings[i].nom.value, 0, 1, 0);
 	  }
+	  
 	},
 	error: function(e) {console.log("wesh ya pb la bro");}
   });
