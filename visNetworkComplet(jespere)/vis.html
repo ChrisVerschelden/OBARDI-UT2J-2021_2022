@@ -1,6 +1,8 @@
 <html>
 <head>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link rel="stylesheet" href="slider.css">
+    <link rel="stylesheet" href="nouislider.css">
 
     <style type="text/css">
     body {
@@ -35,7 +37,7 @@
         float:right ;
     }
     .box2{
-      width: 90%;
+      width: 90vw;
         height: 600px;
         float:right ;
     }
@@ -58,14 +60,15 @@
     <div class="box2">
       <div id="mynetwork"></div>
     </div>
-
-    <div id="slider"></div>
   </div>
+  <div id="slider"></div>
   
 	
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="sparqlRequete.js"></script>
 	<script src="vis.js"></script>
+  <script src="nouislider.js"></script>
+  <script src="slider.js"></script>
 </body>
 </html>

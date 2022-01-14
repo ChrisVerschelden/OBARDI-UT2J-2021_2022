@@ -131,7 +131,7 @@ function composeLegendElement(pos, e){
 		if(value[1] === e.level){
 			obj.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
 			//obj.innerText = '<p color="' +  +  '">' + e.label + '</p>';
-			obj.style.cssText = 'position:absolute;z-index: 100;top:'+ (pos.y + 50) + 'px;margin-left:10px;width:100px;height:50px;-moz-border-radius:10px;border:1px  solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
+			obj.style.cssText = 'position:absolute;z-index: 100;top:'+ (pos.y + 50) + 'px;margin-left:0;width:8vw;height:50px;-moz-border-radius:10px;border:1px  solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
 		}
 	}
 
