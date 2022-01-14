@@ -6,60 +6,21 @@ let nom = [];
 let couleurcomp = 0;
 let colorgroup = ["red","green","yellow","blue","pink","orange", "white"];
 
-function loadDoc() {
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-	  if (this.readyState == 4 && this.status == 200) {
-		  console.log("hey");
-		console.log( this.responseText + "ok");
-	  }
-	};
-	xhttp.open("GET", "Access-Control-Allow-Origin: http://localhost:7200/rest/data/import/server/2", true);
-	xhttp.send();
-}
 
 function hide(element){
 	var id_node_origine = parseInt(element.id,10);
 
-	edges.forEach( e => {
-		var id = parseInt(e.id,10);
-		var id_from = parseInt(e.from,10);
-		var id_to = parseInt(e.to,10);
-		var parent_node = nodes.get(id_from);
-		var child_node = nodes.get(id_to);
-		if(!parent_node.expanded && id_from === id_node_origine){
-			var id_child_node = parseInt(child_node.id,10);
-			var connectedEdges = network.getConnectedEdges(id_child_node, "from");
-			console.log(connectedEdges)
-			if(connectedEdges.length === 1){
-				nodes.update({id: id_child_node, hidden: true});
-			} else {
-				var cpt_visible = 0;
-				var cpt_parent = 0;
-				connectedEdges.forEach( e => {
-					var edge = edges.get(e);
-					var edge_id = parseInt(edge.from,10);
-					var parent = nodes.get(edge_id);
-					if(parent.expanded){
-						cpt_visible++;
-					}
-					if(parent.id === parent_node.id){
-						cpt_parent++
-					}
-				})
-				if (cpt_visible===1 || cpt_parent === 1){
-					nodes.update({id: id_child_node, hidden: true});
-				}
-			}
+	var connectedEdges = network.getConnectedEdges(id_node_origine, "to");
 
-			network.getConnectedEdges(id_child_node, "from")
-
-
-
-			
-			
+	connectedEdges.forEach( e => {
+		var child_node = nodes.get(e);
+		var child_node_id = parseInt(child_node.id, 10);
+		if (network.getConnectedEdges(child_node_id, "from").length === 1) {
+			nodes.remove(child_node_id);
 		}
-	})
+		edges.remove(e);
+	});
+
 }	
 
 function reveal(element){
@@ -227,7 +188,6 @@ function whilemousedown() {
 
 window.addEventListener("wheel", function(e) {
 	updateLegend();
-	console.log('test')
 });
 
 //Assign events
@@ -334,38 +294,10 @@ function load(data, group, level, recursif, idnem)
 			id = id + 1;
 		}
 	}
-
-	updateReferencePoint();
-	updateLegend();
 }
 
 
-/*
-function retrieveData() {
-  //var query = "PREFIX pub: <http://ontology.ontotext.com/taxonomy/> PREFIX pub-old: <http://ontology.ontotext.com/publishing#> select distinct ?x ?Person  where { ?x a pub:Person . ?x pub:preferredLabel ?Person . ?doc pub-old:containsMention / pub-old:hasInstance ?x . } ";
-  //var query = "select * where { ?s ?p ?o . } limit 100 ";
-  //var query = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/> SELECT ?name WHERE { ?person foaf:name ?name . }";
-  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?nom ?nomdeceluiquiestdessous ?nomgroupe WHERE { ?x a :Area . ?x rdfs:label ?nom . ?x :hasSubUnit ?y . ?y rdfs:label ?nomdeceluiquiestdessous . ?x :isMemberOf ?groupe . ?groupe rdfs:label ?nomgroupe . }";
-
-  var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
-
-  $.ajax({
-	url: url,
-	dataType: "json",
-	success: function (data) {
-	  $('#results').show();
-	  $('#raw_output').text(JSON.stringify(data, null, 3));
-	  data = dataremovedoublons(data.results.bindings);
-	  load(data, 0,1, true, 0);
-	},
-	error: function(e) {console.log("wesh ya pb la bro");}
-  });
-}*/
-
 function retrieveDataSup() {
-  //var query = "PREFIX pub: <http://ontology.ontotext.com/taxonomy/> PREFIX pub-old: <http://ontology.ontotext.com/publishing#> select distinct ?x ?Person  where { ?x a pub:Person . ?x pub:preferredLabel ?Person . ?doc pub-old:containsMention / pub-old:hasInstance ?x . } ";
-  //var query = "select * where { ?s ?p ?o . } limit 100 ";
-  //var query = "PREFIX foaf:  <http://xmlns.com/foaf/0.1/> SELECT ?name WHERE { ?person foaf:name ?name . }";
   var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?nom WHERE { ?x a :Area . ?x rdfs:label ?nom . MINUS { ?x a :Area . ?x :hasUpperUnit ?z . } }";
   var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
 
