@@ -33,6 +33,8 @@ Notre client Lucas Bourel fait partie du projet Obardi et souhaite que nous cré
 
 [site de démonstration](https://chrisverschelden.github.io/OBARDI-UT2J-2021_2022/)
 
+[Mise en place nécessaire](#importation-des-données)
+
 ## Documentation utilisateur
 
 - Se déplacer sur le graphique à la souris
