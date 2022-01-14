@@ -10,7 +10,7 @@ let colorgroup = ["red","green","yellow","blue","pink","orange", "white"];
 function hide(element){
 	var id_node_origine = parseInt(element.id,10);
 
-	var connectedEdges = network.getConnectedEdges(id_node_origine, "to");
+	var connectedEdges = network.getConnectedEdges(id_node_origine, "from");
 
 	connectedEdges.forEach( e => {
 		var child_node = nodes.get(e);
@@ -21,30 +21,12 @@ function hide(element){
 		edges.remove(e);
 	});
 
-}	
-
-function reveal(element){
-	var id_node_origine = parseInt(element.id,10);
-
-	network.getConnectedNodes(element.id, "to").forEach( e => {
-		var id = parseInt(e,10);
-		nodes.update({id:id, hidden: false});
-	})
-
-	edges.forEach( e => {
-		var id = parseInt(e.id,10);
-		var id_from = parseInt(e.from,10);
-		var id_to = parseInt(e.to,10);
-		var from_visibility = nodes.get(id_from).hidden;
-		var to_visibility = nodes.get(id_to).hidden;
-		if(!from_visibility && !to_visibility){
-			edges.update({id: id, hidden: false});
+	for(let i = 0; i<nom.length; i++){
+		if(nom[i] == name){
+			delete nom[i];
 		}
-	})
-
-}
-	
-	
+	}
+}	
 	
 var color = "gray";
 var len = undefined;
@@ -91,20 +73,8 @@ var options = {
 		},
 	},
 };
+
 network = new vis.Network(container, data, options);
-
-function reset(){
-	nodes.forEach(e =>{
-		var id_node = parseInt(e.id,10);
-		if (e.level === 1) {
-			nodes.update({id: id_node, hidden: false});
-		} else {
-			nodes.update({id: id_node, hidden: true});
-		}
-	})
-
-	
-}
 
 network.on("click", function(params) {
 	var clicked_node = nodes.get(params.nodes[0]);
@@ -113,7 +83,7 @@ network.on("click", function(params) {
 	if(clicked_node.id != null){
 		if(!clicked_node.expanded){
 			nodes.update({id: clicked_node_id, expanded: true});
-			reveal(clicked_node);
+			retrieveNom(clicked_node['label'], 0, 2, 0);
 		}else{
 			nodes.update({id: clicked_node_id, expanded: false});
 			hide(clicked_node);
@@ -123,6 +93,7 @@ network.on("click", function(params) {
 	updateReferencePoint();
 	updateLegend();
 });
+
 
 function getPosDom(e) {
 	var pos = network.getPositions(e.id)[e.id];
@@ -168,7 +139,6 @@ function composeLegendElement(pos, e){
 	obj.classList.add('legende');
 	return obj;
 }
-
 
 var mousedownID = -1;  //Global ID of mouse down interval
 function mousedown(event) {
@@ -220,12 +190,14 @@ function load(data, group, level, recursif, idnem)
 		}
 		
 		let trouve = false;
+		//Regarde si le nom de la node est déjà présent, si c'est le cas il ajoute ses enfants
 		for(let j = 0; j<nom.length; j++)
 		{
 			if(nom[j] == data[i].nom.value)
 			{
-				if(recursif)
+				if(recursif && level != 1)
 				{
+					//Recupere le groupe de la node mère
 					let groupnem = grouptemp;
 					for (const key of myMap.keys()) {
 					  if(key.value == data[i].nom.value)
@@ -234,6 +206,7 @@ function load(data, group, level, recursif, idnem)
 					  }
 					}
 					
+					//Recupere l'id de la node mère
 					let idnem = id;
 					for (const key of myMapid.keys()) {
 					  if(key.value == data[i].nom.value)
@@ -242,12 +215,14 @@ function load(data, group, level, recursif, idnem)
 					  }
 					}
 
+					//Recupere la node enfants
 					retrieveNom(data[i].nomdeceluiquiestdessous.value, groupnem, (leveltemp + 1), idnem);
 				}
 				trouve = true;
 			}
 		}
 		
+		//Cas du nom de la nodes inexistant 
 		if(!trouve)
 		{
 			//Attribution d'une couleur pour un groupe
@@ -294,8 +269,10 @@ function load(data, group, level, recursif, idnem)
 			id = id + 1;
 		}
 	}
-}
 
+	updateReferencePoint();
+	updateLegend();
+}
 
 function retrieveDataSup() {
   var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?nom WHERE { ?x a :Area . ?x rdfs:label ?nom . MINUS { ?x a :Area . ?x :hasUpperUnit ?z . } }";
@@ -311,6 +288,7 @@ function retrieveDataSup() {
 	  {
 		  retrieveNom(data.results.bindings[i].nom.value, 0, 1, 0);
 	  }
+	  
 	},
 	error: function(e) {console.log("wesh ya pb la bro");}
   });
@@ -380,3 +358,4 @@ function dataremovedoublons(dataval)
 }
 
 retrieveDataSup();
+
