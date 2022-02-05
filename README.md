@@ -20,4 +20,4 @@ Notre client Lucas Bourel fait partie du projet Obardi et souhaite que nous cré
 [VOIR CETTE SECTION](https://github.com/ChrisVerschelden/OBARDI-UT2J-2021_2022/tree/main/graphique)
 
 
-BALDE Ismaila-COSTES Lou-Anne - FEZZANI Ismael- JEANJEAN Cédric -TRINH Williams -VERSCHELDEN Chris
+BALDE Ismaila - COSTES Lou-Anne - FEZZANI Ismael- JEANJEAN Cédric - TRINH Williams - VERSCHELDEN Chris
