@@ -38,7 +38,7 @@ var options = {
 	physics: false,
 	layout: {
 		hierarchical: {
-			levelSeparation: 450,
+			levelSeparation: 150,
 			nodeSpacing: 200,
 			treeSpacing: 200,
 			direction: "UD",
@@ -99,6 +99,7 @@ function getPosDom(e) {
 
 function updateLegend(){
 	var elements = document.getElementsByClassName('legende');
+	document.getElementById('legendeComplete').innerHTML = "";
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
@@ -106,8 +107,9 @@ function updateLegend(){
 	referencePoints.forEach( e => {
 		var pos = getPosDom(e);
 		if(!e.hidden){
-			var obj = composeLegendElement(pos, e)
-			document.body.appendChild(obj);
+			var objs = composeLegendElement(pos, e)
+			document.body.appendChild(objs[0]);
+			document.getElementById('legendeComplete').appendChild(objs[1]);
 		}	
 	})
 }
@@ -126,17 +128,19 @@ function updateReferencePoint(){
 function composeLegendElement(pos, e){
 	var obj = document.createElement('div');
 	obj.id = ""+e.id;
+	var obj_glob = document.createElement('div');
+	obj_glob.id = ""+e.id;
 
 	for (const [key, value] of groupe.entries()) {
 		if(value[1] === e.level){
 			obj.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
-			//obj.innerText = '<p color="' +  +  '">' + e.label + '</p>';
-			obj.style.cssText = 'position:absolute;z-index: 100;top:'+ (pos.y + 50) + 'px;margin-left:0;width:8vw;height:50px;-moz-border-radius:10px;border:1px  solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
+			obj.style.cssText = 'position:absolute;z-index: 100;top:'+ (pos.y - 20) + 'px;margin-left:0;width:9vw;height:50px; font-size: 1.2em; -moz-border-radius:10px;border:1px solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
+			obj_glob.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
+			obj_glob.style.cssText = 'color=' + value[0] + ";"
 		}
 	}
-
 	obj.classList.add('legende');
-	return obj;
+	return [obj, obj_glob];
 }
 
 var mousedownID = -1;  //Global ID of mouse down interval
