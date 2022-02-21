@@ -210,7 +210,7 @@
  */
 .noUi-marker {
   position: absolute;
-  background: rgb(145, 137, 137);
+  background: rgb(0, 0, 0);
 }
 .noUi-marker-sub {
   background: black;
