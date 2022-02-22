@@ -99,7 +99,7 @@ function getPosDom(e) {
 
 function updateLegend(){
 	var elements = document.getElementsByClassName('legende');
-	document.getElementById('legendeComplete').innerHTML = "";
+	document.getElementById('legende-complete').innerHTML = "";
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
@@ -107,9 +107,9 @@ function updateLegend(){
 	referencePoints.forEach( e => {
 		var pos = getPosDom(e);
 		if(!e.hidden){
-			var objs = composeLegendElement(pos, e)
-			document.body.appendChild(objs[0]);
-			document.getElementById('legendeComplete').appendChild(objs[1]);
+			var objs = composeLegendElement(pos, e);
+			document.getElementById('legende-mobile').appendChild(objs[0]);
+			document.getElementById('legende-complete').appendChild(objs[1]);
 		}	
 	})
 }
@@ -143,6 +143,25 @@ function composeLegendElement(pos, e){
 	return [obj, obj_glob];
 }
 
+function centerOn(){
+	var searchTerm = document.getElementById('searchBar').value.toLowerCase();
+
+	if (searchTerm !== ""){
+		var results = nodes.get({
+			filter: function (item) {
+			  return (item.label.toLowerCase().includes(searchTerm));
+			}
+		  });
+	
+		console.log(results);
+		if (results.length > 0) {
+			network.focus(results[0]['id'], {scale: 3});
+			network.setSelection({nodes: [results[0]['id']], edges:[]})
+		}
+	}
+	//network.focus(nodes.get(4))
+}
+
 var mousedownID = -1;  //Global ID of mouse down interval
 function mousedown(event) {
   if(mousedownID==-1)  //Prevent multimple loops!
@@ -157,6 +176,36 @@ function mouseup(event) {
 
 function whilemousedown() {
 	updateLegend();
+}
+
+function hideShowMenu(id) {
+	switch (id) {
+		case 'legende-mobile':
+			var button = document.getElementById('bouton-legende-mobile');
+			if(document.getElementById('legende-mobile').style.display === "block") {
+				document.getElementById('legende-mobile').style.display = "none";
+				document.getElementById('mynetwork').style.marginLeft = "0px";
+				button.innerText = "🍄";
+			} else {
+				document.getElementById('legende-mobile').style.display = "block";
+				document.getElementById('mynetwork').style.marginLeft = document.getElementById('legende-mobile').style.width;
+				button.innerText = "❌";
+			}
+			break;
+		case 'legende-fixe':
+			var button = document.getElementById('bouton-legende-fixe');
+			if(document.getElementById('legende-complete').style.display === "block") {
+				document.getElementById('legende-complete').style.display = "none";
+				button.innerText = "🍄";
+			} else {
+				document.getElementById('legende-complete').style.display = "block";
+				button.innerText = "❌";
+			}
+			break;
+		case 'outils':
+			var button = document.getElementById('bouton-outils');
+			break;
+	}
 }
 
 window.addEventListener("wheel", function(e) {

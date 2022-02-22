@@ -3,68 +3,27 @@
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <link rel="stylesheet" href="slider.css">
     <link rel="stylesheet" href="nouislider.css">
-
-    <style type="text/css">
-    body {
-      margin: auto;
-		  color: #d3d3d3;
-		  font: 12pt arial;
-		  background-color: #8d8686;
-		}
-    .conteneur{
-      
-      display: inline-block;
-      justify-content: space-between;
-      width: 100%;
-    }
-
-      
-
-		#mynetwork {
-		    width: 100%;
-        height: 100%;
-        border-radius: 0px;
-        background-color: rgb(66, 64, 64);
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
-		}
-
-    .title{
-      text-align: center;
-      font-family: sans-serif;
-    }
-
-    .box1{
-        width: 10vw;
-        float:right ;
-    }
-    .box2{
-        width: 90vw;
-        height: 90%;
-        float:right ;
-    }
-
-    .legende-complete{
-      position: absolute;
-      float: right;
-      top: 0px;
-      right: 0px;
-      width: 13vh;
-      border: 2px solid white;
-      z-index: 500;
-    }
-    </style>
+    <link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <div id='legendeComplete' class='legende-complete'></div>
-  <div class="conteneur">
-    <div class="box1">
+  <section class="app">
+    <div class="legende-bouton legende-bouton-legende-mobile"> <div id="bouton-legende-mobile" onclick="hideShowMenu('legende-mobile')"> ❌ </div> </div>
+    <div class="legende-bouton legende-bouton-outils"> <div id="bouton-legende-outils" onclick="hideShowMenu('outils')"> ❌ </div> </div>
+    <div class="legende-bouton legende-bouton-legende-fixe"> <div id="bouton-legende-fixe" onclick="hideShowMenu('legende-fixe')"> ❌ </div> </div>
+    
+    <div class="legende-mobile" id='legende-mobile'>
       
     </div>
+    <div id="mynetwork">
     
-    <div class="box2">
-      <div id="mynetwork"></div>
-    </div>
-  </div>
+  </section>
+
+  <div id='legende-complete' class='legende-complete'></div>
+  <form id='search'>
+    <input id='searchBar' type="text">
+    <button onclick="centerOn()"> chercher 🔍</button>
+  </form>
+  
   <div id="slider"></div>
   
 	
@@ -74,5 +33,6 @@
 	<script src="vis.js"></script>
   <script src="nouislider.js"></script>
   <script src="slider.js"></script>
+  <script src="interface.js"></script>
 </body>
 </html>
