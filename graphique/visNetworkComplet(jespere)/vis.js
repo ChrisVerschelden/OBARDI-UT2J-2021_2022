@@ -4,7 +4,22 @@ let levelperms = 0;
 let groupperms = 1;
 let nom = [];
 let couleurcomp = 0;
-let colorgroup = ["red","green","yellow","blue","pink","orange", "white"];
+//let colorgroup = ["red","green","yellow","blue","pink","orange", "white"];
+let colorgroup = [	
+					'rgb(104, 212, 243)',
+					'rgb(155, 233, 34)',
+					'rgb(166, 41, 155)',
+					'rgb(129, 27, 29)',
+					'rgb(152, 60, 133)',
+					'rgb(224, 182, 231)',
+					'rgb(110, 172, 204)',
+					'rgb(171, 23, 64)',
+					'rgb(151, 39, 6)',
+					'rgb(183, 214, 45)',
+					'rgb(61, 107, 216)',
+					'rgb(213, 48, 6)',
+					'rgb(76, 244, 56)',
+				];
 
 var setLevels = new Set();
 var referencePoints = new Set();
@@ -54,11 +69,12 @@ network.on("click", function(params) {
 	clicked_node_id = parseInt(clicked_node['id']);
 
 	if(clicked_node.id != null){
+		var color = retrieveGroupColor(clicked_node.levelLabel.value);
 		if(!clicked_node.expanded){
-			nodes.update({id: clicked_node_id, expanded: true});
-			retrieveNom(clicked_node['label'], 0, 2, 0);
+			nodes.update({id: clicked_node_id, expanded: true,color: color});
+			retrieveNom(clicked_node['label'], clicked_node['group'], clicked_node['level']+1, 0);
 		}else{
-			nodes.update({id: clicked_node_id, expanded: false});
+			nodes.update({id: clicked_node_id, expanded: false,color: color});
 			hide(clicked_node);
 		}
 	}
@@ -143,6 +159,12 @@ function composeLegendElement(pos, e){
 	return [obj, obj_glob];
 }
 
+var search = document.getElementById('searchBar');
+search.addEventListener("keydown", function (e) {
+	if (e.code === 'Enter')
+    	centerOn();
+});
+
 function centerOn(){
 	var searchTerm = document.getElementById('searchBar').value.toLowerCase();
 
@@ -152,12 +174,28 @@ function centerOn(){
 			  return (item.label.toLowerCase().includes(searchTerm));
 			}
 		  });
+
+		var coef_map = {};
+		nodes.forEach(e => {
+			coef_map[e.id] = diceCoefficient(searchTerm, e.label);
+		});
+
+		console.log(coef_map);
+
+		var coef_map_sorted = Object.keys(coef_map).map(function(key) {
+			return [key, coef_map[key]];
+		  });
+
+		  coef_map_sorted.sort(function(first, second) {
+			return second[1] - first[1];
+		  });
+
+		console.log(coef_map_sorted);
 	
-		console.log(results);
-		if (results.length > 0) {
-			network.focus(results[0]['id'], {scale: 3});
-			network.setSelection({nodes: [results[0]['id']], edges:[]})
-		}
+		console.log(nodes.get(parseInt(coef_map_sorted[0][0])));
+		network.focus(parseInt(coef_map_sorted[0][0]), {scale: 2});
+		network.setSelection({nodes: coef_map_sorted[0][0], edges:[]})
+		results = null;
 	}
 }
 
