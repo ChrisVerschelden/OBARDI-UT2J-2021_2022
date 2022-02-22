@@ -25,11 +25,6 @@ noUiSlider.create(slider, {
         from: function(value) {
             return value.replace();
         }
-    },
-    pips: {
-        mode: 'values',
-        values: tabVal,
-        density: 2,
     }
 });
 

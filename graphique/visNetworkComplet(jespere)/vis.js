@@ -134,7 +134,7 @@ function composeLegendElement(pos, e){
 	for (const [key, value] of groupe.entries()) {
 		if(value[1] === e.level){
 			obj.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
-			obj.style.cssText = 'position:absolute;z-index: 100;top:'+ (pos.y - 20) + 'px;margin-left:0;width:9vw;height:50px; font-size: 1.2em; -moz-border-radius:10px;border:1px solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
+			obj.style.cssText = 'position:absolute;z-index: 100;top:'+ (pos.y - 20) + 'px;margin-left:0;width:9.5vw;height:50px; font-size: 1.2em; -moz-border-radius:10px;border:1px solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
 			obj_glob.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
 			obj_glob.style.cssText = 'color=' + value[0] + ";"
 		}
@@ -159,7 +159,6 @@ function centerOn(){
 			network.setSelection({nodes: [results[0]['id']], edges:[]})
 		}
 	}
-	//network.focus(nodes.get(4))
 }
 
 var mousedownID = -1;  //Global ID of mouse down interval
@@ -185,25 +184,32 @@ function hideShowMenu(id) {
 			if(document.getElementById('legende-mobile').style.display === "block") {
 				document.getElementById('legende-mobile').style.display = "none";
 				document.getElementById('mynetwork').style.marginLeft = "0px";
-				button.innerText = "🍄";
+				button.innerText = "🡆";
 			} else {
 				document.getElementById('legende-mobile').style.display = "block";
 				document.getElementById('mynetwork').style.marginLeft = document.getElementById('legende-mobile').style.width;
-				button.innerText = "❌";
+				button.innerText = "🡄";
 			}
 			break;
 		case 'legende-fixe':
 			var button = document.getElementById('bouton-legende-fixe');
-			if(document.getElementById('legende-complete').style.display === "block") {
-				document.getElementById('legende-complete').style.display = "none";
-				button.innerText = "🍄";
+			if(document.getElementById('legende-complete').style.visibility === "visible") {
+				document.getElementById('legende-complete').style.visibility = "collapse";
+				button.innerText = "🡄";
 			} else {
-				document.getElementById('legende-complete').style.display = "block";
-				button.innerText = "❌";
+				document.getElementById('legende-complete').style.visibility = "visible";
+				button.innerText = "🡆";
 			}
 			break;
 		case 'outils':
-			var button = document.getElementById('bouton-outils');
+			var button = document.getElementById('bouton-legende-outils');
+			if(document.getElementById('outils').style.visibility === "visible") {
+				document.getElementById('outils').style.visibility = "collapse";
+				button.innerText = "🡇";
+			} else {
+				document.getElementById('outils').style.visibility = "visible";
+				button.innerText = "🡅";
+			}
 			break;
 	}
 }
