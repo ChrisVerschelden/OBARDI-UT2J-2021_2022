@@ -169,7 +169,7 @@ function mousedown(event) {
 function mouseup(event) {
    if(mousedownID!=-1) {  //Only stop if exists
      clearInterval(mousedownID);
-     mousedownID=-1;
+     mousedownID=-1; 
    }
 }
 
