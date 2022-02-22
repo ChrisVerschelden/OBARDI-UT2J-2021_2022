@@ -46,6 +46,7 @@ function load(data, group, level, recursif, idnem)
 					  }
 					}
 
+
 					//Recupere la node enfants
 					retrieveNom(data[i].nomdeceluiquiestdessous.value, groupnem, (leveltemp + 1), idnem);
 				}
@@ -76,15 +77,15 @@ function load(data, group, level, recursif, idnem)
 				color = colorgroup[couleurcomp];
 				couleurcomp = couleurcomp + 1;
 			}
-			
+
 			//Ajout de la node
 			if(leveltemp == 1)
 			{
-				nodes.add({id: id, label: data[i].nom.value, title: "TourLab",value: 30,group: grouptemp ,level: leveltemp, levelLabel: data[i].nomgroupe, hidden: false, expanded: false, color : color});
+				nodes.add({id: id, label: data[i].nom.value, title: data[i].nom.value,value: 30,group: grouptemp ,level: leveltemp, levelLabel: data[i].nomgroupe, hidden: false, expanded: false, color : color});
 			}
 			else
 			{
-				nodes.add({id: id, label: data[i].nom.value, title: "TourLab",value: 30,group: grouptemp ,level: leveltemp, levelLabel: data[i].nomgroupe, hidden: false, expanded: false, color : color});
+				nodes.add({id: id, label: data[i].nom.value, title: data[i].nom.value,value: 30,group: grouptemp ,level: leveltemp, levelLabel: data[i].nomgroupe, hidden: false, expanded: false, color : color});
 			}
 			nom.push(data[i].nom.value);
 			myMap.set(data[i].nom, grouptemp);
@@ -103,6 +104,17 @@ function load(data, group, level, recursif, idnem)
 
 	updateReferencePoint();
 	updateLegend();
+}
+
+function retrieveGroupColor(group){
+	for (const key of groupe.keys())
+	{
+		if(group == key)
+		{
+			return groupe.get(key)[0];
+		}
+	}
+	return "yellow";
 }
 
 function retrieveDataSup() {

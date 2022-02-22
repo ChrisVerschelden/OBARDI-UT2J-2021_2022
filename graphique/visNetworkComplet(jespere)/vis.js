@@ -54,11 +54,12 @@ network.on("click", function(params) {
 	clicked_node_id = parseInt(clicked_node['id']);
 
 	if(clicked_node.id != null){
+		var color = retrieveGroupColor(clicked_node.levelLabel.value);
 		if(!clicked_node.expanded){
-			nodes.update({id: clicked_node_id, expanded: true});
-			retrieveNom(clicked_node['label'], 0, 2, 0);
+			nodes.update({id: clicked_node_id, expanded: true,color: color});
+			retrieveNom(clicked_node['label'], clicked_node['group'], clicked_node['level']+1, 0);
 		}else{
-			nodes.update({id: clicked_node_id, expanded: false});
+			nodes.update({id: clicked_node_id, expanded: false,color: color});
 			hide(clicked_node);
 		}
 	}
