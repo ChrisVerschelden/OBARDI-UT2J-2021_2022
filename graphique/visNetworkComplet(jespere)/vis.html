@@ -3,12 +3,14 @@
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <link rel="stylesheet" href="slider.css">
     <link rel="stylesheet" href="nouislider.css">
+    <link rel="stylesheet" href="vis-network.min.css">
     <link rel="stylesheet" href="app.css">
+    
 </head>
 <body>
   <section class="app">
     <div class="legende-bouton legende-bouton-legende-mobile"> <div id="bouton-legende-mobile" onclick="hideShowMenu('legende-mobile')"> ❌ </div> </div>
-    <div class="legende-bouton legende-bouton-outils"> <div id="bouton-legende-outils" onclick="hideShowMenu('outils')"> ❌ </div> </div>
+    <div class="legende-bouton legende-bouton-outils" id="bouton-legende-outils" onclick="hideShowMenu('outils')"> Fermer </div> 
     <div class="legende-bouton legende-bouton-legende-fixe"> <div id="bouton-legende-fixe" onclick="hideShowMenu('legende-fixe')"> ❌ </div> </div>
     
     <div class="legende-mobile" id='legende-mobile'>
@@ -19,11 +21,15 @@
   </section>
 
   <div id='legende-complete' class='legende-complete'></div>
-  <form id='search'>
-    <input id='searchBar' type="text">
-    <button onclick="centerOn()"> chercher 🔍</button>
-  </form>
-  
+
+  <div class="boiteOutils">
+    <form id='search'>
+      <input id='searchBar' type="text">
+      <button onclick="centerOn()"> Chercher 🔍</button>
+    </form>
+    
+
+  </div>
   <div id="slider"></div>
   
 	
