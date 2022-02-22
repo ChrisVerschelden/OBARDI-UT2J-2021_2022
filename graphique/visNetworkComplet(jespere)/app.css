@@ -41,7 +41,7 @@ overflow: hidden;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    background-color: aqua;
+    background-color: #f4c10e;
     width: 25em;
     height: 3em;
     display: flex;
@@ -51,7 +51,15 @@ overflow: hidden;
     z-index: 500;
     padding-top: 2em;
     border-radius: 0px 0px 12px  12px ;
+    transition: all 0.5s ease-in-out;
+    
 
+
+}
+
+.boiteOutils.hidden{
+    
+    margin-top : -400px;
 }
 
 
@@ -80,6 +88,7 @@ overflow: hidden;
 .legende-bouton.legende-bouton-outils{
     top: 0px;
     left: 50%;
+    cursor: pointer;
 }
 
 .legende-complete{
@@ -92,6 +101,8 @@ overflow: hidden;
     background-color: #f0f8ff;
     border-radius: 12px;
     z-index: 500;
+    border-radius: 0px 0px 0px  12px ;
+
 }
 
 button{
@@ -100,10 +111,14 @@ button{
     border : none;
     border-radius: 12px;
     color: #f0f8ff;
+    height: 30px;
+    width: 100px;
 }
 #searchbar{
     border: none;
     border-radius: 12px;
+    height: 30px;
+    width: 200px;
 }
 #search{
    

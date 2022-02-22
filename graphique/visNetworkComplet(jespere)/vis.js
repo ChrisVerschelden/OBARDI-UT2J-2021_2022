@@ -191,6 +191,8 @@ function hideShowMenu(id) {
 				document.getElementById('mynetwork').style.marginLeft = document.getElementById('legende-mobile').style.width;
 				button.innerText = "❌";
 			}
+
+		
 			break;
 		case 'legende-fixe':
 			var button = document.getElementById('bouton-legende-fixe');
@@ -203,7 +205,22 @@ function hideShowMenu(id) {
 			}
 			break;
 		case 'outils':
-			var button = document.getElementById('bouton-outils');
+			var button = document.getElementById('bouton-legende-outils');
+			//	if(document.getElementById('boiteOutils').style.visibility === "visible") {
+			//	document.getElementById('boiteOutils').style.visibility = "collapse";
+			//	button.innerText = "🍄";
+		//	} else {
+		//		document.getElementById('boiteOutils').style.visibility = "visible";
+		//		button.innerText = "❌";
+		//	}
+			if(document.getElementById('boiteOutils').classList.contains('hidden')) {
+                document.getElementById('boiteOutils').classList.remove('hidden');
+                button.innerText = "❌";
+            } else {
+                document.getElementById('boiteOutils').classList.add('hidden');
+                button.innerText = "🍄";
+            }
+		
 			break;
 	}
 }

@@ -1,12 +1,13 @@
 #slider {
     height: 10px;
-    top: 15vh;
-    width: 80vw;
-    left: 10vw;
+    top: 6vh;
+    width: 20vw;
+    left: 32vw;
+    position: absolute;
 }
 
 #slider .noUi-connect {
-    background: #3FB8AF;
+    background: #f4c10e;
 }
 
 #slider .noUi-handle {
