@@ -54,12 +54,11 @@ network.on("click", function(params) {
 	clicked_node_id = parseInt(clicked_node['id']);
 
 	if(clicked_node.id != null){
-		var color = retrieveGroupColor(clicked_node.levelLabel.value);
 		if(!clicked_node.expanded){
-			nodes.update({id: clicked_node_id, expanded: true,color: color});
-			retrieveNom(clicked_node['label'], clicked_node['group'], clicked_node['level']+1, 0);
+			nodes.update({id: clicked_node_id, expanded: true});
+			retrieveNom(clicked_node['label'], 0, 2, 0);
 		}else{
-			nodes.update({id: clicked_node_id, expanded: false,color: color});
+			nodes.update({id: clicked_node_id, expanded: false});
 			hide(clicked_node);
 		}
 	}
@@ -182,34 +181,34 @@ function hideShowMenu(id) {
 	switch (id) {
 		case 'legende-mobile':
 			var button = document.getElementById('bouton-legende-mobile');
-			if(document.getElementById('legende-mobile').style.display === "block") {
-				document.getElementById('legende-mobile').style.display = "none";
-				document.getElementById('mynetwork').style.marginLeft = "0px";
-				button.innerText = "🡆";
-			} else {
-				document.getElementById('legende-mobile').style.display = "block";
-				document.getElementById('mynetwork').style.marginLeft = document.getElementById('legende-mobile').style.width;
+			if(document.getElementById('legende-mobile').classList.contains('hidden')) {
+				document.getElementById('legende-mobile').classList.remove('hidden');
+				document.getElementById('mynetwork').classList.remove('hidden');
 				button.innerText = "🡄";
+			} else {
+				document.getElementById('legende-mobile').classList.add('hidden');
+				document.getElementById('mynetwork').classList.add('hidden');
+				button.innerText = "🡆";
 			}
 			break;
 		case 'legende-fixe':
 			var button = document.getElementById('bouton-legende-fixe');
-			if(document.getElementById('legende-complete').style.visibility === "visible") {
-				document.getElementById('legende-complete').style.visibility = "collapse";
-				button.innerText = "🡄";
-			} else {
-				document.getElementById('legende-complete').style.visibility = "visible";
+			if(document.getElementById('legende-complete').classList.contains('hidden')) {
+				document.getElementById('legende-complete').classList.remove('hidden');
 				button.innerText = "🡆";
+			} else {
+				document.getElementById('legende-complete').classList.add('hidden');
+				button.innerText = "🡄";
 			}
 			break;
 		case 'outils':
 			var button = document.getElementById('bouton-legende-outils');
-			if(document.getElementById('outils').style.visibility === "visible") {
-				document.getElementById('outils').style.visibility = "collapse";
-				button.innerText = "🡇";
-			} else {
-				document.getElementById('outils').style.visibility = "visible";
+			if(document.getElementById('outils').classList.contains('hidden')) {
+				document.getElementById('outils').classList.remove('hidden');
 				button.innerText = "🡅";
+			} else {
+				document.getElementById('outils').classList.add('hidden');
+				button.innerText = "🡇";
 			}
 			break;
 	}
