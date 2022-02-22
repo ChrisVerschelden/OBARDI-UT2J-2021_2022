@@ -44,18 +44,30 @@
     }
 
     .legende-complete{
-      position: absolute;
-      float: right;
-      top: 0px;
-      right: 0px;
-      width: 13vh;
       border: 2px solid white;
-      z-index: 500;
+      z-index: 1000;
     }
+    
+
+    .legendeAvecBouton{
+      display: flex;
+
+    }
+
+    .divBouton{
+     display: inline-block;
+    }
+
     </style>
 </head>
 <body>
-  <div id='legendeComplete' class='legende-complete'></div>
+  <div class="legendeAvecBouton">
+    <div class="divBouton">
+      <button class="boutonLegende" onclick="myFunction()">Click Me</button>
+    </div>
+    <div id='legendeComplete' class='legende-complete'></div>
+  </div>
+  
   <div class="conteneur">
     <div class="box1">
       

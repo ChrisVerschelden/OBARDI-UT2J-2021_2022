@@ -171,3 +171,13 @@ document.addEventListener("mouseout", mouseup);
 
 //charge les données du premier niveau
 retrieveDataSup();
+
+//cache ou montre la légende 
+function myFunction() {
+	var x = document.getElementById("legendeComplete");
+	if (x.style.display === "none") {
+	  x.style.display = "block";
+	} else {
+	  x.style.display = "none";
+	}
+  }
