@@ -171,4 +171,4 @@ document.addEventListener("mouseup", mouseup);
 document.addEventListener("mouseout", mouseup);
 
 //charge les données du premier niveau
-retrieveDataSup();
+retrieveDataSup(); 
