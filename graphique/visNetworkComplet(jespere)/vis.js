@@ -144,6 +144,12 @@ function composeLegendElement(pos, e) {
 	return [obj, obj_glob];
 }
 
+var search = document.getElementById('searchBar');
+search.addEventListener("keydown", function (e) {
+	if (e.code === 'Enter')
+    	centerOn();
+});
+
 function centerOn(){
 	var searchTerm = document.getElementById('searchBar').value.toLowerCase();
 
