@@ -256,10 +256,7 @@ function hideShowMenu(id) {
 function toggleAffichageElement(param){
 	switch (param) {
 		case 'theme':
-			var button = document.getElementById('toggle-theme').checked;
-			if (button) {
-
-			}
+			toggleTheme();
 			break;
 		case 'zoomSlider':
 			var button = document.getElementById('toggle-zoomSlider').checked;
