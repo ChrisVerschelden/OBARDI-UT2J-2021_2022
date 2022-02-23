@@ -4,7 +4,7 @@ let levelperms = 0;
 let groupperms = 1;
 let nom = [];
 let couleurcomp = 0;
-let colorgroup = ["red","green","yellow","blue","pink","orange", "white"];
+let colorgroup = ["red", "green", "yellow", "blue", "pink", "orange", "white"];
 
 var setLevels = new Set();
 var referencePoints = new Set();
@@ -20,7 +20,8 @@ var container = document.getElementById("mynetwork");
 var options = {
 	interaction: {
 		navigationButtons: true,
-		keyboard: true,},
+		keyboard: true,
+	},
 	nodes: {
 		shape: "dot",
 		size: 30,
@@ -29,11 +30,11 @@ var options = {
 			color: "#ffffff",
 		},
 		borderWidth: 2,
-       
+
 	},
 	edges: {
 		width: 2,
-        smooth : true,
+		smooth: true,
 	},
 	physics: false,
 	layout: {
@@ -49,36 +50,36 @@ var options = {
 };
 network = new vis.Network(container, data, options);
 
-network.on("click", function(params) {
+network.on("click", function (params) {
 	var clicked_node = nodes.get(params.nodes[0]);
 	clicked_node_id = parseInt(clicked_node['id']);
 
-	if(clicked_node.id != null){
-		if(!clicked_node.expanded){
-			nodes.update({id: clicked_node_id, expanded: true});
+	if (clicked_node.id != null) {
+		if (!clicked_node.expanded) {
+			nodes.update({ id: clicked_node_id, expanded: true });
 			retrieveNom(clicked_node['label'], 0, 2, 0);
-		}else{
-			nodes.update({id: clicked_node_id, expanded: false});
+		} else {
+			nodes.update({ id: clicked_node_id, expanded: false });
 			hide(clicked_node);
 		}
 	}
-	
+
 	updateReferencePoint();
 	updateLegend();
 });
 
-function hide(element){
-	var id_node_origine = parseInt(element.id,10);
+function hide(element) {
+	var id_node_origine = parseInt(element.id, 10);
 	var connectedEdges = network.getConnectedEdges(id_node_origine, "from");
 
-	connectedEdges.forEach( e => {
+	connectedEdges.forEach(e => {
 		var edge = edges.get(e)
-        var child_node_id = parseInt(edge.to,10);
+		var child_node_id = parseInt(edge.to, 10);
 
 		var nomnode = nodes.get(child_node_id);
 		var name = nomnode.label;
-		for(let i = 0; i<nom.length; i++){
-			if(nom[i] == name){
+		for (let i = 0; i < nom.length; i++) {
+			if (nom[i] == name) {
 				delete nom[i];
 			}
 		}
@@ -86,8 +87,8 @@ function hide(element){
 			nodes.remove(child_node_id);
 		}
 		edges.remove(e);
-	});	
-}	
+	});
+}
 
 function getPosDom(e) {
 	var pos = network.getPositions(e.id)[e.id];
@@ -97,45 +98,45 @@ function getPosDom(e) {
 	});
 }
 
-function updateLegend(){
+function updateLegend() {
 	var elements = document.getElementsByClassName('legende');
 	document.getElementById('legende-complete').innerHTML = "";
-    while(elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
-    }
+	while (elements.length > 0) {
+		elements[0].parentNode.removeChild(elements[0]);
+	}
 
-	referencePoints.forEach( e => {
+	referencePoints.forEach(e => {
 		var pos = getPosDom(e);
-		if(!e.hidden){
+		if (!e.hidden) {
 			var objs = composeLegendElement(pos, e);
 			document.getElementById('legende-mobile').appendChild(objs[0]);
 			document.getElementById('legende-complete').appendChild(objs[1]);
-		}	
+		}
 	})
 }
 
-function updateReferencePoint(){
+function updateReferencePoint() {
 	setLevels = new Set();
 	referencePoints = new Set();
-	nodes.forEach( e => {
-		if(!setLevels.has(e.level) && !e.hidden){
+	nodes.forEach(e => {
+		if (!setLevels.has(e.level) && !e.hidden) {
 			setLevels.add(e.level);
-			referencePoints.add({id: e.id, level: e.level, label: e.levelLabel, nom: e.title, hidden: e.hidden})
+			referencePoints.add({ id: e.id, level: e.level, label: e.levelLabel, nom: e.title, hidden: e.hidden })
 		}
 	});
 }
 
-function composeLegendElement(pos, e){
+function composeLegendElement(pos, e) {
 	var obj = document.createElement('div');
-	obj.id = ""+e.id;
+	obj.id = "" + e.id;
 	var obj_glob = document.createElement('div');
-	obj_glob.id = ""+e.id;
+	obj_glob.id = "" + e.id;
 
 	for (const [key, value] of groupe.entries()) {
-		if(value[1] === e.level){
-			obj.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
-			obj.style.cssText = 'position:absolute;z-index: 100;top:'+ (pos.y - 20) + 'px;margin-left:0;width:9vw;height:50px;text-align: center;  font-size: 1.2em; -moz-border-radius:10px;background-color: #f0f8ff; border-radius: 12px;-moz-box-shadow: 0px 0px 8px  #fff';
-			obj_glob.innerHTML = '<p style="color:' + value[0] +  ';"> ' + key + '</p>';
+		if (value[1] === e.level) {
+			obj.innerHTML = '<p style="color:' + value[0] + ';">' + key + '</p>';
+			obj.style.cssText = 'position:absolute;z-index: 100;top:' + (pos.y - 20) + 'px;margin-left:0;width:9vw;height:50px;text-align: center;  font-size: 1.2em; -moz-border-radius:10px;background-color: #f0f8ff; border-radius: 12px;-moz-box-shadow: 0px 0px 8px  #fff';
+			obj_glob.innerHTML = '<p style="color:' + value[0] + ';"> ' + key + '</p>';
 			obj_glob.style.cssText = 'color=' + value[0] + ";"
 		}
 	}
@@ -143,20 +144,20 @@ function composeLegendElement(pos, e){
 	return [obj, obj_glob];
 }
 
-function centerOn(){
+function centerOn() {
 	var searchTerm = document.getElementById('searchBar').value.toLowerCase();
 
-	if (searchTerm !== ""){
+	if (searchTerm !== "") {
 		var results = nodes.get({
 			filter: function (item) {
-			  return (item.label.toLowerCase().includes(searchTerm));
+				return (item.label.toLowerCase().includes(searchTerm));
 			}
-		  });
-	
+		});
+
 		console.log(results);
 		if (results.length > 0) {
-			network.focus(results[0]['id'], {scale: 3});
-			network.setSelection({nodes: [results[0]['id']], edges:[]})
+			network.focus(results[0]['id'], { scale: 3 });
+			network.setSelection({ nodes: [results[0]['id']], edges: [] })
 		}
 	}
 	//network.focus(nodes.get(4))
@@ -164,14 +165,14 @@ function centerOn(){
 
 var mousedownID = -1;  //Global ID of mouse down interval
 function mousedown(event) {
-  if(mousedownID==-1)  //Prevent multimple loops!
-     mousedownID = setInterval(whilemousedown, 10 /*execute every 100ms*/);
+	if (mousedownID == -1)  //Prevent multimple loops!
+		mousedownID = setInterval(whilemousedown, 10 /*execute every 100ms*/);
 }
 function mouseup(event) {
-   if(mousedownID!=-1) {  //Only stop if exists
-     clearInterval(mousedownID);
-     mousedownID=-1;
-   }
+	if (mousedownID != -1) {  //Only stop if exists
+		clearInterval(mousedownID);
+		mousedownID = -1;
+	}
 }
 
 function whilemousedown() {
@@ -182,52 +183,56 @@ function hideShowMenu(id) {
 	switch (id) {
 		case 'legende-mobile':
 			var button = document.getElementById('bouton-legende-mobile');
-			if(document.getElementById('legende-mobile').style.display === "block") {
-				document.getElementById('legende-mobile').style.display = "none";
-				document.getElementById('mynetwork').style.marginLeft = "0px";
-				button.innerText = "🍄";
+			
+
+			if (document.getElementById('legende-mobile').classList.contains('hidden')) {
+				document.getElementById('legende-mobile').classList.remove('hidden');
+				document.getElementById('mynetwork').classList.remove('hidden');
+
+				button.innerText = "◀";
 			} else {
-				document.getElementById('legende-mobile').style.display = "block";
-				document.getElementById('mynetwork').style.marginLeft = document.getElementById('legende-mobile').style.width;
-				button.innerText = "❌";
+				document.getElementById('legende-mobile').classList.add('hidden');
+				document.getElementById('mynetwork').classList.add('hidden');
+
+				button.innerText = "▶";
 			}
 
-		
 			break;
+
 		case 'legende-fixe':
 			var button = document.getElementById('bouton-legende-fixe');
-			if(document.getElementById('legende-complete').style.display === "block") {
-				document.getElementById('legende-complete').style.display = "none";
-				button.innerText = "🍄";
+			
+			if (document.getElementById('legende-complete').classList.contains('hidden')) {
+				document.getElementById('legende-complete').classList.remove('hidden');
+				button.innerText = "▶";
 			} else {
-				document.getElementById('legende-complete').style.display = "block";
-				button.innerText = "❌";
+				document.getElementById('legende-complete').classList.add('hidden');
+				
+				button.innerText = "⏪";
 			}
+
 			break;
 		case 'outils':
 			var button = document.getElementById('bouton-legende-outils');
-			//	if(document.getElementById('boiteOutils').style.visibility === "visible") {
-			//	document.getElementById('boiteOutils').style.visibility = "collapse";
-			//	button.innerText = "🍄";
-		//	} else {
-		//		document.getElementById('boiteOutils').style.visibility = "visible";
-		//		button.innerText = "❌";
-		//	}
-			if(document.getElementById('boiteOutils').classList.contains('hidden')) {
-                document.getElementById('boiteOutils').classList.remove('hidden');
-                button.innerText = "❌";
-            } else {
-                document.getElementById('boiteOutils').classList.add('hidden');
-                button.innerText = "🍄";
-            }
-		
+			
+
+			if (document.getElementById('boiteOutils').classList.contains('hidden')) {
+				document.getElementById('boiteOutils').classList.remove('hidden');
+				button.innerText = "▲";
+			} else {
+				document.getElementById('boiteOutils').classList.add('hidden');
+				button.innerText = "⏬";
+			}
+
 			break;
 	}
 }
 
-window.addEventListener("wheel", function(e) {
+window.addEventListener("wheel", function (e) {
 	updateLegend();
 });
+
+
 
 //Assign events
 document.addEventListener("mousedown", mousedown);

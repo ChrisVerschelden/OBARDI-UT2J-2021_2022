@@ -1,22 +1,22 @@
 <html>
+
 <head>
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-    <link rel="stylesheet" href="slider.css">
-    <link rel="stylesheet" href="nouislider.css">
-    <link rel="stylesheet" href="vis-network.min.css">
-    <link rel="stylesheet" href="app.css">
-    
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <link rel="stylesheet" href="slider.css">
+  <link rel="stylesheet" href="nouislider.css">
+  <link rel="stylesheet" href="app.css">
+
 </head>
+
 <body>
   <section class="app">
-    <div class="legende-bouton legende-bouton-legende-mobile"> <div id="bouton-legende-mobile" onclick="hideShowMenu('legende-mobile')"> ❌ </div> </div>
-    <div class="legende-bouton legende-bouton-outils" id="bouton-legende-outils" onclick="hideShowMenu('outils')">  ❌ </div> 
-    <div class="legende-bouton legende-bouton-legende-fixe"> <div id="bouton-legende-fixe" onclick="hideShowMenu('legende-fixe')"> ❌ </div> </div>
+    <div class="legende-bouton legende-bouton-legende-mobile" id="bouton-legende-mobile" onclick="hideShowMenu('legende-mobile')">◀</div>
+    <div class="legende-bouton legende-bouton-outils" id="bouton-legende-outils" onclick="hideShowMenu('outils')"> ▲</div>
+    <div class="legende-bouton legende-bouton-legende-fixe"id="bouton-legende-fixe" onclick="hideShowMenu('legende-fixe')"> ▶ </div>
     
-    <div class="legende-mobile" id='legende-mobile'>
-      
-    </div>
-    <div id="mynetwork">
+
+    <div class="legende-mobile" id='legende-mobile'></div>
+    <div id="mynetwork"></div>
 
   </section>
 
@@ -31,14 +31,15 @@
     <div id="slider"></div>
 
   </div>
-  
 
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="sparqlRequete.js"></script>
-	<script src="vis.js"></script>
+  <script src="vis.js"></script>
   <script src="nouislider.js"></script>
   <script src="slider.js"></script>
   <script src="interface.js"></script>
 </body>
+
 </html>

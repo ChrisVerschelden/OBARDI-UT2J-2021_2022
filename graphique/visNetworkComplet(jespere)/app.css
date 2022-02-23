@@ -9,14 +9,24 @@ overflow: hidden;
 .app{
     width: 100vw;
     height: 100vh;
-    background-color: royalblue;
+    background-color: #3b4a6b;
 }
 
 #mynetwork {
     margin-left: 10vw;
     height: 100vh;
-    width: auto;
+    width: 90vw;
     background-color: #3b4a6b;
+    transition: all 0.6s ease-in-out;
+
+
+}
+
+#mynetwork.hidden {
+    margin-left: 0;
+    width: 100vw;
+    transition: all 0.4s ease-in-out;
+
 
 }
 
@@ -30,6 +40,8 @@ overflow: hidden;
     height: 100%;
     float: left;
     background-color: #535a7e;
+    transition: all 0.5s ease-in-out;
+
     
 }
 
@@ -52,7 +64,6 @@ overflow: hidden;
     padding-top: 2em;
     border-radius: 0px 0px 12px  12px ;
     transition: all 0.5s ease-in-out;
-    
 
 
 }
@@ -62,6 +73,16 @@ overflow: hidden;
     margin-top : -400px;
 }
 
+.legende-mobile.hidden{
+    
+    margin-left : -400px;
+}
+
+.legende-complete.hidden{
+    
+    margin-right : -400px;
+}
+
 
 
 .legende-bouton{
@@ -69,13 +90,16 @@ overflow: hidden;
     height: 20px;
     position: absolute;
     z-index: 1000;
-    background-color: pink;
+    color: #535a7e;
+
+    
 }
 
 .legende-bouton.legende-bouton-legende-mobile{
     top: 0px;
     left: 0px;
     cursor: pointer;
+    color: white;
 
 }
 .legende-bouton.legende-bouton-legende-fixe{
@@ -102,6 +126,8 @@ overflow: hidden;
     border-radius: 12px;
     z-index: 500;
     border-radius: 0px 0px 0px  12px ;
+    transition: all 0.5s ease-in-out;
+
 
 }
 
@@ -127,5 +153,74 @@ button{
     left: 10vw;
     z-index: 500;
    
+
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-up, 
+div.vis-network div.vis-navigation div.vis-button.vis-down, 
+div.vis-network div.vis-navigation div.vis-button.vis-left, 
+div.vis-network div.vis-navigation div.vis-button.vis-right, 
+div.vis-network div.vis-navigation div.vis-button.vis-zoomIn, 
+div.vis-network div.vis-navigation div.vis-button.vis-zoomOut, 
+div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+  background-image: none !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button:hover {
+  box-shadow: none !important;
+}
+
+.vis-button:after {
+  font-size: 2em;
+  color: gray;
+}
+
+.vis-button:hover:after {
+  font-size: 2em;
+  color: lightgray;
+}
+
+.vis-button.vis-up:after {
+  content: "▲";
+  color: #f4c10e;
+
+}
+
+.vis-button.vis-down:after {
+  content: "▼";
+  color: #f4c10e;
+
+}
+
+.vis-button.vis-left:after {
+  content: "◀";
+  color: #f4c10e;
+
+}
+
+.vis-button.vis-right:after {
+  content: "▶";
+  color: #f4c10e;
+}
+
+.vis-button.vis-zoomIn:after {
+  content: "+";
+  font-weight: bold;
+  color: #f4c10e;
+
+}
+
+.vis-button.vis-zoomOut:after {
+  content: "−";
+  font-weight: bold;
+  color: #f4c10e;
+
+}
+
+.vis-button.vis-zoomExtends:after {
+  content: "⤧";
+  font-weight: bold;
+
+  color: #f4c10e;
 
 }
