@@ -144,23 +144,38 @@ function composeLegendElement(pos, e) {
 	return [obj, obj_glob];
 }
 
-function centerOn() {
+function centerOn(){
 	var searchTerm = document.getElementById('searchBar').value.toLowerCase();
 
-	if (searchTerm !== "") {
+	if (searchTerm !== ""){
 		var results = nodes.get({
 			filter: function (item) {
-				return (item.label.toLowerCase().includes(searchTerm));
+			  return (item.label.toLowerCase().includes(searchTerm));
 			}
+		  });
+
+		var coef_map = {};
+		nodes.forEach(e => {
+			coef_map[e.id] = diceCoefficient(searchTerm, e.label);
 		});
 
-		console.log(results);
-		if (results.length > 0) {
-			network.focus(results[0]['id'], { scale: 3 });
-			network.setSelection({ nodes: [results[0]['id']], edges: [] })
-		}
+		console.log(coef_map);
+
+		var coef_map_sorted = Object.keys(coef_map).map(function(key) {
+			return [key, coef_map[key]];
+		  });
+
+		  coef_map_sorted.sort(function(first, second) {
+			return second[1] - first[1];
+		  });
+
+		console.log(coef_map_sorted);
+	
+		console.log(nodes.get(parseInt(coef_map_sorted[0][0])));
+		network.focus(parseInt(coef_map_sorted[0][0]), {scale: 2});
+		network.setSelection({nodes: coef_map_sorted[0][0], edges:[]})
+		results = null;
 	}
-	//network.focus(nodes.get(4))
 }
 
 var mousedownID = -1;  //Global ID of mouse down interval
