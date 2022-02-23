@@ -35,7 +35,8 @@ var container = document.getElementById("mynetwork");
 var options = {
 	interaction: {
 		navigationButtons: true,
-		keyboard: true,},
+		keyboard: true,
+	},
 	nodes: {
 		shape: "dot",
 		size: 30,
@@ -250,6 +251,48 @@ function hideShowMenu(id) {
 			}
 			break;
 	}
+}
+
+function toggleAffichageElement(param){
+	switch (param) {
+		case 'theme':
+			var button = document.getElementById('toggle-theme').checked;
+			if (button) {
+
+			}
+			break;
+		case 'zoomSlider':
+			var button = document.getElementById('toggle-zoomSlider').checked;
+			if (button) {
+				document.getElementById('slider-zoom').style.display = 'none';
+			} else {
+				document.getElementById('slider-zoom').style.display = 'block';
+			}
+			break;
+		case 'navigation':
+			var button = document.getElementById('toggle-navigation').checked;
+			console.log(button)
+			if (button) {
+				var tmp_option = options;
+				tmp_option['interaction'] = {
+					navigationButtons: false,
+					keyboard: false,};
+				network.setOptions(tmp_option);
+				console.log(button)
+			} else {
+				var tmp_option = options;
+				tmp_option['interaction'] = {
+					navigationButtons: true,
+					keyboard: true,};
+				network.setOptions(tmp_option);
+				console.log(button)
+			}
+			break;
+	};
+}
+
+function reEvaluateColors(){
+
 }
 
 window.addEventListener("wheel", function(e) {

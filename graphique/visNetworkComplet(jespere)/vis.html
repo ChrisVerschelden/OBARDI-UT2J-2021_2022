@@ -17,11 +17,41 @@
       <div id='legende-mobile'   class="legende-mobile">  </div>
       <div id='legende-complete' class='legende-complete'></div>
       <div id='outils'           class='outils'>
-        <div id='search' class='search'>
-          <input class='search-field' id='searchBar' type="text"> 
-          <button class='search-bouton' onclick="centerOn()"> chercher 🔍</button>
+        <div class='row'>
+          <div id='search' class='search'>
+            <input class='search-field' id='searchBar' type="text"> 
+            <button class='search-bouton' onclick="centerOn()"> chercher 🔍</button>
+          </div>
+          <div id="slider"></div>
         </div>
-        <div id="slider"></div>
+        <div class="row">
+          <div>
+            <div class='preferences'>
+              <h3>préférences</h3>
+              <div class='preferences-element'>
+                <span>theme : </span>
+                <label class="switch">
+                  <input type="checkbox" id='toggle-theme' onclick='toggleAffichageElement("theme")'>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class='preferences-element'>
+                <span>slider :</span>
+                <label class="switch">
+                  <input type="checkbox" id='toggle-zoomSlider' onclick='toggleAffichageElement("zoomSlider")'>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class='preferences-element'>
+                <span>navigation :</span>
+                <label class="switch">
+                  <input type="checkbox" id='toggle-navigation' onclick='toggleAffichageElement("navigation")'>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="slider-zoom"></div>
     </div>

@@ -1,5 +1,4 @@
-// var anneeMin = 1660, anneeMax = 1800;
-var anneeMin = 0, anneeMax = 12;
+var anneeMin = 1660, anneeMax = 1800;
 
 var slider = document.getElementById("slider");
 
@@ -14,7 +13,7 @@ noUiSlider.create(slider, {
     start: [anneeMin, anneeMax],
     connect: true,
     tooltips: true,
-    step: 0.1,
+    step: 1,
     range: {
         'min': anneeMin,
         'max': anneeMax
