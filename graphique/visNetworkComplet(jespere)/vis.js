@@ -56,8 +56,9 @@ network.on("click", function(params) {
 	if(clicked_node.id != null){
 		var color = retrieveGroupColor(clicked_node.levelLabel.value);
 		if(!clicked_node.expanded){
+			console.log(clicked_node);
 			nodes.update({id: clicked_node_id, expanded: true,color: color});
-			retrieveNom(clicked_node['label'], clicked_node['group'], clicked_node['level']+1, 0);
+			retrieveNom(clicked_node['label'], clicked_node['group']+1, clicked_node['level']+1, clicked_node_id);
 		}else{
 			nodes.update({id: clicked_node_id, expanded: false,color: color});
 			hide(clicked_node);
@@ -77,16 +78,20 @@ function hide(element){
         var child_node_id = parseInt(edge.to,10);
 
 		var nomnode = nodes.get(child_node_id);
+		console.log(nomnode);
 		var name = nomnode.label;
 		for(let i = 0; i<nom.length; i++){
-			if(nom[i] == name){
-				delete nom[i];
+			if(nom[i] != null){
+				if(nom[i][0] == name && nom[i][1] == nomnode.levelLabel.value){
+					delete nom[i];
+				}
 			}
 		}
+		
 		if (network.getConnectedEdges(child_node_id, "from").length === 1) {
 			nodes.remove(child_node_id);
+			edges.remove(e);
 		}
-		edges.remove(e);
 	});	
 }	
 
