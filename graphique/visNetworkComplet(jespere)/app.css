@@ -121,6 +121,8 @@ body {
     transition: margin 1s ease-in-out;
 }
 
+
+
 .outils {
     position: absolute;
     background-color: var(--color-secondary);
