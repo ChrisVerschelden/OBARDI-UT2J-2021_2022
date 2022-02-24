@@ -71,7 +71,6 @@ network.on("click", function(params) {
 	clicked_node_id = parseInt(clicked_node['id']);
 
 	if(clicked_node.id != null){
-		console.log(clicked_node);
 		var color = getColorGroup(clicked_node.levelLabel);
 		if(!clicked_node.expanded){
 			nodes.update({id: clicked_node_id, expanded: true,color: color});
@@ -289,4 +288,4 @@ network.on("stabilizationProgress", function (params) {
 
 //charge les données du premier niveau
 retrieveGroupe(groupe); 
-//retrieveNom("Monthaudon",groupe[2]);
+//retrieveNom("Vendôme",groupe[1]);
