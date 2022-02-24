@@ -42,7 +42,7 @@ var options = {
 		size: 30,
 		font: {
 			size: 32,
-			color: "#ffffff",
+			color: "#8c8674",
 		},
 		borderWidth: 2,
        
@@ -160,11 +160,7 @@ function composeLegendElement(pos, e){
 	return [obj, obj_glob];
 }
 
-var search = document.getElementById('searchBar');
-search.addEventListener("keydown", function (e) {
-	if (e.code === 'Enter')
-    	centerOn();
-});
+
 
 function centerOn(){
 	var searchTerm = document.getElementById('searchBar').value.toLowerCase();
@@ -198,22 +194,6 @@ function centerOn(){
 		network.setSelection({nodes: coef_map_sorted[0][0], edges:[]})
 		results = null;
 	}
-}
-
-var mousedownID = -1;  //Global ID of mouse down interval
-function mousedown(event) {
-  if(mousedownID==-1)  //Prevent multimple loops!
-     mousedownID = setInterval(whilemousedown, 10 /*execute every 100ms*/);
-}
-function mouseup(event) {
-   if(mousedownID!=-1) {  //Only stop if exists
-     clearInterval(mousedownID);
-     mousedownID=-1; 
-   }
-}
-
-function whilemousedown() {
-	updateLegend();
 }
 
 function hideShowMenu(id) {
@@ -292,15 +272,7 @@ function reEvaluateColors(){
 
 }
 
-window.addEventListener("wheel", function(e) {
-	updateLegend();
-});
 
-//Assign events
-document.addEventListener("mousedown", mousedown);
-document.addEventListener("mouseup", mouseup);
-//Also clear the interval when user leaves the window with mouse
-document.addEventListener("mouseout", mouseup);
 
 //charge les données du premier niveau
 retrieveDataSup();
