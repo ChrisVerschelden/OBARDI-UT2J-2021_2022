@@ -141,6 +141,35 @@ function retrieveData() {
 
 	
 }
+
+
+$(document).ready(()=>{
+	const url=window.location.href;
+	var resWindow=parseInt(url[url.length-1]);
+	
+	if (isNaN(resWindow)===true){
+		console.log("pas d\' élément sélectionné")
+	}
+	else{
+		var paramsPage={
+			groupOrder: function (a, b) {
+				return a.value - b.value;    
+			},
+			editable: false,
+			stack: false,
+			min: new Date(res.intervals[resWindow].begin, 1, 1),
+			max: new Date(res.intervals[resWindow].end, 1, 1),
+			dataAttributes: ['id']
+							
+		}
+					
+					
+		slider.noUiSlider.updateOptions({ start: [res.intervals[resWindow].begin, res.intervals[resWindow].end]});
+		document.getElementById("cardGestion"+(resWindow+1).toString()).hidden=false;
+													 
+	}
+	
+});
   
 
 

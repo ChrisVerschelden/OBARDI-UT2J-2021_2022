@@ -1,0 +1,89 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link rel="stylesheet" href="slider.css">
+    <link rel="stylesheet" href="nouislider.css">
+    <link rel="stylesheet" href="cssMobile.css">
+    <script defer src="https://use.fontawesome.com/releases/v6.0.0/js/all.js"></script>
+    <style type="text/css">
+    body {
+		  color: #d3d3d3;
+		  font: 12pt arial;
+		  background-color: #8d8686;
+		}
+    .conteneur{
+      
+      display: inline-block;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+      
+
+		#mynetwork {
+		  width: 100%;
+        height: 700px;
+        border-radius: 50px;
+        background-color: rgb(66, 64, 64);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+		}
+
+    .title{
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    .box1{
+    
+        float:right ;
+    }
+    .box2{
+      width: 90vw;
+        height: 600px;
+        float:right ;
+    }
+
+		
+    
+
+    </style>
+    <div class="title">
+      <h1>Exemple Vis Network</h1>
+    </div>
+</head>
+<body>
+  <menu id="menuContainer">
+    <ul id="mainMenu" >
+      <li class="menuItem" id="election" style="outline: thin red solid;">
+        <a style="color: red; "><i class="fa-solid fa-envelope-open-text"></i> <i> election</i></a>
+      </li>
+      <li class="menuItem" id="paroisse" style="outline: thin green solid;">
+        <a style="color: green;"><i class="fas fa-church"></i> paroisse</a>
+      </li>
+      <li class="menuItem"  id="dirigeant" style="outline: thin yellow solid;">
+        <a style="color: yellow;"> <i class="fa-solid fa-person"></i>dirigeant</a>
+      </li>
+    </ul>
+  </menu>
+  
+  <div class="conteneur">
+    <div class="box1">
+      
+    </div>
+    
+    <div class="box2">
+      <div id="mynetwork"></div>
+    </div>
+  </div>
+  <div id="slider"></div>
+  
+	
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="sparqlRequete.js"></script>
+  <script src="nouislider.js"></script>
+  <script src="slider.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></script>
+  <script src="vis.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+
+@media screen and (max-width:700px) {
+    #mainMenu{
+        display: flex;       
+        flex-direction: column;
+    }
+}

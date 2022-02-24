@@ -1,0 +1,138 @@
+#slider {
+    height: 10px;
+    top: 15vh;
+    width: 80vw;
+    left: 10vw;
+}
+
+#slider .noUi-connect {
+    background: #3FB8AF;
+}
+
+
+#toggleButton:hover{
+    background-color: red;
+    color: black;
+
+}
+
+
+#slider .noUi-handle {
+    height: 18px;
+    width: 18px;
+    top: -5px;
+    right: -9px; /* half the width */
+    border-radius: 9px;
+}
+
+#searchBar{
+    margin-left: 0;
+    display: inline-block;
+}
+
+
+
+
+#toggleButton{
+    margin-left: 0%;
+}
+
+
+#menuContainer{
+    margin-left: -5%;
+    
+
+}
+
+
+
+#mainMenu{
+   display: flex;
+   justify-content: center;
+   list-style: none;
+
+}
+
+.menuItem{
+    width: 250px;
+    text-align: center;
+}
+
+.menuItem a{
+    font-size: 25px;
+}
+
+.menuItem a:hover {
+    cursor: pointer;
+    font-size: 30px;
+    width: fit-content;
+    
+;
+
+}
+
+.barre{
+    margin-left: 0;
+    background: red;
+   
+}
+
+.barre:hover >.rechercheTexte{
+   
+    background: white;
+    color: darkred;
+
+}
+
+
+
+.rechercheEntre{
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: orangered;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-delay: 0,4s;
+    transition-duration: 1s;
+    
+
+}
+
+
+
+.rechercheTexte{
+    border: none;
+    background:none;
+    outline: none;
+    float: left;
+    padding: 0;
+    background-color: red ;
+    font-size: 14px;
+    transition: 0.4s;
+    line-height:40px ;
+    height: 25px;
+    width: 0px;
+    width:330px;
+    transition-delay: 0,4s;
+    transition-duration: 1s;
+    opacity: 1;
+
+    
+}
+
+.bouttonHide{
+    height: 25px;
+    display: inline-block;
+    color: red;
+    background-color: black;
+    border-radius: 50%;
+
+}
+
+.bouttonHide:hover{
+    background: white;
+    color: red;
+}
