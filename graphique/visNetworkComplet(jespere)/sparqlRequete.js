@@ -4,25 +4,21 @@ let groupeColor = new Map();
 
 function load(data, nomgroupe, idsup = 0, level = 0){
 	for(i = 0; i<data.length; i++){
-		if(data[i].upNom != null){
-			nodes.add({id: id, label: data[i].upNom.value, title: data[i].upNom.value,value: 30,group: 0 ,level: 0, levelLabel: data[i].upgrouplab.value, hidden: false, expanded: false, color : getColorGroup(nomgroupe)})
-			edges.add({id: idedges,label: "subFeature", from: id , to: idsup , arrows:"to", hidden: false});
-			idedges = idedges + 1;
-			idsup = id;
-		}
-		else if(data[i].nom != null){
+		if(data[i].nom != null){
 			nodes.add({id: id, label: data[i].nom.value, title: data[i].nom.value,value: 30,group: 0 ,level: level, levelLabel: nomgroupe, hidden: false, expanded: false, color : getColorGroup(nomgroupe)})
+			id = id + 1;
 			if(idsup != 0){
 				edges.add({id: idedges,label: "subFeature", from: idsup , to: id , arrows:"to", hidden: false});
 				idedges = idedges + 1;
 				idsup = id;
 			}
-		}else if(data[i].subNom != null){
+		}
+		else if(data[i].subNom != null){
 			nodes.add({id: id, label: data[i].subNom.value, title: data[i].subNom.value,value: 30,group: 0 ,level: level, levelLabel: data[i].subgrouplab.value, hidden: false, expanded: false, color : getColorGroup(data[i].subgrouplab.value)})
 			edges.add({id: idedges,label: "subFeature", from: idsup , to: id , arrows:"to", hidden: false});
 			idedges = idedges + 1;
+			id = id + 1;
 		}
-		id = id + 1;
 	}
 	updateReferencePoint();
 	updateLegend();
@@ -63,13 +59,19 @@ function retrieveNom(nom, nomgroupe, idsup = 0, level = 0)
 		success: function (data) {
 		  $('#results').show();
 		  $('#raw_output').text(JSON.stringify(data, null, 3));
-		  if(idsup == 0){
-			nodes.add({id: id, label: nom, title: nom,value: 30,group: 0 ,level: 1, levelLabel: nomgroupe, hidden: false, expanded: true, color : getColorGroup(nomgroupe)})
-			idsup = id;
-			id = id + 1;
-			level = 2;
-		  }
 		  if(data.results.bindings.length != 0){
+			if(idsup == 0){
+				nodes.add({id: id, label: nom, title: nom,value: 30,group: 0 ,level: 1, levelLabel: nomgroupe, hidden: false, expanded: true, color : getColorGroup(nomgroupe)})
+				idsup = id;
+				id = id + 1;
+				level = 2;
+				if(data.results.bindings[0].upNom != null){
+					nodes.add({id: id, label: data.results.bindings[0].upNom.value, title: data.results.bindings[0].upNom.value,value: 30,group: 0 ,level: 0, levelLabel: data.results.bindings[0].upgrouplab.value, hidden: false, expanded: false, color : getColorGroup(nomgroupe)})
+					edges.add({id: idedges,label: "subFeature", from: id , to: idsup , arrows:"to", hidden: false});
+					idedges = idedges + 1;
+					id = id + 1;
+				}
+			}
 			load(data.results.bindings, nomgroupe, idsup, level);
 		  }
 		},
