@@ -5,6 +5,7 @@ let groupperms = 1;
 let nom = [];
 let couleurcomp = 0;
 let colorgroup = ["red","green","yellow","blue","pink","orange", "white"];
+let groupe = ["Generalite","Election","Paroisse"]
 
 var setLevels = new Set();
 var referencePoints = new Set();
@@ -54,11 +55,11 @@ network.on("click", function(params) {
 	clicked_node_id = parseInt(clicked_node['id']);
 
 	if(clicked_node.id != null){
-		var color = retrieveGroupColor(clicked_node.levelLabel.value);
+		console.log(clicked_node);
+		var color = getColorGroup(clicked_node.levelLabel);
 		if(!clicked_node.expanded){
-			console.log(clicked_node);
 			nodes.update({id: clicked_node_id, expanded: true,color: color});
-			retrieveNom(clicked_node['label'], clicked_node['group']+1, clicked_node['level']+1, clicked_node_id);
+			retrieveNom(clicked_node['label'], clicked_node['levelLabel'], clicked_node_id, (clicked_node['level']+1));
 		}else{
 			nodes.update({id: clicked_node_id, expanded: false,color: color});
 			hide(clicked_node);
@@ -78,7 +79,6 @@ function hide(element){
         var child_node_id = parseInt(edge.to,10);
 
 		var nomnode = nodes.get(child_node_id);
-		console.log(nomnode);
 		var name = nomnode.label;
 		for(let i = 0; i<nom.length; i++){
 			if(nom[i] != null){
@@ -176,4 +176,5 @@ document.addEventListener("mouseup", mouseup);
 document.addEventListener("mouseout", mouseup);
 
 //charge les données du premier niveau
-retrieveDataSup(); 
+retrieveGroupe(groupe); 
+//retrieveNom("Monthaudon",groupe[2]);

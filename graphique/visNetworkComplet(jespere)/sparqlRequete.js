@@ -1,7 +1,100 @@
 let myMap = new Map();
 let myMapid = new Map();
-let groupe = new  Map();
+let groupeColor = new Map();
 
+function load(data, nomgroupe, idsup = 0, level = 0){
+	for(i = 0; i<data.length; i++){
+		if(data[i].upNom != null){
+			nodes.add({id: id, label: data[i].upNom.value, title: data[i].upNom.value,value: 30,group: 0 ,level: 0, levelLabel: data[i].upgrouplab.value, hidden: false, expanded: false, color : getColorGroup(nomgroupe)})
+			edges.add({id: idedges,label: "subFeature", from: id , to: idsup , arrows:"to", hidden: false});
+			idedges = idedges + 1;
+			idsup = id;
+		}
+		else if(data[i].nom != null){
+			nodes.add({id: id, label: data[i].nom.value, title: data[i].nom.value,value: 30,group: 0 ,level: level, levelLabel: nomgroupe, hidden: false, expanded: false, color : getColorGroup(nomgroupe)})
+			if(idsup != 0){
+				edges.add({id: idedges,label: "subFeature", from: idsup , to: id , arrows:"to", hidden: false});
+				idedges = idedges + 1;
+				idsup = id;
+			}
+		}else if(data[i].subNom != null){
+			nodes.add({id: id, label: data[i].subNom.value, title: data[i].subNom.value,value: 30,group: 0 ,level: level, levelLabel: data[i].subgrouplab.value, hidden: false, expanded: false, color : getColorGroup(data[i].subgrouplab.value)})
+			edges.add({id: idedges,label: "subFeature", from: idsup , to: id , arrows:"to", hidden: false});
+			idedges = idedges + 1;
+		}
+		id = id + 1;
+	}
+	updateReferencePoint();
+	updateLegend();
+}
+
+function retrieveGroupe(groupe, nbgroupe = 0) {
+
+	var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> select ?nom where { ?x a :Area. ?x rdfs:label ?nom. ?x :isMemberOf ?groupe. ?groupe rdfs:label \""+groupe[nbgroupe]+"\".}";
+	var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
+  
+	console.log(query);
+	$.ajax({
+		url: url,
+		dataType: "json",
+		success: function (data) {
+		$('#results').show();
+		$('#raw_output').text(JSON.stringify(data, null, 3));
+		
+		if(data.results.bindings.length == 0){
+			retrieveGroupe(groupe, (nbgroupe+1))
+		}else{
+			load(data.results.bindings, groupe[nbgroupe]);
+		}
+		
+		},
+		error: function(e) {console.log("Query error");}
+	});
+}
+
+function retrieveNom(nom, nomgroupe, idsup = 0, level = 0)
+{
+	  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT ?nomgroupe ?upNom ?upgrouplab ?subNom ?subgrouplab WHERE { ?x a :Area . ?x rdfs:label \""+nom+"\". ?x :isMemberOf ?groupe . ?groupe rdfs:label \""+nomgroupe+"\" . ?groupe rdfs:label ?nomgroupe . OPTIONAL { ?x :hasUpperUnit ?up. ?up :idObardi ?upId . ?up rdfs:label ?upNom . ?up :isMemberOf ?upgroup . ?upgroup rdfs:label ?upgrouplab} . OPTIONAL { ?x :hasSubUnit ?sub . ?sub :idObardi ?subId . ?sub rdfs:label ?subNom . ?sub :isMemberOf ?subgroup . ?subgroup rdfs:label ?subgrouplab } . }";
+	  var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
+
+	  $.ajax({
+		url: url,
+		dataType: "json",
+		success: function (data) {
+		  $('#results').show();
+		  $('#raw_output').text(JSON.stringify(data, null, 3));
+		  if(idsup == 0){
+			nodes.add({id: id, label: nom, title: nom,value: 30,group: 0 ,level: 1, levelLabel: nomgroupe, hidden: false, expanded: true, color : getColorGroup(nomgroupe)})
+			idsup = id;
+			id = id + 1;
+			level = 2;
+		  }
+		  if(data.results.bindings.length != 0){
+			load(data.results.bindings, nomgroupe, idsup, level);
+		  }
+		},
+		error: function(e) {console.log("wesh ya pb la bro");}
+	  });
+}
+
+function getColorGroup(nomgroupe){
+	//Attribution d'une couleur pour un groupe
+	let color;
+
+	for (const key of groupeColor.keys()){
+		if(nomgroupe == key){
+			return groupeColor.get(key);
+		}
+	}
+	
+	groupeColor.set(nomgroupe, colorgroup[couleurcomp]);
+	color = colorgroup[couleurcomp];
+	couleurcomp = couleurcomp + 1;
+
+	return color;
+}
+
+/*
 function load(data, group, level, recursif, idnem)
 {
 	let grouptemp = group;
@@ -185,7 +278,7 @@ function retrieveNom(name, group, level, idnem)
 		},
 		error: function(e) {console.log("wesh ya pb la bro");}
 	  });
-}*/
+}
 
 function retrieveNomSansEnfants(name, group, level, idnem)
 {	  
@@ -224,4 +317,4 @@ function dataremovedoublons(dataval)
 		}
 	}
 	return val;
-}
+}*/
