@@ -54,7 +54,12 @@ body {
 }
 
 .legende-mobile-element{
-
+  position: absolute;
+  border: 1px solid var(--color-accent);
+  width: 9.8vw;
+  font-size: 100%;
+  height: fit-content;
+  padding-left: 3px 0px 3px 0px;
 }
 
 .legende-bouton{
@@ -330,7 +335,18 @@ div.vis-network div.vis-navigation div.vis-button:hover {
     font-size: xx-small;
 }
 
-#slider.noUi-connect {
+#slider-zoom {
+  position: absolute;
+  z-index: 500;
+  right: 0;
+  bottom: 0;
+  height: 100px;
+  margin-right: 27px;
+  margin-bottom: 100px;
+  background: var(--color-accent);
+}
+
+.noUi-connect {
     background: var(--color-accent);
 }
 
@@ -340,28 +356,4 @@ div.vis-network div.vis-navigation div.vis-button:hover {
     margin-right: auto;
     margin-left: auto;
     border-radius: 10px;
-}
-
-
-#slider-zoom {
-    position: absolute;
-    height: 20vh;
-    right: 27px;
-    width: 10px;
-    bottom: 15vh;
-    z-index: 500;
-    background-color: var(--color-accent);
-}
-
-#slider-zoom.noUi-connect {
-    background-color: var(--color-accent);
-}
-
-#slider-zoom.noUi-handle {
-    height: 20px;
-    width: 20px;
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 10px;
-    background-color: var(--color-accent);
 }

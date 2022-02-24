@@ -120,12 +120,11 @@ function getPosDom(e) {
 }
 
 function updateLegend(){
-	var elements = document.getElementsByClassName('legende');
+	var elements = document.getElementsByClassName('legende-mobile-element');
 	document.getElementById('legende-complete').innerHTML = "";
     while(elements.length > 0){
         elements[0].parentNode.removeChild(elements[0]);
     }
-
 	referencePoints.forEach( e => {
 		var pos = getPosDom(e);
 		if(!e.hidden){
@@ -142,26 +141,32 @@ function updateReferencePoint(){
 	nodes.forEach( e => {
 		if(!setLevels.has(e.level) && !e.hidden){
 			setLevels.add(e.level);
-			referencePoints.add({id: e.id, level: e.level, label: e.levelLabel, nom: e.title, hidden: e.hidden})
+			referencePoints.add(e)
 		}
 	});
+	console.log(referencePoints)
 }
 
 function composeLegendElement(pos, e){
+	// for (const [key, value] of groupe.entries()) {
+	// 	if(value[1] === e.level){
+	// 		obj.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
+	// 		obj.style.cssText = 'position:absolute;z-index: 600;top:'+ (pos.y - 20) + 'px;margin-left:0;width:9.5vw;height:50px; font-size: 1.2em; -moz-border-radius:10px;border:1px solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
+	// 		obj_glob.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
+	// 		obj_glob.style.cssText = 'color=' + value[0] + ";"
+	// 	}
+	// }
 	var obj = document.createElement('div');
 	obj.id = ""+e.id;
 	var obj_glob = document.createElement('div');
 	obj_glob.id = ""+e.id;
 
-	for (const [key, value] of groupe.entries()) {
-		if(value[1] === e.level){
-			obj.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
-			obj.style.cssText = 'position:absolute;z-index: 100;top:'+ (pos.y - 20) + 'px;margin-left:0;width:9.5vw;height:50px; font-size: 1.2em; -moz-border-radius:10px;border:1px solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
-			obj_glob.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
-			obj_glob.style.cssText = 'color=' + value[0] + ";"
-		}
-	}
-	obj.classList.add('legende');
+	obj.innerHTML = '<p style="color:' + e.color +  ';">' + e.levelLabel + '</p>';
+	obj.style.cssText = 'margin-top:'+ (pos.y - 20) + 'px;';
+	obj_glob.innerHTML = '<p style="color:' + e.color +  ';">' + e.levelLabel + '</p>';
+	obj_glob.style.cssText = 'color=' + e.color + ";";
+
+	obj.classList.add('legende-mobile-element');
 	return [obj, obj_glob];
 }
 
@@ -273,7 +278,13 @@ function toggleAffichageElement(param){
 	};
 }
 
-
+network.on("stabilizationProgress", function (params) {
+    if (document.getElementById('slider-zoom').style.display !== 'none') {
+		document.getElementById('slider-zoom').style.display = 'none';
+	} else {
+		document.getElementById('slider-zoom').style.display = 'block';
+	}
+});
 
 
 //charge les données du premier niveau
