@@ -20,6 +20,7 @@ let colorgroup = [
 					'rgb(213, 48, 6)',
 					'rgb(76, 244, 56)',
 				];
+let groupe = ["Generalite","Election","Paroisse"]
 
 var setLevels = new Set();
 var referencePoints = new Set();
@@ -70,10 +71,11 @@ network.on("click", function(params) {
 	clicked_node_id = parseInt(clicked_node['id']);
 
 	if(clicked_node.id != null){
-		var color = retrieveGroupColor(clicked_node.levelLabel.value);
+		console.log(clicked_node);
+		var color = getColorGroup(clicked_node.levelLabel);
 		if(!clicked_node.expanded){
 			nodes.update({id: clicked_node_id, expanded: true,color: color});
-			retrieveNom(clicked_node['label'], clicked_node['group'], clicked_node['level']+1, 0);
+			retrieveNom(clicked_node['label'], clicked_node['levelLabel'], clicked_node_id, (clicked_node['level']+1));
 		}else{
 			nodes.update({id: clicked_node_id, expanded: false,color: color});
 			hide(clicked_node);
@@ -95,14 +97,17 @@ function hide(element){
 		var nomnode = nodes.get(child_node_id);
 		var name = nomnode.label;
 		for(let i = 0; i<nom.length; i++){
-			if(nom[i] == name){
-				delete nom[i];
+			if(nom[i] != null){
+				if(nom[i][0] == name && nom[i][1] == nomnode.levelLabel.value){
+					delete nom[i];
+				}
 			}
 		}
+		
 		if (network.getConnectedEdges(child_node_id, "from").length === 1) {
 			nodes.remove(child_node_id);
+			edges.remove(e);
 		}
-		edges.remove(e);
 	});	
 }	
 
@@ -275,4 +280,5 @@ function reEvaluateColors(){
 
 
 //charge les données du premier niveau
-retrieveDataSup();
+retrieveGroupe(groupe); 
+//retrieveNom("Monthaudon",groupe[2]);

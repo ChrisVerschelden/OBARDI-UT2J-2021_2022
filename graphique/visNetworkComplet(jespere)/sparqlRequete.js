@@ -1,7 +1,100 @@
 let myMap = new Map();
 let myMapid = new Map();
-let groupe = new  Map();
+let groupeColor = new Map();
 
+function load(data, nomgroupe, idsup = 0, level = 0){
+	for(i = 0; i<data.length; i++){
+		if(data[i].upNom != null){
+			nodes.add({id: id, label: data[i].upNom.value, title: data[i].upNom.value,value: 30,group: 0 ,level: 0, levelLabel: data[i].upgrouplab.value, hidden: false, expanded: false, color : getColorGroup(nomgroupe)})
+			edges.add({id: idedges,label: "subFeature", from: id , to: idsup , arrows:"to", hidden: false});
+			idedges = idedges + 1;
+			idsup = id;
+		}
+		else if(data[i].nom != null){
+			nodes.add({id: id, label: data[i].nom.value, title: data[i].nom.value,value: 30,group: 0 ,level: level, levelLabel: nomgroupe, hidden: false, expanded: false, color : getColorGroup(nomgroupe)})
+			if(idsup != 0){
+				edges.add({id: idedges,label: "subFeature", from: idsup , to: id , arrows:"to", hidden: false});
+				idedges = idedges + 1;
+				idsup = id;
+			}
+		}else if(data[i].subNom != null){
+			nodes.add({id: id, label: data[i].subNom.value, title: data[i].subNom.value,value: 30,group: 0 ,level: level, levelLabel: data[i].subgrouplab.value, hidden: false, expanded: false, color : getColorGroup(data[i].subgrouplab.value)})
+			edges.add({id: idedges,label: "subFeature", from: idsup , to: id , arrows:"to", hidden: false});
+			idedges = idedges + 1;
+		}
+		id = id + 1;
+	}
+	updateReferencePoint();
+	updateLegend();
+}
+
+function retrieveGroupe(groupe, nbgroupe = 0) {
+
+	var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> select ?nom where { ?x a :Area. ?x rdfs:label ?nom. ?x :isMemberOf ?groupe. ?groupe rdfs:label \""+groupe[nbgroupe]+"\".}";
+	var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
+  
+	console.log(query);
+	$.ajax({
+		url: url,
+		dataType: "json",
+		success: function (data) {
+		$('#results').show();
+		$('#raw_output').text(JSON.stringify(data, null, 3));
+		
+		if(data.results.bindings.length == 0){
+			retrieveGroupe(groupe, (nbgroupe+1))
+		}else{
+			load(data.results.bindings, groupe[nbgroupe]);
+		}
+		
+		},
+		error: function(e) {console.log("Query error");}
+	});
+}
+
+function retrieveNom(nom, nomgroupe, idsup = 0, level = 0)
+{
+	  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT ?nomgroupe ?upNom ?upgrouplab ?subNom ?subgrouplab WHERE { ?x a :Area . ?x rdfs:label \""+nom+"\". ?x :isMemberOf ?groupe . ?groupe rdfs:label \""+nomgroupe+"\" . ?groupe rdfs:label ?nomgroupe . OPTIONAL { ?x :hasUpperUnit ?up. ?up :idObardi ?upId . ?up rdfs:label ?upNom . ?up :isMemberOf ?upgroup . ?upgroup rdfs:label ?upgrouplab} . OPTIONAL { ?x :hasSubUnit ?sub . ?sub :idObardi ?subId . ?sub rdfs:label ?subNom . ?sub :isMemberOf ?subgroup . ?subgroup rdfs:label ?subgrouplab } . }";
+	  var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
+
+	  $.ajax({
+		url: url,
+		dataType: "json",
+		success: function (data) {
+		  $('#results').show();
+		  $('#raw_output').text(JSON.stringify(data, null, 3));
+		  if(idsup == 0){
+			nodes.add({id: id, label: nom, title: nom,value: 30,group: 0 ,level: 1, levelLabel: nomgroupe, hidden: false, expanded: true, color : getColorGroup(nomgroupe)})
+			idsup = id;
+			id = id + 1;
+			level = 2;
+		  }
+		  if(data.results.bindings.length != 0){
+			load(data.results.bindings, nomgroupe, idsup, level);
+		  }
+		},
+		error: function(e) {console.log("wesh ya pb la bro");}
+	  });
+}
+
+function getColorGroup(nomgroupe){
+	//Attribution d'une couleur pour un groupe
+	let color;
+
+	for (const key of groupeColor.keys()){
+		if(nomgroupe == key){
+			return groupeColor.get(key);
+		}
+	}
+	
+	groupeColor.set(nomgroupe, colorgroup[couleurcomp]);
+	color = colorgroup[couleurcomp];
+	couleurcomp = couleurcomp + 1;
+
+	return color;
+}
+
+/*
 function load(data, group, level, recursif, idnem)
 {
 	let grouptemp = group;
@@ -14,6 +107,9 @@ function load(data, group, level, recursif, idnem)
 	
 	for(let i = 0; i<data.length; i++)
 	{
+		if(id == 52){
+			console.log("ouais ouais");
+		}
 		if(group == 0)
 		{
 			grouptemp = groupperms;
@@ -21,36 +117,39 @@ function load(data, group, level, recursif, idnem)
 		}
 		
 		let trouve = false;
+		
 		//Regarde si le nom de la node est déjà présent, si c'est le cas il ajoute ses enfants
 		for(let j = 0; j<nom.length; j++)
 		{
-			if(nom[j] == data[i].nom.value)
-			{
-				if(recursif && level != 1)
+			if(nom[j] != null){
+				if(nom[j][0] == data[i].nom.value && nom[j][1] == data[i].nomgroupe.value)
 				{
-					//Recupere le groupe de la node mère
-					let groupnem = grouptemp;
-					for (const key of myMap.keys()) {
-					  if(key.value == data[i].nom.value)
-					  {
-						  groupnem = myMap.get(key);
-					  }
-					}
-					
-					//Recupere l'id de la node mère
-					let idnem = id;
-					for (const key of myMapid.keys()) {
-					  if(key.value == data[i].nom.value)
-					  {
-						  idnem = myMapid.get(key);
-					  }
-					}
+					if(recursif && level != 1 && data[i].nomdeceluiquiestdessous != null)
+					{
+						//Recupere le groupe de la node mère
+						let groupnem = grouptemp;
+						for (const key of myMap.keys()) {
+						if(key.value == data[i].nom.value)
+						{
+							groupnem = myMap.get(key);
+						}
+						}
+						
+						//Recupere l'id de la node mère
+						let idnem = id;
+						for (const key of myMapid.keys()) {
+						if(key[0] == data[i].nom.value && key[1] == data[i].nomgroupe.value)
+						{
+							idnem = myMapid.get(key);
+						}
+						}
 
 
-					//Recupere la node enfants
-					retrieveNom(data[i].nomdeceluiquiestdessous.value, groupnem, (leveltemp + 1), idnem);
+						//Recupere la node enfants
+						retrieveNom(data[i].nomdeceluiquiestdessous.value, groupnem, (leveltemp + 1), idnem);
+					}
+					trouve = true;
 				}
-				trouve = true;
 			}
 		}
 		
@@ -70,7 +169,6 @@ function load(data, group, level, recursif, idnem)
 				}
 			}
 			
-			
 			if(!trouvergroupe)
 			{
 				groupe.set(data[i].nomgroupe.value, [colorgroup[couleurcomp],leveltemp]);
@@ -78,24 +176,18 @@ function load(data, group, level, recursif, idnem)
 				couleurcomp = couleurcomp + 1;
 			}
 
-			//Ajout de la node
-			if(leveltemp == 1)
-			{
+			//console.log(data[i].nom.value+" , group "+grouptemp+", level"+leveltemp+" nomgroupe"+data[i].nomgroupe.value);
+			if((level == 1 && data[i].nomgroupe.value != "Paroisse") || level!=1){
 				nodes.add({id: id, label: data[i].nom.value, title: data[i].nom.value,value: 30,group: grouptemp ,level: leveltemp, levelLabel: data[i].nomgroupe, hidden: false, expanded: false, color : color});
-			}
-			else
-			{
-				nodes.add({id: id, label: data[i].nom.value, title: data[i].nom.value,value: 30,group: grouptemp ,level: leveltemp, levelLabel: data[i].nomgroupe, hidden: false, expanded: false, color : color});
-			}
-			nom.push(data[i].nom.value);
-			myMap.set(data[i].nom, grouptemp);
-			myMapid.set(data[i].nom, id);
-			
-			//Ajout des liaisons
-			if(idnem != 0)
-			{
-				edges.add({id: idedges,label: "subFeature", from: idnem , to: id , arrows:"to", hidden: false});
-				idedges = idedges + 1;
+				nom.push([data[i].nom.value, data[i].nomgroupe.value]);
+				myMap.set(data[i].nom, grouptemp);
+				myMapid.set([data[i].nom.value, data[i].nomgroupe.value], id);
+				//Ajout des liaisons
+				if(idnem != 0)
+				{
+					edges.add({id: idedges,label: "subFeature", from: idnem , to: id , arrows:"to", hidden: false});
+					idedges = idedges + 1;
+				}
 			}
 			
 			id = id + 1;
@@ -118,15 +210,20 @@ function retrieveGroupColor(group){
 }
 
 function retrieveDataSup() {
-  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?nom WHERE { ?x a :Area . ?x rdfs:label ?nom . MINUS { ?x a :Area . ?x :hasUpperUnit ?z . } }";
+  //var date = " ?x :referencePeriod ?date . ?date time:hasBeginning ?y . ?date time:hasEnd ?z . ?y time:inXSDDate ?debut . ?z time:inXSDDate ?fin . FILTER ( xsd:dateTime(?debut) > xsd:dateTime(\""+slider.noUiSlider.get()[0]+"-01-01T00:00:00\") && xsd:dateTime(?fin) < xsd:dateTime(\""+slider.noUiSlider.get()[1]+"-01-01T00:00:00\")).";
+  var date = "";
+  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX time: <http://www.w3.org/2006/time#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?nom WHERE { ?x a :Area . ?x rdfs:label ?nom . MINUS { ?x a :Area . ?x :hasUpperUnit ?z . } "+date+"} ";
   var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
 
+
+console.log(query);
   $.ajax({
 	url: url,
 	dataType: "json",
 	success: function (data) {
 	  $('#results').show();
 	  $('#raw_output').text(JSON.stringify(data, null, 3));
+
 	  for(let i = 0; i<data.results.bindings.length; i++)
 	  {
 		  retrieveNom(data.results.bindings[i].nom.value, 0, 1, 0);
@@ -139,7 +236,27 @@ function retrieveDataSup() {
 
 function retrieveNom(name, group, level, idnem)
 {
-	  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?nom ?nomgroupe ?nomdeceluiquiestdessous  WHERE { ?x a :Area . ?x rdfs:label ?nom . ?x :isMemberOf ?groupe . ?groupe rdfs:label ?nomgroupe . ?x rdfs:label \""+name+"\" . ?x :hasSubUnit ?sousunite . ?sousunite rdfs:label ?nomdeceluiquiestdessous .}";
+	  var date = " ?sousunite :referencePeriod ?sousdate .?sousdate time:hasBeginning ?y .?sousdate time:hasEnd ?z . ?y time:inXSDDate ?debut .?z time:inXSDDate ?fin .FILTER ( xsd:dateTime(?debut) > xsd:dateTime(\""+slider.noUiSlider.get()[0]+"-01-01T00:00:00\") && xsd:dateTime(?fin) < xsd:dateTime(\""+slider.noUiSlider.get()[1]+"-01-01T00:00:00\"))."
+	  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX time: <http://www.w3.org/2006/time#> SELECT ?nom ?nomgroupe ?nomdeceluiquiestdessous WHERE {  ?x a :Area .  ?x rdfs:label ?nom .  ?x :isMemberOf ?groupe .  ?groupe rdfs:label ?nomgroupe .  ?x rdfs:label \""+name+"\" . OPTIONAL{ ?x :hasSubUnit ?sousunite . ?sousunite rdfs:label ?nomdeceluiquiestdessous . } }";
+	  var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
+
+	  $.ajax({
+		url: url,
+		dataType: "json",
+		success: function (data) {
+		  $('#results').show();
+		  $('#raw_output').text(JSON.stringify(data, null, 3));
+		  data = dataremovedoublons(data.results.bindings);
+		  load(data, group, level, true, idnem);
+		},
+		error: function(e) {console.log("wesh ya pb la bro");}
+	  });
+}
+/*
+function retrieveNom(name, group, level, idnem)
+{
+	  var date = " ?sousunite :referencePeriod ?sousdate .?sousdate time:hasBeginning ?y .?sousdate time:hasEnd ?z . ?y time:inXSDDate ?debut .?z time:inXSDDate ?fin .FILTER ( xsd:dateTime(?debut) > xsd:dateTime(\""+slider.noUiSlider.get()[0]+"-01-01T00:00:00\") && xsd:dateTime(?fin) < xsd:dateTime(\""+slider.noUiSlider.get()[1]+"-01-01T00:00:00\"))."
+	  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX time: <http://www.w3.org/2006/time#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?nom ?nomgroupe ?nomdeceluiquiestdessous  WHERE { ?x a :Area . ?x rdfs:label ?nom . ?x :isMemberOf ?groupe . ?groupe rdfs:label ?nomgroupe . ?x rdfs:label \""+name+"\" . ?x :hasSubUnit ?sousunite . ?sousunite rdfs:label ?nomdeceluiquiestdessous . "+date+"}";
 
 	  var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
 
@@ -174,12 +291,10 @@ function retrieveNomSansEnfants(name, group, level, idnem)
 		success: function (data) {
 		  $('#results').show();
 		  $('#raw_output').text(JSON.stringify(data, null, 3, false));
-		  if(data.results.bindings.length == 0)
-		  {
+		  if(data.results.bindings.length == 0){
 			  console.log("erreur");
 		  }
-		  else
-		  {
+		  else{
 			  load(data.results.bindings, group, level, false, idnem);
 		  }
 		},
@@ -192,10 +307,14 @@ function dataremovedoublons(dataval)
 	let val = [];
 	for(let i = 0; i<dataval.length; i++)
 	{
-		if(!(dataval[i].nomdeceluiquiestdessous.value == dataval[i].nom.value))
-		{
+		if(dataval[i].nomdeceluiquiestdessous != null){
+			if(!(dataval[i].nomdeceluiquiestdessous.value == dataval[i].nom.value))
+			{
+				val.push(dataval[i]);
+			}
+		}else{
 			val.push(dataval[i]);
 		}
 	}
 	return val;
-}
+}*/
