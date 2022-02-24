@@ -273,9 +273,6 @@ function toggleAffichageElement(param){
 	};
 }
 
-function reEvaluateColors(){
-
-}
 
 
 

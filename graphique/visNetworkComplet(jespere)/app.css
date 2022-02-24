@@ -328,11 +328,11 @@ div.vis-network div.vis-navigation div.vis-button:hover {
     font-size: xx-small;
 }
 
-#slider .noUi-connect {
+#slider.noUi-connect {
     background: var(--color-accent);
 }
 
-#slider .noUi-handle {
+#slider.noUi-handle {
     height: 13px;
     width: 13px;
     margin-right: auto;
@@ -348,16 +348,18 @@ div.vis-network div.vis-navigation div.vis-button:hover {
     width: 10px;
     bottom: 15vh;
     z-index: 500;
-}
-
-#slider-zoom .noUi-connect {
     background-color: var(--color-accent);
 }
 
-#slider-zoom .noUi-handle {
+#slider-zoom.noUi-connect {
+    background-color: var(--color-accent);
+}
+
+#slider-zoom.noUi-handle {
     height: 20px;
     width: 20px;
     margin-right: auto;
     margin-left: auto;
     border-radius: 10px;
+    background-color: var(--color-accent);
 }
