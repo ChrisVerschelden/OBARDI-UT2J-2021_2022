@@ -147,14 +147,6 @@ function updateReferencePoint(){
 }
 
 function composeLegendElement(pos, e){
-	// for (const [key, value] of groupe.entries()) {
-	// 	if(value[1] === e.level){
-	// 		obj.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
-	// 		obj.style.cssText = 'position:absolute;z-index: 600;top:'+ (pos.y - 20) + 'px;margin-left:0;width:9.5vw;height:50px; font-size: 1.2em; -moz-border-radius:10px;border:1px solid #ddd;-moz-box-shadow: 0px 0px 8px  #fff';
-	// 		obj_glob.innerHTML = '<p style="color:' + value[0] +  ';">' + key + '</p>';
-	// 		obj_glob.style.cssText = 'color=' + value[0] + ";"
-	// 	}
-	// }
 	var obj = document.createElement('div');
 	obj.id = ""+e.id;
 	var obj_glob = document.createElement('div');
