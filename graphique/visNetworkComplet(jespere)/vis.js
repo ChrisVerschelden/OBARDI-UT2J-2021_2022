@@ -276,8 +276,3 @@ network.on("stabilizationProgress", function (params) {
 		document.getElementById('slider-zoom').style.display = 'block';
 	}
 });
-
-
-//charge les données du premier niveau
-retrieveGroupe(groupe); 
-//retrieveNom("Vendôme",groupe[1]);

@@ -55,3 +55,4 @@ noUiSlider.create(slider_zoom, {
 slider_zoom.noUiSlider.on('slide', function() {
     network.moveTo({scale:slider_zoom.noUiSlider.get(true)});
 });
+
