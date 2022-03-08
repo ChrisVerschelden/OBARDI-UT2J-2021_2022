@@ -49,7 +49,7 @@ function retrieveGroupe(groupe, nbgroupe = 0) {
 
 function retrieveNom(nom, nomgroupe, idsup = 0, level = 0)
 {
-	  var date = " ?sub :referencePeriod ?date . ?date time:hasBeginning ?y . ?date time:hasEnd ?z . ?y time:inXSDDate ?debut . ?z time:inXSDDate ?fin . FILTER ( xsd:dateTime(?debut) < xsd:dateTime(\""+slider.noUiSlider.get()[1]+"-01-01T00:00:00\") && xsd:dateTime(?fin) > xsd:dateTime(\""+slider.noUiSlider.get()[1]+"-01-01T00:00:00\")).";
+	  var date = " ?sub :referencePeriod ?date . ?date time:hasBeginning ?y . ?date time:hasEnd ?z . ?y time:inXSDDate ?debut . ?z time:inXSDDate ?fin . FILTER ( xsd:dateTime(?debut) < xsd:dateTime(\""+slider.noUiSlider.get()+"-01-01T00:00:00\") && xsd:dateTime(?fin) > xsd:dateTime(\""+slider.noUiSlider.get()+"-01-01T00:00:00\")).";
 	  var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT ?nomgroupe ?upNom ?upgrouplab ?subNom ?subgrouplab WHERE { ?x a :Area . ?x rdfs:label \""+nom+"\". ?x :isMemberOf ?groupe . ?groupe rdfs:label \""+nomgroupe+"\" . ?groupe rdfs:label ?nomgroupe . OPTIONAL { ?x :hasUpperUnit ?up. ?up :idObardi ?upId . ?up rdfs:label ?upNom . ?up :isMemberOf ?upgroup . ?upgroup rdfs:label ?upgrouplab} . OPTIONAL { ?x :hasSubUnit ?sub . ?sub :idObardi ?subId . ?sub rdfs:label ?subNom . ?sub :isMemberOf ?subgroup . ?subgroup rdfs:label ?subgrouplab."+date+"} . }";
 	  var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
 

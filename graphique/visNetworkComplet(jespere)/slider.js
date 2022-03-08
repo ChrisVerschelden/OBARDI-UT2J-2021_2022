@@ -10,7 +10,7 @@ for (var val = anneeMin; val <= anneeMax; val = val + 10) {
     tabVal2.push(val);
 }
 noUiSlider.create(slider, {
-    start: [anneeMin, anneeMax],
+    start: [anneeMax],
     connect: true,
     tooltips: true,
     step: 1,
