@@ -219,7 +219,19 @@
         <div class="form">
             <div class="title">Bienvenue</div>
             <div class="subtitle">Choisissez les paramètres d'affichage</div>
-            <div class="input-container ic1">
+            <div class="input-container ic2">
+                <div class="radios">
+                    <input type="radio" id="niveau" name="radio_button" value="Niveau">
+                    <label for="niveau">Niveau</label><br>
+                    <input type="radio" id="element" name="radio_button" value="Element">
+                    <label for="element">Element</label><br>
+                </div>
+                                
+            </div>
+            <div id="furtive">
+               
+            </div>
+            <div id = "nomUnite" class="input-container ic1">
                 <input id="firstname" class="input" type="text" placeholder=" " />
                 <div class="cut"></div>
                 <label for="firstname" class="placeholder">Nom unité</label>
@@ -231,16 +243,7 @@
                  min="1660-01-01" max="1800-12-31">
 
             </div>
-            <div class="input-container ic2">
-                <div class="radios">
-                    <input type="radio" id="niveau" name="radio_button" value="Niveau">
-                    <label for="niveau">Niveau</label><br>
-                    <input type="radio" id="element" name="radio_button" value="Element">
-                    <label for="element">Element</label><br>
-                </div>
-                
-                  
-            </div>
+           
             <button type="text" class="submit" onclick="testerRadio()">Valider</button>
         </div>
 
