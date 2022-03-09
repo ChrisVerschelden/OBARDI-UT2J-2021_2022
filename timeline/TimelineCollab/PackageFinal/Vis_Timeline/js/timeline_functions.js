@@ -165,48 +165,66 @@ slider2.noUiSlider.on('slide', function() {
 
 (async function() {
     const urlParams = new URLSearchParams(window.location.search);
-    const id_frise = parseInt(urlParams.get('id_frise'));
-    await fetch("https://chrisverschelden.github.io/jsonProvider/data.json") //http://myjson.dit.upm.es/api/bins/8box
-        .then(res => res.json())
-        .then((out) => {
-            var json = out[id_frise];
-            for (var i = 0; i < json.intervals.length; i++) {
-                items.add({ id: i, group: 0, content: json.intervals[i].uri, start: new Date(json.intervals[i].begin + "-01-01"), end: new Date(json.intervals[i].end + "-01-01"), className: "not-selected" });
-            }
-        })
-        .catch(err => { throw err });
+    const url_param_nom = urlParams.get('nom');
+    const url_param_niveau = urlParams.get('niveau');
 
+    let query="PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#>PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> select DISTINCT ?x ?groupe ?nom ?debut ?fin ?upunit where {?x a :Area .?x :isMemberOf ?groupe . ?x :referencePeriod ?date . ?x rdfs:label ?nom .?x rdfs:label \""+url_param_nom+"\". ?groupe rdfs:label \""+ url_param_niveau +"\". ?niveau a :LevelVersion . ?date time:hasBeginning ?debut . ?date time:hasEnd ?fin .OPTIONAL { ?x :hasUpperUnit ?upunit } } "
+    let url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
 
-    if (urlParams.has('id')) {
-        var item_selected = items.get(parseInt(urlParams.get('id')));
-        items.update({ id: item_selected['id'], group: item_selected["group"], content: item_selected["content"], className: 'green' });
-        document.getElementById('item_id').innerHTML = item_selected.id;
-        document.getElementById('item_content').innerHTML = item_selected.content;
-        document.getElementById('item_date').innerHTML = item_selected.start.getFullYear() + " / " + item_selected.end.getFullYear();
-        timeline.fit(parseInt(urlParams.get('id')));
-    }
+    
 
-    timeline.setItems(items);
-    timeline.redraw();
-    timeline.fit();
+    $.ajax({
+        url: url,
+        dataType: "json",
+        success: function (data) {
+        $('#results').show();
+        $('#raw_output').text(JSON.stringify(data, null, 3));
 
-
-    $(document).ready(function() {
-        $('.vis-item').on('click', function() {
-            var e = $(this);
-            var id = e.attr('data-id')
-            var item = items.get(parseInt(id, 10))
-            items.forEach((item) => {
-                if (item.id != id) {
-                    items.update({ id: item["id"], group: item["group"], content: item["content"], className: 'not-selected' });
-                } else {
-                    var item_selected = item;
-                    items.update({ id: item_selected['id'], group: item["group"], content: item["content"], className: 'green' });
-                }
-            })
-            var url_propre = window.location.search.split('?')[0];
-            window.open(url_propre + '?id=' + id + "&id_frise=" + id_frise, '_blank').focus();
+        console.log(data)
+        let data_array = data.results.bindings;
+        for (var i = 0; i < data_array.length; i++) {
+            console.log(data_array[i].debut.value.split('#')[1]);
+            console.log(data_array[i])
+            items.add({ id: i, group: 0, content: data_array[i].nom.value, start: new Date(data_array[i].debut.value.split('#')[1] + "-01-01"), end: new Date(data_array[i].fin.value.split('#')[1] + "-01-01"), className: "not-selected" });
+        }
+        
+        if (urlParams.has('id')) {
+            var item_selected = items.get(parseInt(urlParams.get('id')));
+            items.update({ id: item_selected['id'], group: item_selected["group"], content: item_selected["content"], className: 'green' });
+            document.getElementById('item_id').innerHTML = item_selected.id;
+            document.getElementById('item_content').innerHTML = item_selected.content;
+            document.getElementById('item_date').innerHTML = item_selected.start.getFullYear() + " / " + item_selected.end.getFullYear();
+            timeline.fit(parseInt(urlParams.get('id')));
+        }
+    
+        timeline.setItems(items);
+        timeline.redraw();
+        timeline.fit();
+    
+    
+        $(document).ready(function() {
+            $('.vis-item').on('click', function() {
+                var e = $(this);
+                var id = e.attr('data-id')
+                var item = items.get(parseInt(id, 10))
+                items.forEach((item) => {
+                    if (item.id != id) {
+                        items.update({ id: item["id"], group: item["group"], content: item["content"], className: 'not-selected' });
+                    } else {
+                        var item_selected = item;
+                        items.update({ id: item_selected['id'], group: item["group"], content: item["content"], className: 'green' });
+                    }
+                })
+                var url_propre = window.location.search.split('?')[0];
+                window.open(url_propre + '?id=' + id + "&id_frise=" + id_frise, '_blank').focus();
+            });
         });
+        
+        },
+        error: function(e) {console.log("Query error");}
     });
+
+
+    
 
 })();
