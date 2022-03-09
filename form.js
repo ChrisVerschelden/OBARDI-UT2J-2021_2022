@@ -14,7 +14,7 @@ function testerRadio() {
             document.getElementById('furtive').style.display = "none";
         }
         
-    });
+    });  
     
   }
 
