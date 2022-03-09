@@ -22,7 +22,7 @@ document.getElementById("niveau").addEventListener('click', () => {
     console.log('yo');
     document.getElementById('furtive').style.display = "block";
     document.getElementById('nomUnite').style.display = "none";
-    document.getElementById('furtive').innerHTML = ' <select name="niveau" id="niveau-select"><option value="generalites">Généralités</option><option value="elections">Elections</option><option value="paroisses">Paroisses</option></select>';
+    document.getElementById('furtive').innerHTML = '<select name="niveau" id="niveau-select"><option value="generalites">Généralités</option><option value="elections">Elections</option><option value="paroisses">Paroisses</option></select>';
 })
 
 document.getElementById("element").addEventListener('click', () => {
