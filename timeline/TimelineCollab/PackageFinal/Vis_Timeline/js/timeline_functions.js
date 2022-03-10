@@ -179,8 +179,6 @@ slider2.noUiSlider.on('slide', function() {
         success: function (data) {
         $('#results').show();
         $('#raw_output').text(JSON.stringify(data, null, 3));
-
-        console.log(data)
         let data_array = data.results.bindings;
         for (var i = 0; i < data_array.length; i++) {
             console.log(data_array[i].debut.value.split('#')[1]);
