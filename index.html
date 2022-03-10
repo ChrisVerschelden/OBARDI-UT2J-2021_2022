@@ -43,7 +43,7 @@
         }
 
 
-        
+
 
         label {
             display: block;
@@ -77,12 +77,12 @@
             width: 100%;
         }
 
-       
+
         .form {
             background-color: #3b4a6b;
             border-radius: 20px;
             box-sizing: border-box;
-            
+
             padding: 20px;
             width: 320px;
         }
@@ -195,90 +195,99 @@
             background-color: #6e7a96;
         }
 
-        .radios{
+        .radios {
             display: flex;
-            flex-direction: row ;
+            flex-direction: row;
             align-items: center;
             padding-right: 30px;
 
         }
 
-        .divListe, .divListe2{
-           
-            width: 100%;    
-            text-align-last:center;     
+        .divListe,
+        .divListe2 {
+
+            width: 100%;
+            text-align-last: center;
             background-color: #3b4a6b;
-                
+
         }
+
         .divListe,
         .divListe * {
-        margin: 0;
-        padding: 0;
-        position: relative;
-        box-sizing: border-box;
-        color: white;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            box-sizing: border-box;
+            color: white;
 
         }
 
         .divListe2,
         .divListe2 * {
-        margin: 0;
-        padding: 0;
-        position: relative;
-        box-sizing: border-box;
-        color: white;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            box-sizing: border-box;
+            color: white;
 
         }
-        .divListe  .divListe2 {
-        position: relative;
-        background-color: #535a7e;
-        border-radius: 4px;
+
+        .divListe .divListe2 {
+            position: relative;
+            background-color: #535a7e;
+            border-radius: 4px;
         }
+
         .divListe select {
-        font-size: 1rem;
-        font-weight: normal;
-        max-width: 100%;
-        padding: 8px 24px 8px 10px;
-        border: none;
-        background-color: #535a7e;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        width: 100%;
-        border-radius: 12px;
+            font-size: 1rem;
+            font-weight: normal;
+            max-width: 100%;
+            padding: 8px 24px 8px 10px;
+            border: none;
+            background-color: #535a7e;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 100%;
+            border-radius: 12px;
         }
 
         .divListe2 select {
-        font-size: 1rem;
-        font-weight: normal;
-        max-width: 100%;
-        padding: 8px 24px 8px 10px;
-        border: none;
-        background-color: #535a7e;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        width: 100%;
-        border-radius: 12px;
-        margin-bottom: 20px;
+            font-size: 1rem;
+            font-weight: normal;
+            max-width: 100%;
+            padding: 8px 24px 8px 10px;
+            border: none;
+            background-color: #535a7e;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
         }
 
-        
-        .divListe select:active, .divListe select:focus, .divListe2 select:active, .divListe2 select:focus {
-        outline: none;
-        box-shadow: none;
+
+        .divListe select:active,
+        .divListe select:focus,
+        .divListe2 select:active,
+        .divListe2 select:focus {
+            outline: none;
+            box-shadow: none;
         }
-        .divListe:after, .divListe2:after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: 8px;
-        width: 0;
-        height: 0;
-        margin-top: -2px;
-        border-top: 5px solid #aaa;
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
+
+        .divListe:after,
+        .divListe2:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            width: 0;
+            height: 0;
+            margin-top: -2px;
+            border-top: 5px solid #aaa;
+            border-right: 5px solid transparent;
+            border-left: 5px solid transparent;
         }
     </style>
 </head>
@@ -306,28 +315,26 @@
                     <input type="radio" id="element" name="radio_button" value="Element">
                     <label for="element">Element</label><br>
                 </div>
-                                
+
             </div>
-        
+
             <div id="furtive2" class="divListe2"></div>
 
             <div id="furtive" class="divListe">
             </div>
 
-            <div id = "nomUnite" class="input-container ic1">
+            <div id="nomUnite" class="input-container ic1">
                 <input id="firstname" name="firstname" class="input" type="text" placeholder=" " />
-                <input id="groupeval" name="groupe" type="hidden" placeholder=" "/>
+                <input id="groupeval" name="groupe" type="hidden" placeholder=" " />
                 <div class="cut"></div>
                 <label for="firstname" class="placeholder">Nom unité</label>
             </div>
             <div class="input-container ic2">
-                
-                <input type="date" id="start" name="date"
-                 value="1660-01-01"
-                 min="1660-01-01" max="1800-12-31">
+
+                <input type="date" id="start" name="date" value="1660-01-01" min="1660-01-01" max="1800-12-31">
 
             </div>
-           
+
             <button type="text" class="submit" onclick="testerRadio()">Valider</button>
         </form>
 
