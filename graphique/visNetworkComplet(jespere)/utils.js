@@ -5,11 +5,11 @@ function getBigrams(str) {
   }
   return bigrams;
 }
-  
+
 function intersect(set1, set2) {
   return new Set([...set1].filter((x) => set2.has(x)));
 }
-  
+
 function diceCoefficient(str1, str2) {
   const bigrams1 = getBigrams(str1);
   const bigrams2 = getBigrams(str2);
@@ -22,11 +22,11 @@ function setTheme(themeName) {
 }
 // function to toggle between light and dark theme
 function toggleTheme() {
- if (localStorage.getItem('theme') === 'theme-dark'){
-     setTheme('theme-light');
- } else {
-     setTheme('theme-dark');
- }
+  if (localStorage.getItem('theme') === 'theme-dark') {
+    setTheme('theme-light');
+  } else {
+    setTheme('theme-dark');
+  }
 }
 
 if (localStorage.getItem('theme') === 'theme-dark') {

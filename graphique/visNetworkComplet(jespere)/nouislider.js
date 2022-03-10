@@ -1,8 +1,9 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.noUiSlider = {}));
-}(this, (function (exports) { 'use strict';
+        typeof define === 'function' && define.amd ? define(['exports'], factory) :
+            (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.noUiSlider = {}));
+}(this, (function (exports) {
+    'use strict';
 
     exports.PipsMode = void 0;
     (function (PipsMode) {
@@ -1752,20 +1753,20 @@
                 if (eventName === eventType) {
                     scope_Events[targetEvent].forEach(function (callback) {
                         callback.call(
-                        // Use the slider public API as the scope ('this')
-                        scope_Self, 
-                        // Return values as array, so arg_1[arg_2] is always valid.
-                        scope_Values.map(options.format.to), 
-                        // Handle index, 0 or 1
-                        handleNumber, 
-                        // Un-formatted slider values
-                        scope_Values.slice(), 
-                        // Event is fired by tap, true or false
-                        tap || false, 
-                        // Left offset of the handle, in relation to the slider
-                        scope_Locations.slice(), 
-                        // add the slider public API to an accessible parameter when this is unavailable
-                        scope_Self);
+                            // Use the slider public API as the scope ('this')
+                            scope_Self,
+                            // Return values as array, so arg_1[arg_2] is always valid.
+                            scope_Values.map(options.format.to),
+                            // Handle index, 0 or 1
+                            handleNumber,
+                            // Un-formatted slider values
+                            scope_Values.slice(),
+                            // Event is fired by tap, true or false
+                            tap || false,
+                            // Left offset of the handle, in relation to the slider
+                            scope_Locations.slice(),
+                            // add the slider public API to an accessible parameter when this is unavailable
+                            scope_Self);
                     });
                 }
             });
