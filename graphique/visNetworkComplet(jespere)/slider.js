@@ -1,3 +1,6 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
 var anneeMin = 1660, anneeMax = 1800;
 
 var slider = document.getElementById("slider");
@@ -10,7 +13,7 @@ for (var val = anneeMin; val <= anneeMax; val = val + 10) {
     tabVal2.push(val);
 }
 noUiSlider.create(slider, {
-    start: [anneeMax],
+    start: parseInt(urlParams.get('date')),
     connect: true,
     tooltips: true,
     step: 1,

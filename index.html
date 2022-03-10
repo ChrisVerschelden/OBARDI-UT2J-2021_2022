@@ -267,12 +267,12 @@
     </section>
     <br><br><br>
     <section class="sectionFormulaire">
-        <div class="form">
+        <form action="graphique/visNetworkComplet(jespere)/vis.html" method="get" class="form">
             <div class="title">Bienvenue</div>
             <div class="subtitle">Choisissez les paramètres d'affichage</div>
             <div class="input-container ic2">
                 <div class="radios">
-                    <input type="radio" id="niveau" name="radio_button" value="Niveau">
+                    <input type="radio" id="niveau" name="radio_button" value="Niveau" checked="checked">
                     <label for="niveau">Niveau</label><br>
                     <input type="radio" id="element" name="radio_button" value="Element">
                     <label for="element">Element</label><br>
@@ -283,20 +283,21 @@
                
             </div>
             <div id = "nomUnite" class="input-container ic1">
-                <input id="firstname" class="input" type="text" placeholder=" " />
+                <input id="firstname" name="firstname" class="input" type="text" placeholder=" " />
+                <input id="groupeval" name="groupe" type="hidden" placeholder=" "/>
                 <div class="cut"></div>
                 <label for="firstname" class="placeholder">Nom unité</label>
             </div>
             <div class="input-container ic2">
                 
-                <input type="date" id="start" name="trip-start"
+                <input type="date" id="start" name="date"
                  value="1660-01-01"
                  min="1660-01-01" max="1800-12-31">
 
             </div>
            
             <button type="text" class="submit" onclick="testerRadio()">Valider</button>
-        </div>
+        </form>
 
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
