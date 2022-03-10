@@ -203,7 +203,7 @@
 
         }
 
-        .divListe{
+        .divListe, .divListe2{
            
             width: 100%;    
             text-align-last:center;     
@@ -219,7 +219,17 @@
         color: white;
 
         }
-        .divListe {
+
+        .divListe2,
+        .divListe2 * {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        box-sizing: border-box;
+        color: white;
+
+        }
+        .divListe  .divListe2 {
         position: relative;
         background-color: #535a7e;
         border-radius: 4px;
@@ -237,11 +247,28 @@
         width: 100%;
         border-radius: 12px;
         }
-        .divListe select:active, .divListe select:focus {
+
+        .divListe2 select {
+        font-size: 1rem;
+        font-weight: normal;
+        max-width: 100%;
+        padding: 8px 24px 8px 10px;
+        border: none;
+        background-color: #535a7e;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        }
+
+        
+        .divListe select:active, .divListe select:focus, .divListe2 select:active, .divListe2 select:focus {
         outline: none;
         box-shadow: none;
         }
-        .divListe:after {
+        .divListe:after, .divListe2:after {
         content: "";
         position: absolute;
         top: 50%;
@@ -281,9 +308,12 @@
                 </div>
                                 
             </div>
+        
+            <div id="furtive2" class="divListe2"></div>
+
             <div id="furtive" class="divListe">
-               
             </div>
+
             <div id = "nomUnite" class="input-container ic1">
                 <input id="firstname" name="firstname" class="input" type="text" placeholder=" " />
                 <input id="groupeval" name="groupe" type="hidden" placeholder=" "/>

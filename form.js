@@ -22,13 +22,18 @@ function testerRadio() {
 document.getElementById("niveau").addEventListener('click', () => {
     document.getElementById('furtive').style.display = "block";
     document.getElementById('nomUnite').style.display = "none";
+    document.getElementById('furtive2').style.display = "none";
+
     niveau();
 })
 
 document.getElementById("element").addEventListener('click', () => {
+    document.getElementById('furtive2').style.display = "block";
     document.getElementById('furtive').style.display = "block";
     document.getElementById('nomUnite').style.display = "block";
+
     elem();
+    
 })
 
 
@@ -59,6 +64,7 @@ function elem(){
     namesearch = document.getElementById('firstname');
 
     text = '<select name="niveau" id="niveau-select" onchange="getValue(this)">';
+    
 
     var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?name ?nomgroupe WHERE { ?x a :Area  . ?x rdfs:label ?name . ?x :isMemberOf ?groupe . ?groupe rdfs:label ?nomgroupe . FILTER regex(?name, \"" + namesearch.value + "\", \"i\") }";
     var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
@@ -79,15 +85,20 @@ function elem(){
             if(data.results.bindings[0] != null){
                 document.getElementById('groupeval').value = data.results.bindings[0].nomgroupe.value;
             }
+
             document.getElementById('furtive').innerHTML = text;
+            niveau(false);
+
+
             
         },
         error: function (e) { console.log("Query error"); }
     });
 }
 
-function niveau(){
+function niveau(val = true){
     text = '<select name="niveau" id="niveau-select" onchange="getValue(this)">';
+    
 
     var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#>PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>select ?name where {?x a :LevelVersion .?x rdfs:label ?name .}";
     var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
@@ -102,7 +113,12 @@ function niveau(){
             }
             document.getElementById('groupeval').value = data.results.bindings[0].name.value;
             text += '</select>';
-            document.getElementById('furtive').innerHTML = text;
+            if(val){
+                document.getElementById('furtive').innerHTML = text;
+            }
+            else{
+                document.getElementById('furtive2').innerHTML = text;
+            }
         },
         error: function (e) { console.log("Query error"); }
     });
