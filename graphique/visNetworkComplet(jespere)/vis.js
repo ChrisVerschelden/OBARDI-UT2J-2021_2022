@@ -5,6 +5,7 @@ let groupperms = 1;
 let nom = [];
 let couleurcomp = 0;
 //let colorgroup = ["red","green","yellow","blue","pink","orange", "white"];
+
 let colorgroup = [	
 					'rgb(104, 212, 243)',
 					'rgb(155, 233, 34)',
@@ -24,6 +25,7 @@ let groupe = ["Generalite","Election","Paroisse"]
 
 var setLevels = new Set();
 var referencePoints = new Set();
+var lastClick = Date.now();
 
 // create a network
 var nodes = new vis.DataSet([]);
@@ -83,6 +85,17 @@ network.on("click", function(params) {
 	
 	updateReferencePoint();
 	updateLegend();
+});
+
+network.on('dragStart', function(params){
+	var clicked_node = nodes.get(params.nodes[0]);
+	clicked_node_id = parseInt(clicked_node['id']);
+
+	if(clicked_node.id != null){
+		var n = nodes.get(clicked_node_id);
+		console.log(n)
+	}
+	window.open("http://127.0.0.1:5500/OBARDI-UT2J-2021_2022/timeline/TimelineCollab/PackageFinal/Vis_Timeline/VisTimeline.html?nom="+ n.label +"&niveau=" + n.levelLabel);
 });
 
 function hide(element){

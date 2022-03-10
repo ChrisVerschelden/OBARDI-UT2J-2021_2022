@@ -125,6 +125,78 @@ function deleteAll(){
 	updateLegend();
 }
 
+function sortParents(sorted_array, parent){
+	let node = [];
+	sorted_array
+	.filter(function(d){ return d.parent === parent})
+	.forEach(function(d){
+	  var cd = d;
+	  cd.child = sortParents(sorted_array, d.name);
+	  return node.push(cd);
+	})
+	return node;
+}
+
+
+function getAllLevels(nommenclature){
+	 
+	var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#>PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>select ?nom ?up where { ?x a :LevelVersion .?x :isDivisionOf ?y .?x rdfs:label ?nom .?y rdfs:label \"" + nommenclature + "\" .OPTIONAL{?x :hasUpperLevel ?z .?z rdfs:label ?up .}}";
+	var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
+	$.ajax({
+	url: url,
+	dataType: "json",
+	success: function (data) {
+		$('#results').show();
+		$('#raw_output').text(JSON.stringify(data, null, 3));
+		var array_levels = data.results.bindings;
+		var sorted_array = [];
+
+		console.log(array_levels)
+		array_levels.forEach((element) => {
+			if ('up' in element){
+				sorted_array.push({id: element.nom.value, parentId: element.up.value});
+			} else {
+				sorted_array.push({id: element.nom.value, parentId: null});
+			}
+		});
+		
+		const idMapping = sorted_array.reduce((acc, el, i) => {
+			acc[el.id] = i;
+			return acc;
+		  }, {});
+
+		  let root;
+		  sorted_array.forEach((el) => {
+			// Handle the root element
+			if (el.parentId === null) {
+			  root = el;
+			  return;
+			}
+			// Use our mapping to locate the parent element in our data array
+			const parentEl = sorted_array[idMapping[el.parentId]];
+			// Add our current el to its parent's `children` array
+			parentEl.children = [...(parentEl.children || []), el];
+		  });
+
+		  console.log(root);
+
+		// array_levels.forEach(element => {
+		// 	if ('up' in element) {
+		// 		if (element.up.value in sorted_array){
+		// 			sorted_array[element.up.value].push(element.nom.value);
+		// 		}
+		// 	} else {
+		// 		sorted_array[element.nom.value] = [];
+		// 	}
+		// });
+
+		// console.log(sorted_array)
+
+	},
+	error: function(e) {console.log("wesh ya pb la bro");}
+	});
+}
+
 slider.noUiSlider.on('change', function() {
     updateDate();
 });
