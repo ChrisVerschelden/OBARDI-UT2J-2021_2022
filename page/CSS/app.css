@@ -80,22 +80,18 @@ body {
 }
 
 .legende-bouton.legende-bouton-legende-mobile{
-    top: -3px;
     left: 0px;
     padding-bottom: 2px;
     padding-right: 4px;
     border-radius: 0 0 5px 0;
 }
 .legende-bouton.legende-bouton-legende-fixe{
-    top: -3px;
     right: 0px;
     padding-bottom: 2px;
     padding-left: 4px;
-    top: -3px;
     border-radius: 0 0 0 5px;
 }
 .legende-bouton.legende-bouton-outils{
-    top: -3px;
     left: 0px;
     right: 0px;
     padding-right: 2px;
@@ -326,7 +322,7 @@ div.vis-network div.vis-navigation div.vis-button:hover {
 #slider {
     width: 200px;
     right: 0;
-    height: 5px;
+    height: 10px;
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 40px;

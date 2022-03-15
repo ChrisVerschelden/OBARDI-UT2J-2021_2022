@@ -4,7 +4,7 @@ const anneeMax = 1800;
 //group list
 var groups = new vis.DataSet([
     { id: 0, content: 'Evenements', value: 1 },
-    { id: 1, content: '[|||||||||||]', value: 2 },
+    { id: 1, content: '|||||||||||', value: 2 },
 ]);
 
 //item list
