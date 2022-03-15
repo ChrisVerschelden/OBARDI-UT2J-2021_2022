@@ -50,6 +50,7 @@ function getValue(selectObject) {
 function getValue2(selectObject) {
     groupe = selectObject.value;
     document.getElementById('groupeval').value = groupe;
+    document.getElementById('firstname').value = "";
     elem(true);
 }
 
