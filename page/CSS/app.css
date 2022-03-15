@@ -1,5 +1,6 @@
-body {
-    margin: auto;
+body{
+  margin : 0px;
+  overflow-x: hidden ;
 }
 
 .theme-light {
@@ -143,7 +144,7 @@ body {
     transition: margin 0.6s ease-in-out;
 }
 .outils.hidden {
-    margin-top: -100vh;
+    margin-top: -50vh;
     transition: margin 1s ease-in-out;
 }
 
@@ -351,4 +352,13 @@ div.vis-network div.vis-navigation div.vis-button:hover {
     margin-right: auto;
     margin-left: auto;
     border-radius: 10px;
+}
+
+.timeline{
+  z-index: 999;
+  background-color: #e5e5e5;
+}
+
+html{
+  background-color: white;
 }

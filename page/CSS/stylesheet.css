@@ -1,3 +1,5 @@
+
+
 #visualization {
 
   width: float;
@@ -19,6 +21,8 @@
   border-radius: 10px ;
   box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
   background: rgb(255, 255, 255);
+  margin-bottom: 2vh;
+
 }
 #item_id{
   background: rgb(145, 137, 137);
@@ -54,20 +58,11 @@ h1{
 
 }
 
-body{
-  
-  font-family: Open Sans;
-  background: #ffffff;
-  color: rgb(255, 255, 255);
-  border-radius: 70%;
 
-} 
 
 .timeline-widget{
   margin: 20px 20px 20px 20px;
   padding: 20px 20px 20px 20px;
-  border-radius: 30px;
-  border: 2px solid rgb(255, 255, 255);
 }
 
 .timeline {
@@ -75,7 +70,6 @@ body{
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  border-radius: 20%;
   
 }
 
@@ -117,19 +111,7 @@ body{
   background-color: lightgray;
 }
 
-button{
-  margin : 10px 10px 10px 0px;
-  font-family: Arial, Helvetica, sans-serif;
-  display: inline-block;
-    
-  border-color: rgb(255, 255, 255);
-  border-radius: 10px ;
-  
-  background-color: darkcyan;
-  font-size: 15pt;
-  color:azure ;
-  box-shadow: 5px 5px 20px rgba(128, 128, 128, 0.5);
-}
+
 
 .vis-time-axis .vis-grid.vis-minor {
   border-width: 2px;

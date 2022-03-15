@@ -1,5 +1,5 @@
 const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
+urlParams = new URLSearchParams(queryString);
 
 var anneeMin = 1660, anneeMax = 1800;
 

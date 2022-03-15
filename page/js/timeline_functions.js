@@ -42,131 +42,22 @@ timeline.on("doubleClick", function(properties) {
 
 
 
-function reset_dates() {
-    tabVal2 = new Array;
-    for (var val = anneeMin; val <= anneeMax; val = val + 10) {
-        tabVal2.push(val);
-    }
-    slider2.noUiSlider.updateOptions({
-        range: {
-            'min': anneeMin,
-            'max': anneeMax
-        },
-        pips: {
-            mode: 'values',
-            values: tabVal2,
-            density: 2,
-        }
-    });
-    slider.noUiSlider.updateOptions({ start: [anneeMin, anneeMax] });
-    slider2.noUiSlider.updateOptions({ start: [anneeMin, anneeMax] });
-    options['min'] = new Date(anneeMin, 1, 1);
-    options['max'] = new Date(anneeMax, 1, 1);
-    items.remove('background_item');
-    timeline.setOptions(options);
-    timeline.fit();
-}
-
-var slider = document.getElementById('slider');
-var sliderval = document.getElementById('slidervalue');
-
-var tabVal = new Array();
-var tabVal2 = new Array();
-
-for (var val = anneeMin; val <= anneeMax; val = val + 10) {
-    tabVal.push(val);
-    tabVal2.push(val);
-}
 
 
 // Configuration for the Timeline
 var options = { stack: false, min: anneeMin + '-01-01', max: anneeMax + '-01-01' };
 
-noUiSlider.create(slider, {
-    start: [anneeMin, anneeMax],
-    connect: true,
-    tooltips: true,
-    step: 1,
-    range: {
-        'min': anneeMin,
-        'max': anneeMax
-    },
-    format: {
-        to: function(value) {
-            return value;
-        },
-        from: function(value) {
-            return value.replace();
-        }
-    },
-    pips: {
-        mode: 'values',
-        values: tabVal,
-        density: 2,
-    }
-});
 
-slider.noUiSlider.on('slide', function() {
-    var min = slider.noUiSlider.get()[0];
-    var max = slider.noUiSlider.get()[1];
-    tabVal2 = new Array;
-    for (var val = min; val <= max; val = val + 10) {
-        tabVal2.push(val);
-    }
-    slider2.noUiSlider.updateOptions({
-        range: {
-            'min': min,
-            'max': max
-        },
-        pips: {
-            mode: 'values',
-            values: tabVal2,
-            density: 2,
-        }
-    });
-    options['min'] = new Date(min, 1, 1);
-    options['max'] = new Date(max, 1, 1);
-    timeline.setOptions(options);
-    timeline.fit();
-})
 
-//slider highLight
-var slider2 = document.getElementById("slider2");
 
-noUiSlider.create(slider2, {
-    start: [anneeMin, anneeMax],
-    connect: true,
-    tooltips: true,
-    step: 1,
-    range: {
-        'min': anneeMin,
-        'max': anneeMax
-    },
-    format: {
-        to: function(value) {
-            return value;
-        },
-        from: function(value) {
-            return value.replace();
-        }
-    },
-    pips: {
-        mode: 'values',
-        values: tabVal2,
-        density: 2,
-    }
-});
+const urlParams = new URLSearchParams(window.location.search);
+const url_param_nom = urlParams.get('nom');
+const url_param_niveau = urlParams.get('niveau');
 
-slider2.noUiSlider.on('slide', function() {
-    items.update({ id: 'background_item', content: "", start: slider2.noUiSlider.get()[0] + "-01-01", end: slider2.noUiSlider.get()[1] + "-01-01", type: "background", style: "background-color: orange" });
-    console.log(items.get('background_item'))
-    console.log(items.get(1))
-});
+
 
 (async function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const url_param_nom = urlParams.get('nom');
-    const url_param_niveau = urlParams.get('niveau');
+   
 
     let query="PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#>PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> select DISTINCT ?x ?groupe ?nom ?debut ?fin ?upunit where {?x a :Area .?x :isMemberOf ?groupe . ?x :referencePeriod ?date . ?x rdfs:label ?nom .?x rdfs:label \""+url_param_nom+"\". ?groupe rdfs:label \""+ url_param_niveau +"\". ?niveau a :LevelVersion . ?date time:hasBeginning ?debut . ?date time:hasEnd ?fin .OPTIONAL { ?x :hasUpperUnit ?upunit } } "
     let url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';

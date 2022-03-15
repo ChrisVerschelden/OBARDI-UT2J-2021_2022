@@ -2,14 +2,14 @@
 <head>
   <meta charset="UTF-8">
   <!-- CDN and external scripts -->
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
   <script src="js/d3.v2.min.js"></script>
 
   <!-- CDN css -->
   <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Personnal css -->
   <link href="CSS/nouislider.css" rel="stylesheet">
@@ -22,15 +22,14 @@
 </head>
 
 <body>
-  <section>
+  <section class="timeline ">
     <div class="timeline-widget">
 
       <h3 style="color: black ; justify-content: center;font-family: Arial, Helvetica, sans-serif; display: flex">
         Frise <a href="https://visjs.github.io/vis-timeline/docs/timeline/" target="_blank"> vis-timeline-graph2d.js</a>
       </h3>
 
-      <button onclick="reset_couleurs()"> reset couleurs </button>
-      <button onclick="reset_dates()"> reset dates </button>
+    
 
       <div id="visualization"></div>
       <br><br><br><br><br>
@@ -53,9 +52,8 @@
 
 
   </section>
-  <br><br><br>
-  <section>
-
+  <!-- <h1> modale arborescence <br> améliorer la search bar ?</h1> -->
+  <section class="app">
     <div class="hud">
       <div class='hud-boutons'>
         <div class="legende-bouton legende-bouton-legende-mobile" id="bouton-legende-mobile" onclick="hideShowMenu('legende-mobile')"> 🡄 </div>
@@ -104,23 +102,22 @@
     </div>
     <div id='slider-zoom'></div>
     </div><div id="mynetwork">
-
-
+    
   </section>
 
 
 </body>
 <footer>
   <!-- Personnal scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <script src="js/nouislider.js"></script>
   <script src="js/timeline_functions.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/interactions.js"></script>
   <script src="js/vis.js"></script>
   <script src="js/slider.js"></script>
   <script src="js/sparqlRequete.js"></script>
-  <script src="js/import_api.js"></script>
 
   <!-- <script src="js/slider_functions.js"></script> -->
 </footer>
