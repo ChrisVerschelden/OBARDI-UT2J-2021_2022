@@ -1,6 +1,3 @@
-const anneeMin = 1660;
-const anneeMax = 1800;
-
 //group list
 var groups = new vis.DataSet([
     { id: 0, content: 'Evenements', value: 1 },
@@ -47,10 +44,6 @@ timeline.on("doubleClick", function(properties) {
 // Configuration for the Timeline
 var options = { stack: false, min: anneeMin + '-01-01', max: anneeMax + '-01-01' };
 
-
-
-
-const urlParams = new URLSearchParams(window.location.search);
 const url_param_nom = urlParams.get('nom');
 const url_param_niveau = urlParams.get('niveau');
 
@@ -59,10 +52,8 @@ const url_param_niveau = urlParams.get('niveau');
 (async function() {
    
 
-    let query="PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#>PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> select DISTINCT ?x ?groupe ?nom ?debut ?fin ?upunit where {?x a :Area .?x :isMemberOf ?groupe . ?x :referencePeriod ?date . ?x rdfs:label ?nom .?x rdfs:label \""+url_param_nom+"\". ?groupe rdfs:label \""+ url_param_niveau +"\". ?niveau a :LevelVersion . ?date time:hasBeginning ?debut . ?date time:hasEnd ?fin .OPTIONAL { ?x :hasUpperUnit ?upunit } } "
+    let query="PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX var: <"+uriavantclear+"> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> select DISTINCT ?x ?groupe ?nom ?debut ?fin where {var: :isMemberOf ?groupe . var: :referencePeriod ?date . var: rdfs:label ?nom . ?niveau a :LevelVersion . ?date time:hasBeginning ?debut . ?date time:hasEnd ?fin . } "
     let url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
-
-    
 
     $.ajax({
         url: url,
@@ -71,9 +62,8 @@ const url_param_niveau = urlParams.get('niveau');
         $('#results').show();
         $('#raw_output').text(JSON.stringify(data, null, 3));
         let data_array = data.results.bindings;
+        console.log(data_array);
         for (var i = 0; i < data_array.length; i++) {
-            console.log(data_array[i].debut.value.split('#')[1]);
-            console.log(data_array[i])
             items.add({ id: i, group: 0, content: data_array[i].nom.value, start: new Date(data_array[i].debut.value.split('#')[1] + "-01-01"), end: new Date(data_array[i].fin.value.split('#')[1] + "-01-01"), className: "not-selected" });
         }
         
