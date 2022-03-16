@@ -2,13 +2,15 @@ let myMap = new Map();
 let myMapid = new Map();
 let groupeColor = new Map();
 
+uriavantclear = urlParams.get('uri')
+/*
 firstname = urlParams.get('firstname')
 const radio_button = urlParams.get('radio_button')
 const groupeget = urlParams.get('groupe')
 
 if(radio_button=="Niveau"){
-	retrieveGroupe(groupeget, 1);
-}else{
+	//retrieveGroupe(groupeget, 1);
+}else{*/
 	//firstname = firstname.split(' ').join('');
 	//firstname = "<http://www.semanticweb.org/melodi/data#L1_602__Ambillon_V1>";
 	//retrieveURI(firstname);
@@ -21,9 +23,8 @@ if(radio_button=="Niveau"){
 	while(uriavantclear.includes("%23")){
 		uriavantclear = uriavantclear.replace('%23','#');
 	}
-	console.log(uriavantclear);
 	retrieveURI(uriavantclear);
-}
+//}
 
 
 function load(data, nomgroupe, idsup = 0, level = 0){
