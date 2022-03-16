@@ -9,7 +9,27 @@
 
 #positioncard{
   display : flex;
+  box-shadow: 5px 5px 20px rgba(25, 61, 219, 0.5);
+
   justify-content: center;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  height: 60%;
+  width: 90%;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  
+
+}
+.boxInfo{
+  display: flex;
+  justify-content: center;
+  height: 50%;
+  width: 100%;
+  
 }
 
 #card{
@@ -24,31 +44,7 @@
   margin-bottom: 2vh;
 
 }
-#item_id{
-  background: rgb(145, 137, 137);
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 5px;
-  margin:  2% 2% 2% 2%;
-  padding:  2% 2% 2% 2%;
-  color: rgb(255, 255, 255);
-}
-#item_content{
-  
-  background: rgb(145, 137, 137);
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 5px; 
-  padding:  2% 2% 2% 2%;
-  margin:  2% 2% 2% 2%;
-  color: rgb(255, 255, 255);
-}
-#item_date{
-  background: rgb(145, 137, 137);
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 5px;
-  margin:  2% 2% 2% 2%;
-  padding:  2% 2% 2% 2%;
-  color: rgb(255, 255, 255);
-}
+
 
 h1{
 
