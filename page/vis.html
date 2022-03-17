@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link rel="stylesheet" href="CSS/slider.css">
+    <link rel="stylesheet" href="CSS/nouislider.css">
+    <link rel="stylesheet" href="CSS/app.css">
+</head>
+<body>
+  <!-- <h1> modale arborescence <br> améliorer la search bar ?</h1> -->
+  <section class="app">
+    <div class="hud">
+      <div class='hud-boutons'>
+        <div class="legende-bouton legende-bouton-legende-mobile" id="bouton-legende-mobile" onclick="hideShowMenu('legende-mobile')"> 🡄 </div>
+        <div class="legende-bouton legende-bouton-outils"         id="bouton-legende-outils" onclick="hideShowMenu('outils')"        > 🡅 </div>
+        <div class="legende-bouton legende-bouton-legende-fixe"   id="bouton-legende-fixe"   onclick="hideShowMenu('legende-fixe')"  > 🡆 </div>
+      </div>
+      <div id='legende-mobile'   class="legende-mobile">  </div>
+      <div id='legende-complete' class='legende-complete'></div>
+      <div id='outils'           class='outils'>
+        <div class='row'>
+          <div id='search' class='search'>
+            <input class='search-field' id='searchBar' type="text"> 
+            <button class='search-bouton' onclick="centerOn()"> chercher 🔍</button>
+          </div>
+          <div id="slider"></div>
+        </div>
+        <div class="row">
+          <div>
+            <div class='preferences'>
+              <h3>préférences</h3>
+              <div class='preferences-element'>
+                <span>theme : </span>
+                <label class="switch">
+                  <input type="checkbox" id='toggle-theme' onclick='toggleAffichageElement("theme")'>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class='preferences-element'>
+                <span>slider :</span>
+                <label class="switch">
+                  <input type="checkbox" id='toggle-zoomSlider' onclick='toggleAffichageElement("zoomSlider")'>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class='preferences-element'>
+                <span>navigation :</span>
+                <label class="switch">
+                  <input type="checkbox" id='toggle-navigation' onclick='toggleAffichageElement("navigation")'>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id='slider-zoom'></div>
+    </div><div id="mynetwork">
+    
+  </section>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/nouislider.js"></script>
+  <script src="js/interactions.js"></script>
+  <script src="js/vis.js"></script>
+  <script src="js/slider.js"></script>
+  <script src="js/sparqlRequete.js"></script>
+</body>
+</html>
