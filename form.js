@@ -42,9 +42,13 @@ namesearch.addEventListener('input', () => {
     elem(true);
 })
 
-function getValue(selectObject) {
+function getValue(selectObject, val) {
     var str = selectObject.value;
-    document.getElementById('firstname').value = str;
+    if(val){
+        document.getElementById('firstname').value = str;
+    }else{
+        document.getElementById('groupeval').value = str;
+    }
 }
 
 function getValue2(selectObject) {
@@ -57,7 +61,7 @@ function getValue2(selectObject) {
 function elem(call = false){
     namesearch = document.getElementById('firstname');
 
-    text = '<select name="niveau" id="niveau-select" onchange="getValue(this)">';
+    text = '<select name="niveau" id="niveau-select" onchange="getValue(this,1)">';
     
 
     var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?name ?nomgroupe WHERE { ?x a :Area  . ?x rdfs:label ?name . ?x :isMemberOf ?groupe . ?groupe rdfs:label \""+groupe+"\". ?groupe  rdfs:label ?nomgroupe . FILTER regex(?name, \"" + namesearch.value + "\", \"i\") }";
@@ -95,7 +99,7 @@ function elem(call = false){
 
 function niveau(val = true){
     if(val){
-        text = '<select name="niveau" id="niveau-select" onchange="getValue(this)">';
+        text = '<select name="niveau" id="niveau-select" onchange="getValue(this,0)">';
     }
     else{
         text = '<select name="niveau" id="niveau-select" onchange="getValue2(this)">';
