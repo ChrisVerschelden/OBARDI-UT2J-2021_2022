@@ -73,7 +73,7 @@ function elem(call = false){
                 text += "<option value=\"" + data.results.bindings[i].name.value + "\">" + data.results.bindings[i].name.value + "</option>";
             }
             text += '</select>';
-            if(first){
+            if(first && data.results.bindings[0].name.value != null){
                 document.getElementById('firstname').value = data.results.bindings[0].name.value;
                 first = false;
             }

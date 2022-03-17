@@ -50,7 +50,6 @@ const url_param_niveau = urlParams.get('niveau');
 
 
 (async function() {
-   
 
     let query="PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX var: <"+uriavantclear+"> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> select DISTINCT ?x ?groupe ?nom ?debut ?fin where {var: :isMemberOf ?groupe . var: :referencePeriod ?date . var: rdfs:label ?nom . ?niveau a :LevelVersion . ?date time:hasBeginning ?debut . ?date time:hasEnd ?fin . } "
     let url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
