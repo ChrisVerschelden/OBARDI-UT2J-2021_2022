@@ -98,6 +98,7 @@ network.on("click", function(params) {
 		var clicked_node = nodes.get(params.nodes[0]);
 		clicked_node_id = parseInt(clicked_node['id']);
 
+<<<<<<< HEAD
 		if(clicked_node.id != null){
 			var n = nodes.get(clicked_node_id);
 			console.log(n)
@@ -108,6 +109,13 @@ network.on("click", function(params) {
 		}
 		window.open("file:///D:/Universite/Obardi/Repo/OBARDI-UT2J-2021_2022/page/page.html?uri="+ n.uri+"&date="+slider.noUiSlider.get());
     }
+=======
+	if(clicked_node.id != null){
+		var n = nodes.get(clicked_node_id);
+		console.log(n)
+	}
+	window.open("http://127.0.0.1:5500/OBARDI-UT2J-2021_2022/timeline/TimelineCollab/PackageFinal/Vis_Timeline/VisTimeline.html?nom="+ n.label +"&niveau=" + n.levelLabel);
+>>>>>>> 11cd1e63a31d6b77f2093f7e186d04ab067eef9c
 });
 
 function hide(element){

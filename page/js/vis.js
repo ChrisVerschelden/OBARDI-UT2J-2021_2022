@@ -72,39 +72,44 @@ var clickCount = 0;
 
 network.on("click", function(params) {
 
-	clickCount++;
+    clickCount++;
     if (clickCount === 1) {
+		console.log('1 click');
         singleClickTimer = setTimeout(function() {
             clickCount = 0;
-			var clicked_node = nodes.get(params.nodes[0]);
-			clicked_node_id = parseInt(clicked_node['id']);
+            var clicked_node = nodes.get(params.nodes[0]);
+            clicked_node_id = parseInt(clicked_node['id']);
 
-			if(clicked_node.id != null){
-				var color = getColorGroup(clicked_node.levelLabel);
-				if(!clicked_node.expanded){
-					nodes.update({id: clicked_node_id, expanded: true,color: color});
-					retrieveNom(clicked_node['label'], clicked_node['levelLabel'], clicked_node_id, (clicked_node['level']+1));
-				}else{
-					nodes.update({id: clicked_node_id, expanded: false,color: color});
-					hide(clicked_node);
-				}
-			}
-			updateReferencePoint();
-			updateLegend();
+            if(clicked_node.id != null){
+                var color = getColorGroup(clicked_node.levelLabel);
+                if(!clicked_node.expanded){
+                    nodes.update({id: clicked_node_id, expanded: true,color: color});
+                    retrieveNom(clicked_node['label'], clicked_node['levelLabel'], clicked_node_id, (clicked_node['level']+1));
+                }else{
+                    nodes.update({id: clicked_node_id, expanded: false,color: color});
+                    hide(clicked_node);
+                }
+            }
+            updateReferencePoint();
+            updateLegend();
         }, 400);
     } else if (clickCount === 2) {
+		console.log('2 click');
         clearTimeout(singleClickTimer);
         clickCount = 0;
-		var clicked_node = nodes.get(params.nodes[0]);
-		clicked_node_id = parseInt(clicked_node['id']);
+        var clicked_node = nodes.get(params.nodes[0]);
+        clicked_node_id = parseInt(clicked_node['id']);
 
-		if(clicked_node.id != null){
-			var n = nodes.get(clicked_node_id);
-			console.log(n)
-		}
-		window.open("http://127.0.0.1:5500/OBARDI-UT2J-2021_2022/timeline/TimelineCollab/PackageFinal/Vis_Timeline/VisTimeline.html?nom="+ n.label +"&niveau=" + n.levelLabel);
+
+        if(clicked_node.id != null){
+            var n = nodes.get(clicked_node_id);
+            console.log(n)
+        }
+        window.open("page.html?uri="+ n.uri+"&date="+slider.noUiSlider.get());
     }
-});
+
+	
+}); 
 
 
 function hide(element){
