@@ -62,7 +62,6 @@ const url_param_niveau = urlParams.get('niveau');
         $('#raw_output').text(JSON.stringify(data, null, 3));
         let data_array = data.results.bindings;
         document.getElementById('titre').innerText=data_array[0].nom.value;
-        console.log(data_array);
         for (var i = 0; i < data_array.length; i++) {
             items.add({ id: i, group: 0, content: data_array[i].nom.value, start: new Date(data_array[i].debut.value.split('#')[1] + "-01-01"), end: new Date(data_array[i].fin.value.split('#')[1] + "-01-01"), className: "not-selected" });
         }

@@ -100,12 +100,15 @@ network.on("click", function(params) {
         var clicked_node = nodes.get(params.nodes[0]);
         clicked_node_id = parseInt(clicked_node['id']);
 
+
         if(clicked_node.id != null){
             var n = nodes.get(clicked_node_id);
             console.log(n)
         }
         window.open("page.html?uri="+ n.uri+"&date="+slider.noUiSlider.get());
     }
+
+	
 });
 
 

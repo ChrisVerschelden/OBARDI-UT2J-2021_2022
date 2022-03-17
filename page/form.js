@@ -42,9 +42,13 @@ namesearch.addEventListener('input', () => {
     elem(true);
 })
 
-function getValue(selectObject) {
+function getValue(selectObject, val = 1) {
     var str = selectObject.value;
-    document.getElementById('firstname').value = str;
+    if(val){
+        document.getElementById('firstname').value = str;
+    }else{
+        document.getElementById('groupeval').value = str;
+    }
 }
 
 function getValue2(selectObject) {
@@ -95,7 +99,7 @@ function elem(call = false){
 
 function niveau(val = true){
     if(val){
-        text = '<select name="niveau" id="niveau-select" onchange="getValue(this)">';
+        text = '<select name="niveau" id="niveau-select" onchange="getValue(this, 0)">';
     }
     else{
         text = '<select name="niveau" id="niveau-select" onchange="getValue2(this)">';

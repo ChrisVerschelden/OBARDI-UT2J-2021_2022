@@ -17,6 +17,9 @@ if(radio_button=="Niveau"){
 	uriavantclear = window.location.href;
 	uriavantclear = uriavantclear.split('=')[1].split('&')[0];
 	uriavantclear = uriavantclear.replace('%3A%2F%2F', '://');
+	while(uriavantclear.includes("%C3%A9")){
+		uriavantclear = uriavantclear.replace('%C3%A9', 'é');
+	}
 	while(uriavantclear.includes("%2F")){
 		uriavantclear = uriavantclear.replace('%2F', '/');
 	}
@@ -54,6 +57,7 @@ function retrieveGroupe(groupe, nbgroupe = 0) {
 	var date = " ?x :referencePeriod ?date . ?date time:hasBeginning ?y . ?date time:hasEnd ?z . ?y time:inXSDDate ?debut . ?z time:inXSDDate ?fin . FILTER ( xsd:dateTime(?debut) < xsd:dateTime(\""+slider.noUiSlider.get()+"-01-01T00:00:00\") && xsd:dateTime(?fin) > xsd:dateTime(\""+slider.noUiSlider.get()+"-01-01T00:00:00\")).";
 	var query = "PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX time:<http://www.w3.org/2006/time#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> select ?nom ?x where { ?x a :Area. ?x rdfs:label ?nom. ?x :isMemberOf ?groupe. ?groupe rdfs:label \""+groupe+"\". OPTIONAL{ "+date+"}}";
 	var url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
+
 	$.ajax({
 		url: url,
 		dataType: "json",
