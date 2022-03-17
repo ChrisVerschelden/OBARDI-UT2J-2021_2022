@@ -8,9 +8,7 @@
 }
 
 #positioncard{
-  display : flex;
   box-shadow: 5px 5px 20px rgba(25, 61, 219, 0.5);
-
   justify-content: center;
   margin-bottom: 20px;
   border-radius: 12px;
@@ -20,9 +18,17 @@
 
 .container{
   display: flex;
-  justify-content: center;
-  
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 
+
+
+}
+
+span{
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
 }
 .boxInfo{
   display: flex;
