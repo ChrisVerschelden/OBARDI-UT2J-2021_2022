@@ -3,6 +3,12 @@ const urlParams = new URLSearchParams(queryString);
 
 var anneeMin = 1660, anneeMax = 1800;
 
+if(urlParams.get("date") != null){
+    dateval = parseInt(urlParams.get("date"));
+}else{
+    dateval = parseInt(window.location.href.split('=')[2]);
+}
+
 var slider = document.getElementById("slider");
 
 var tabVal = new Array();
@@ -13,7 +19,7 @@ for (var val = anneeMin; val <= anneeMax; val = val + 10) {
     tabVal2.push(val);
 }
 noUiSlider.create(slider, {
-    start: parseInt(urlParams.get('date')),
+    start: dateval,
     connect: true,
     tooltips: true,
     step: 1,
