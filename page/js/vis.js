@@ -95,6 +95,7 @@ network.on('dragStart', function(params){
 		var n = nodes.get(clicked_node_id);
 		console.log(n)
 	}
+
 	window.open("file:///D:/Universite/Obardi/Repo/OBARDI-UT2J-2021_2022/page/page.html?uri="+ n.uri+"&date="+slider.noUiSlider.get());
 });
 
