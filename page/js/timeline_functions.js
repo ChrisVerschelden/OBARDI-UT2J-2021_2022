@@ -50,7 +50,6 @@ const url_param_niveau = urlParams.get('niveau');
 
 
 (async function() {
-   
 
     let query="PREFIX : <http://www.semanticweb.org/lucas/ontologies/2021/11/HHT_Ontology#> PREFIX var: <"+uriavantclear+"> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX time: <http://www.w3.org/2006/time#> select DISTINCT ?x ?groupe ?nom ?debut ?fin where {var: :isMemberOf ?groupe . var: :referencePeriod ?date . var: rdfs:label ?nom . ?niveau a :LevelVersion . ?date time:hasBeginning ?debut . ?date time:hasEnd ?fin . } "
     let url = 'http://localhost:7200/repositories/test?query=' + encodeURIComponent(query) + '&output=json';
@@ -62,6 +61,7 @@ const url_param_niveau = urlParams.get('niveau');
         $('#results').show();
         $('#raw_output').text(JSON.stringify(data, null, 3));
         let data_array = data.results.bindings;
+        document.getElementById('titre').innerText=data_array[0].nom.value;
         console.log(data_array);
         for (var i = 0; i < data_array.length; i++) {
             items.add({ id: i, group: 0, content: data_array[i].nom.value, start: new Date(data_array[i].debut.value.split('#')[1] + "-01-01"), end: new Date(data_array[i].fin.value.split('#')[1] + "-01-01"), className: "not-selected" });

@@ -102,7 +102,11 @@ network.on("click", function(params) {
 			var n = nodes.get(clicked_node_id);
 			console.log(n)
 		}
-		window.open("http://127.0.0.1:5500/OBARDI-UT2J-2021_2022/timeline/TimelineCollab/PackageFinal/Vis_Timeline/VisTimeline.html?nom="+ n.label +"&niveau=" + n.levelLabel);
+		if(clicked_node.id != null){
+			var n = nodes.get(clicked_node_id);
+			console.log(n)
+		}
+		window.open("file:///D:/Universite/Obardi/Repo/OBARDI-UT2J-2021_2022/page/page.html?uri="+ n.uri+"&date="+slider.noUiSlider.get());
     }
 });
 

@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <meta charset="UTF-8">
   <!-- CDN and external scripts -->
@@ -15,10 +16,10 @@
   <link href="CSS/nouislider.css" rel="stylesheet">
   <link href="CSS/slider.css" rel="stylesheet">
   <link href="CSS/stylesheet.css" rel="stylesheet">
-  <link href="CSS/app.css" rel="stylesheet" >
+  <link href="CSS/app.css" rel="stylesheet">
 
 
-  <h1>Titre inconnu</h1>
+  <h1 id="titre">Titre inconnu</h1>
 </head>
 
 <body>
@@ -27,20 +28,23 @@
 
       <div id="visualization"></div>
       <br>
-     
+
     </div>
     <br>
     <div class="boxInfo">
       <div id="positioncard">
         <div class="container">
-          test test 
-  
+          <span>Nom</span>
+          <span>Date </span>
+          <span>Version </span>
+          <span>etc </span>
+
         </div>
-      
-      </div>  
+
+      </div>
 
     </div>
-   
+
 
     <div class="network">
 
@@ -53,16 +57,19 @@
   <section class="app">
     <div class="hud">
       <div class='hud-boutons'>
-        <div class="legende-bouton legende-bouton-legende-mobile" id="bouton-legende-mobile" onclick="hideShowMenu('legende-mobile')"> 🡄 </div>
-        <div class="legende-bouton legende-bouton-outils"         id="bouton-legende-outils" onclick="hideShowMenu('outils')"        > 🡅 </div>
-        <div class="legende-bouton legende-bouton-legende-fixe"   id="bouton-legende-fixe"   onclick="hideShowMenu('legende-fixe')"  > 🡆 </div>
+        <div class="legende-bouton legende-bouton-legende-mobile" id="bouton-legende-mobile"
+          onclick="hideShowMenu('legende-mobile')"> 🡄 </div>
+        <div class="legende-bouton legende-bouton-outils" id="bouton-legende-outils" onclick="hideShowMenu('outils')">
+          🡅 </div>
+        <div class="legende-bouton legende-bouton-legende-fixe" id="bouton-legende-fixe"
+          onclick="hideShowMenu('legende-fixe')"> 🡆 </div>
       </div>
-      <div id='legende-mobile'   class="legende-mobile">  </div>
+      <div id='legende-mobile' class="legende-mobile"> </div>
       <div id='legende-complete' class='legende-complete'></div>
-      <div id='outils'           class='outils'>
+      <div id='outils' class='outils'>
         <div class='row'>
           <div id='search' class='search'>
-            <input class='search-field' id='searchBar' type="text"> 
+            <input class='search-field' id='searchBar' type="text">
             <button class='search-bouton' onclick="centerOn()"> chercher 🔍</button>
           </div>
           <div id="slider"></div>
@@ -98,8 +105,9 @@
       </div>
     </div>
     <div id='slider-zoom'></div>
-    </div><div id="mynetwork">
-    
+    </div>
+    <div id="mynetwork">
+
   </section>
 
 
@@ -113,7 +121,7 @@
   <script src="js/interactions.js"></script>
   <script src="js/vis.js"></script>
   <script src="js/slider.js"></script>
-  <script src="js/sparqlRequete.js"></script>
+  <script src="../graphique/visNetworkComplet(jespere)/sparqlRequete.js"></script>
   <script src="js/timeline_functions.js"></script>
 
   <!-- <script src="js/slider_functions.js"></script> -->
