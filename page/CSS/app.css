@@ -331,13 +331,13 @@ div.vis-network div.vis-navigation div.vis-button:hover {
 }
 
 #slider-zoom {
-  position: absolute;
+  position: relative;
   z-index: 500;
   right: 0;
   bottom: 0;
   height: 100px;
-  margin-right: 11px;
-  margin-bottom:  -325px;
+  margin-right: 27px;
+  margin-bottom:  100px;
   background: var(--color-accent);
 }
 
