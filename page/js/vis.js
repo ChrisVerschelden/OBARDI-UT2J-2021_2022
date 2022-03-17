@@ -109,7 +109,7 @@ network.on("click", function(params) {
     }
 
 	
-});
+}); 
 
 
 function hide(element){
