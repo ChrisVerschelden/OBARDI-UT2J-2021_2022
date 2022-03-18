@@ -186,6 +186,21 @@ function sortParents(sorted_array, parent){
 	return node;
 }
 
+function buildTree(rootElement, tree){
+	var html = '<li>' + rootElement.id + '</li> <ul>';
+
+	if('children' in rootElement){
+		rootElement.children.forEach(e => {
+			html += '<li>' + e.id + '</li>';
+			if('children' in e) {
+				buildTree(e, tree);
+			} 
+		});
+	}
+	html += '</ul>';
+
+	return html;
+}
 
 function getAllLevels(nommenclature){
 	 
@@ -225,6 +240,21 @@ function getAllLevels(nommenclature){
 			// Add our current el to its parent's `children` array
 			parentEl.children = [...(parentEl.children || []), el];
 		  });
+
+		  console.log(sorted_array)
+
+		  var tree = document.getElementById('tree');
+
+		  sorted_array.forEach(e=>{
+			  console.log('xesh')
+			  if(e.parentId === null){
+				  var t = buildTree(e, tree);
+				  console.log(t)
+				  tree.innerHTML += t;
+			  }
+		  })
+
+
 	},
 	error: function(e) {console.log("Query error");}
 	});
