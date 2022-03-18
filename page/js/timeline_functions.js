@@ -44,8 +44,6 @@ timeline.on("doubleClick", function(properties) {
 // Configuration for the Timeline
 var options = { stack: false, min: anneeMin + '-01-01', max: anneeMax + '-01-01' };
 
-const url_param_nom = urlParams.get('nom');
-const url_param_niveau = urlParams.get('niveau');
 
 
 
@@ -63,16 +61,24 @@ const url_param_niveau = urlParams.get('niveau');
         let data_array = data.results.bindings;
         document.getElementById('titre').innerText=data_array[0].nom.value;
         for (var i = 0; i < data_array.length; i++) {
-            items.add({ id: i, group: 0, content: data_array[i].nom.value, start: new Date(data_array[i].debut.value.split('#')[1] + "-01-01"), end: new Date(data_array[i].fin.value.split('#')[1] + "-01-01"), className: "not-selected" });
+            var date = window.location.href.split('=')[2];
+            var classname = data_array[i].debut.value.split('#')[1] < date && data_array[i].debut.value.split('#')[1] > date ? 'not-selected': 'green';
+            items.add({ id: i, group: 0, content: data_array[i].nom.value, start: new Date(data_array[i].debut.value.split('#')[1] + "-01-01"), end: new Date(data_array[i].fin.value.split('#')[1] + "-01-01"), className: classname });
         }
-        
-        if (urlParams.has('id')) {
-            var item_selected = items.get(parseInt(urlParams.get('id')));
-            items.update({ id: item_selected['id'], group: item_selected["group"], content: item_selected["content"], className: 'green' });
-            document.getElementById('item_id').innerHTML = item_selected.id;
-            document.getElementById('item_content').innerHTML = item_selected.content;
-            document.getElementById('item_date').innerHTML = item_selected.start.getFullYear() + " / " + item_selected.end.getFullYear();
-            timeline.fit(parseInt(urlParams.get('id')));
+        console.log(urlParams)
+        if (urlParams.has('date')) {
+            var date = urlParams.get('date');
+            console.log(date)
+            items.forEach(e=>{
+                if(e['start'] < date && e['end'] > date){
+                    items.update({ id: e['id'], group: e["group"], content: e["content"], className: 'green' });
+                }
+            });
+            
+            // document.getElementById('item_id').innerHTML = item_selected.id;
+            // document.getElementById('item_content').innerHTML = item_selected.content;
+            // document.getElementById('item_date').innerHTML = item_selected.start.getFullYear() + " / " + item_selected.end.getFullYear();
+            // timeline.fit(parseInt(urlParams.get('id')));
         }
     
         timeline.setItems(items);
